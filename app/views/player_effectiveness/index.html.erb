@@ -1,14 +1,14 @@
-<h1><%= @title %></h1>
+<div class="title"> 
+  <%= @title %>
+</div> 
+<div class="content"> 
 
-<table border="1">
-<tr>
-   <th>Map</th>
-</tr>
+Map:
+<select>
 <% @maps.each do |map| %>
-<tr>
-   <td><%= link_to map.name, "player_effectiveness/#{map.name}" %></td>
-</tr>
+   <option value="<%= "player_effectiveness/#{map.name}" %>"><%= map.name %></option>
 <% end %>
-</table>
+</select>
 
-<%= link_to "Home", "/home#index" %>
+</div>
+
