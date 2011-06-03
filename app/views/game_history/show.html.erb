@@ -1,0 +1,48 @@
+<div class="title"> 
+  <%= @title %>
+</div> 
+<div class="content"> 
+  Below is a list of all the games in the database...
+
+<br /><br />
+
+<div class="pagination">
+<% if @page != 0 %>
+<%= link_to "<<", :controller => "game_history", :action => "show", :page => "0" %>
+<%= link_to "<", :controller => "game_history", :action => "show", :page => (@page.to_i - 1) %>
+<% end %>
+
+<% @pages.each do |page_number| %>
+   <% if page_number == @page %>
+      <strong><%= (page_number + 1) %></strong>
+   <% else %>
+      <%= link_to (page_number + 1), :controller => "game_history", :action => "show", :page => page_number %>
+   <% end %>
+<% end %>
+
+<% if @page != @total_pages %>
+<%= link_to ">", :controller => "game_history", :action => "show", :page => (@page.to_i + 1) %>
+<%= link_to ">>", :controller => "game_history", :action => "show", :page => @total_pages %>
+<% end %>
+</div>
+
+<table>
+<tr>
+   <th>ID</th>
+   <th>Name</th>
+   <th>Map</th>
+   <th>Date</th>
+   <th>Duration</th>
+</tr>
+<% @games.each do |game| %>
+<tr>
+   <td><%= game.reach_id %></td>
+   <td><%= game.name %></td>
+   <td><%= game.reach_map.name %></td>
+   <td><%= game.timestamp %></td>
+   <td><%= game.duration %></td>
+</tr>
+<% end %>
+</table>
+
+</div> 

@@ -3,7 +3,17 @@
 </div> 
 <div class="content"> 
 
-<table border="1">
+<strong>Map:</strong>
+<select onchange="window.location='/player_effectiveness/' + this.value">
+<option value=""></option>
+<% @maps.each do |map| %>
+   <option <%= (map.name == @map_name) ? "selected='selected'": "" %> value="<%= map.name %>"><%= map.name %></option>
+<% end %>
+</select>
+
+<br /><br />
+
+<table>
 <tr>
    <th>Player Name</th>
    <th>Map</th>
@@ -17,7 +27,5 @@
 </tr>
 <% end %>
 </table>
-
-<%= link_to "Back", "/player_effectiveness#index" %>
 
 </div>

@@ -1,17 +1,14 @@
 <div class="title"> 
-  <%= @title %>
+  <%= @title %>: <%= @map_name %>
 </div> 
 <div class="content"> 
 
 Map:
-<select onchange="window.location.href=this.value">
+<select onchange="window.location='/player_effectiveness/' + this.value">
 <option value=""></option>
 <% @maps.each do |map| %>
-   <option value="<%= "player_effectiveness/#{map.name}" %>"><%= map.name %></option>
+   <option value="<%= map.name %>"><%= map.name %></option>
 <% end %>
 </select>
 
-
-
 </div>
-
