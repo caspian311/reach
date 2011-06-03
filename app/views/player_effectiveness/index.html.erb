@@ -4,11 +4,14 @@
 <div class="content"> 
 
 Map:
-<select>
+<select onchange="window.location.href=this.value">
+<option value=""></option>
 <% @maps.each do |map| %>
    <option value="<%= "player_effectiveness/#{map.name}" %>"><%= map.name %></option>
 <% end %>
 </select>
+
+
 
 </div>
 

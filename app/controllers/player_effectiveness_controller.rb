@@ -8,9 +8,8 @@ class PlayerEffectivenessController < ActionController::Base
 
    def show
       @title = "Player Effectiveness"
+      @map_name = params[:map_name]
 
-      map_name = params[:map_name]
-
-      @player_stats = PlayerEffectivenessModel.stats_for_map(map_name)
+      @player_stats = PlayerEffectivenessModel.stats_for_map(@map_name)
    end
 end
