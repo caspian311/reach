@@ -8,7 +8,7 @@
 </head>
 <body>
    <div class="header">     
-       <div class="title">Halo Reach: Game History</div> 
+       <div class="title">Halo Reach: <%= @title %></div> 
    </div>
    <div class="header-shadow">     
    </div>
@@ -18,13 +18,13 @@
                <div class="title">Site</div> 
                    <ul> 
                        <li> 
-                           <%= link_to "Game History", "game_history#index" %>
+                           <%= link_to "Game History", "/game_history#index" %>
                        </li> 
                        <li> 
-                           <%= link_to "Kill/Death Spread", "kill_death_spread#index" %>
+                           <%= link_to "Kill/Death Spread", "/kill_death_spread#index" %>
                        </li> 
                        <li> 
-                           <%= link_to "Player Effectiveness", "player_effectiveness#index" %>
+                           <%= link_to "Player Effectiveness", "/player_effectiveness#index" %>
                        </li> 
                    </ul> 
                </div>
