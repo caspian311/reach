@@ -9,7 +9,9 @@ group :development do
 end
 
 group :test do
-  gem 'rspec', '2.5.0'
-  gem 'webrat', '0.7.1'
-  gem 'mocha'
+   gem 'rspec', '2.5.0'
+   gem 'webrat', '0.7.1'
+   gem 'mocha'
+   gem 'cucumber-rails'
+   gem 'database_cleaner'
 end

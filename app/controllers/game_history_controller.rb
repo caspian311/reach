@@ -32,7 +32,7 @@ class GameHistoryController < ActionController::Base
             display_pages = all_pages.first(5)
          elsif current_page > (total_pages - 4) # at the end, show last 5
             display_pages = all_pages.last(5)
-         else
+         else # otherwise, show 2 before and 2 after current page
             display_pages = all_pages[(current_page - 2)..(current_page + 2)]
          end
       else
