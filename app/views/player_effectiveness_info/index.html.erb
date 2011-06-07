@@ -1,0 +1,79 @@
+<div class="title"> 
+   What is Player Effectiveness?
+</div> 
+<div class="content"> 
+
+Back to <%= link_to "player effectiveness", "/player_effectiveness#index"%>
+<br/><br/>
+
+<p>
+A player's effectiveness for a given map is a determined based on the number of times that player wins on the specified map.
+This number is balanced by a formula that tries to take into consideration the ratio of number of players on both teams.
+So if a player is out numbered, their score is weighted higher.  However, we also wanted to give credit to a team that 
+is out numbered but is able to keep a 0-0 score so we add one to the score.
+</p>
+
+<br />
+
+The formula:
+<p>
+E = (S<sub>p</sub> + 1) / (T<sub>p</sub> / T<sub>o</sub>) <br />
+Where: <br />
+S<sub>p</sub> = the player's team's score<br />
+T<sub>p</sub> = number of players on the player's team<br />
+T<sub>o</sub> = number of players on the opposing team<br />
+</p>
+
+<br />
+
+An example of with even teams: <br />
+
+<p>
+Team 1: 3 players - score 2 points <br />
+Team 2: 3 players - score 1 point <br />
+<br />
+Effectiveness of players on Team 1: 3 <br />
+Effectiveness of players on Team 2: 2 <br />
+</p>
+<br />
+
+An example of uneven teams: <br />
+
+<p>
+Team 1: 4 players - score 2 points <br />
+Team 2: 3 players - score 1 point <br />
+<br />
+Effectiveness of players on Team 1: 2.25 <br />
+Effectiveness of players on Team 2: 2.666 <br />
+</p>
+<br />
+
+Another example of uneven teams: <br />
+
+<p>
+Team 1: 3 players - score 2 points <br />
+Team 2: 2 players - score 1 point <br />
+<br />
+Effectiveness of players on Team 1: 2 <br />
+Effectiveness of players on Team 2: 3 <br />
+</p>
+<br />
+
+And finally, an example of a 0-0 game with uneven teams: <br />
+
+<p>
+Team 1: 3 players - score 0 points <br />
+Team 2: 2 players - score 0 points <br />
+<br />
+Effectiveness of players on Team 1: 0.666 <br />
+Effectiveness of players on Team 2: 1.5 <br />
+</p>
+<br />
+
+So the bigger the difference in the number of players the more effect it has on the players effectivness.
+
+<br/><br/>
+
+Back to <%= link_to "player effectiveness", "/player_effectiveness#index"%>
+
+</div>

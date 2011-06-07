@@ -124,3 +124,8 @@ table td {
 .pagination {
    text-align: right;
 }
+
+p {
+   margin: 0px;
+   padding: 0px 0px 0px 10px;
+}
