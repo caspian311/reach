@@ -39,8 +39,8 @@
    <td><%= game.reach_id %></td>
    <td><%= game.name %></td>
    <td><%= game.reach_map.name %></td>
-   <td><%= game.timestamp %></td>
-   <td><%= game.duration %></td>
+   <td><%= game.timestamp.strftime("%m/%d/%Y %I:%M%p") %></td>
+   <td><%= game.duration %> seconds</td>
 </tr>
 <% end %>
 </table>

@@ -23,12 +23,14 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
    <th>Player Name</th>
    <th>Map</th>
    <th>Effectiveness</th>
+   <th>Number of Games</th>
 </tr>
 <% @player_stats.each do |player_stat| %>
 <tr>
    <td><%= player_stat.player_name %></td>
    <td><%= player_stat.map %></td>
-   <td><%= player_stat.effectiveness %></td>
+   <td><%= number_with_precision(player_stat.effectiveness, :precision => 2) %></td>
+   <td><%= player_stat.number_of_games %></td>
 </tr>
 <% end %>
 </table>
