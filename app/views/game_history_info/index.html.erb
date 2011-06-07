@@ -1,0 +1,40 @@
+<div class="title"> 
+  <%= @title %>: Information
+</div> 
+<div class="content"> 
+
+<strong>What games are we actually recording?</strong>
+
+<p>
+To be recorded by the Halo Reach server, a game must be started from a party that was
+started by someone logged into their XBox Live account.  All those games we retreive
+ and store but not necessarily to the database.  Currently we only store team games.
+</p>
+
+<br />
+
+<strong>Future filtering</strong>
+
+<p>
+If you notice in the game history page, there are some games that only last a few 
+seconds.  This is probably from a scenario that goes something like this:  we start a 
+game, realize we had the wrong game type, stop the game, game will be recorded.  And 
+it'll be recorded as a 0-0 game which will probably lower stats.  
+
+<br /><br />
+
+In the future we'd like to weed those out.  Probably set a threshold like 1 1/2 
+minutes or something.  
+</p>
+
+<br />
+
+<strong>Player stats recorded</strong>
+
+<p>
+We only record stats for players that we know their service tag.  We'll eventually 
+get a page that will let you update that.  But if you didn't get your service tag 
+standardized across the XBoxes until recently, we won't have your previous stats.
+</p>
+
+</div>
