@@ -2,14 +2,19 @@ class PlayerEffectivenessController < ActionController::Base
    layout "application"
 
    def index
-      @title = "Player Effectiveness"
-      @maps = ReachMap.find(:all, :order => "name")
+      setup_page
    end
 
    def show
-      @title = "Player Effectiveness"
+      setup_page
+
       @map_name = params[:map_name]
-      @maps = ReachMap.find(:all, :order => "name")
       @player_stats = PlayerEffectivenessModel.stats_for_map(@map_name)
+   end
+
+   private
+   def setup_page
+      @title = "Player Effectiveness"
+      @maps = ReachMap.find(:all, :order => "name")
    end
 end

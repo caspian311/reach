@@ -2,7 +2,7 @@ class PlayerEffectivenessModel
    def self.stats_for_map(map_name)
       sql = "  SELECT         p.real_name as player_name,
                               m.name as map,
-                              avg((1.0 * team_score) / ((1.0 * team_size) / (1.0 * other_team_size))) as effectiveness
+                              (avg((1.0 * team_score) + 1) / ((1.0 * team_size) / (1.0 * other_team_size))) as effectiveness
                FROM           player_effectivenesses pe, players p, reach_maps m
                WHERE          m.name = '#{map_name}'
                AND            m.id = pe.reach_map_id
