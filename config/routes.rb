@@ -3,6 +3,7 @@ ReachWeb::Application.routes.draw do
 
    match "/game_history" => "game_history#show"
    match "/game_history_info" => "game_history_info#index"
+   match "/game_details/:reach_id" => "game_details#show"
    match "/game_history/:page" => "game_history#show"
    match "/kill_death_spread" => "kill_death_spread#index"
    match "/player_effectiveness" => "player_effectiveness#index"

@@ -12,3 +12,7 @@ namespace :reach do
       BatchJob.new.execute
    end
 end
+
+task :reach => 'reach:run_batch_job'
+
+

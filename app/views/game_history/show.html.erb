@@ -1,3 +1,4 @@
+
 <div class="title"> 
   <%= @title %>
 </div> 
@@ -37,9 +38,9 @@
    <th>Date</th>
    <th>Duration</th>
 </tr>
-<% @games.each do |game| %>
-<tr>
-   <td><%= game.reach_id %></td>
+<% @games.each_with_index do |game, index| %>
+<tr id="<%= game.reach_id %>" class="<%= cycle("regular", "alternate") %>">
+   <td><%= link_to_function game.reach_id, "expand_game_details('#{game.reach_id}')" %></td>
    <td><%= game.name %></td>
    <td><%= game.reach_map.name %></td>
    <td><%= game.timestamp.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>

@@ -1,10 +1,10 @@
-Arun Deivanaygam : ???
+Arun Deivanaygam : G717
 Ben Lee : BENX
 Ben Pomerenke : BUN6
 BJ Self : FETT
 Brian Smith : BUCK
 Britain Oates : N30
-Dan King : ???
+Dan King : Z262
 Ed Wells : ???		
 Eric Neunaber : ???
 Glenn Howard: ???
@@ -14,3 +14,4 @@ Matt Todd : CASP
 Srdjan Grubor : GER
 Tim Hamer : HAMR
 Wes Erhlichman : WES
+#Wes Erhlichman : [WES, L138]
