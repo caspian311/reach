@@ -3,7 +3,8 @@ class KillDeathSpreadModel
       sql = "  select      p.real_name as player_name, 
                            avg(kills) as killz, 
                            avg(deaths) as deathz,
-                           avg(spread) as spreadz
+                           avg(spread) as spreadz,
+                           count(*) as games
                FROM        kill_death_spreads kds, players p
                WHERE       kds.player_id = p.id
                GROUP BY    p.real_name
@@ -17,6 +18,7 @@ class KillDeathSpreadModel
          kill_death_spread_stat.kills = row.killz
          kill_death_spread_stat.deaths = row.deathz
          kill_death_spread_stat.spread = row.spreadz
+         kill_death_spread_stat.games = row.games
 
          kill_death_spread_stats << kill_death_spread_stat
       end

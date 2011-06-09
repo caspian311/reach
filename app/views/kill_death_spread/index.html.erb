@@ -12,6 +12,7 @@
    <th>Kills</th>
    <th>Deaths</th>
    <th>Spread</th>
+   <th>Number of Games</th>
 </tr>
 <% @player_stats.each do |player_stat| %>
 <tr>
@@ -19,6 +20,7 @@
    <td><%= number_with_precision(player_stat.kills, :precision => 2) %></td>
    <td><%= number_with_precision(player_stat.deaths, :precision => 2) %></td>
    <td><%= number_with_precision(player_stat.spread, :precision => 2) %></td>
+   <td><%= player_stat.games %></td>
 </tr>
 <% end %>
 </table>
