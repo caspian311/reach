@@ -52,6 +52,7 @@ class ReachJsonParser
          player = Player.find_by_service_tag(service_tag)
          player_stat.player = player
 
+         player_stat.score = json_player["Score"]
          player_stat.assists = json_player["Assists"]
          player_stat.average_death_distance = json_player["AvgDeathDistanceMeters"]
          player_stat.average_kill_distance = json_player["AvgKillDistanceMeters"]
