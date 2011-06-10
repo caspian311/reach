@@ -10,9 +10,12 @@ class GameFilter
          file_contents = JSON.parse(file_contents)
 
          reach_id = file_contents["GameDetails"]["GameId"]
+         game_duration = file_contents["GameDetails"]["GameDuration"].to_i
 
          if is_game_unique?(reach_id)
-            filtered_game_ids << reach_id
+            if game_duration > 90
+               filtered_game_ids << reach_id
+            end
          end
       end
 
