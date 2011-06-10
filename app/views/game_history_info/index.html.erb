@@ -9,22 +9,11 @@
 To be recorded by the Halo Reach server, a game must be started from a party that was
 started by someone logged into their XBox Live account.  All those games we retreive
  and store but not necessarily to the database.  Currently we only store team games.
-</p>
-
-<br />
-
-<strong>Future filtering</strong>
-
-<p>
-If you notice in the game history page, there are some games that only last a few 
-seconds.  This is probably from a scenario that goes something like this:  we start a 
-game, realize we had the wrong game type, stop the game, game will be recorded.  And 
-it'll be recorded as a 0-0 game which will probably lower stats.  
 
 <br /><br />
 
-In the future we'd like to weed those out.  Probably set a threshold like 1 1/2 
-minutes or something.  
+We also filter out team slayer games (basically if the highest score in the game is 
+greater than 5) and games that last less than 1 1/2 minutes.
 </p>
 
 <br />
