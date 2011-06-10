@@ -51,28 +51,42 @@ function populate_game_details(details_cell, game_details) {
 
       var team_id = team["team_id"]
       var team_score = team["score"]
+
       var team_row = $('<tr></tr>')
       details_table.append(team_row)
 
-      var team_label_cell = $('<td>Team ' + ((team_id * 1) + 1) + '</td>')
-      var team_id_cell = $('<td>' + team_score + '</td>')
-
-      team_row.append(team_label_cell)
-      team_row.append(team_id_cell)
+      team_row.append($('<th>Team ' + ((team_id * 1) + 1) + '</th>'))
+      team_row.append($('<th>' + team_score + '</th>'))
+      team_row.append($('<th>Kills</th>'))
+      team_row.append($('<th>Assists</th>'))
+      team_row.append($('<th>Deaths</th>'))
+      team_row.append($('<th>Spread</th>'))
 
       for (var t=0; t<team["reach_player_stats"].length; t++) {
          var player_stat = team["reach_player_stats"][t]
          var player = player_stat["player"]
+
          var player_service_tag = "Unknown player"
          if (player) {
             player_service_tag = player["real_name"]
          }
 
-         var player_row = $('<tr></tr>')
+         var player_kills = player_stat["kills"]
+         var player_assists = player_stat["assists"]
+         var player_deaths = player_stat["deaths"]
+         var player_spread = (player_kills * 1) - (player_deaths * 1)
+
+         var player_row_class = (t % 2 == 0) ? 'regular' : 'alternate'
+
+         var player_row = $('<tr class="' + player_row_class + '"></tr>')
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
          player_row.append($('<td>' + player_service_tag + '</td>'))
+         player_row.append($('<td>' + player_kills + '</td>'))
+         player_row.append($('<td>' + player_assists + '</td>'))
+         player_row.append($('<td>' + player_deaths + '</td>'))
+         player_row.append($('<td>' + player_spread + '</td>'))
       }
    }
 }

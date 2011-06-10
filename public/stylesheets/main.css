@@ -133,4 +133,6 @@ tr.alternate {
    background: #ffffff;
 }
 
-
+table.game_details {
+   border: 1px solid #000
+}

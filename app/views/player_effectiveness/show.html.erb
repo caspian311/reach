@@ -26,7 +26,7 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
    <th>Number of Games</th>
 </tr>
 <% @player_stats.each do |player_stat| %>
-<tr>
+<tr class="<%= cycle("regular", "alternate") %>">
    <td><%= player_stat.player_name %></td>
    <td><%= player_stat.map %></td>
    <td><%= number_with_precision(player_stat.effectiveness, :precision => 2) %></td>
