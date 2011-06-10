@@ -35,6 +35,7 @@ class CreateInitialTables < ActiveRecord::Migration
       end
 
       create_table :reach_player_stats do |table|
+         table.column :score, :integer
          table.column :assists, :integer
          table.column :average_death_distance, :number
          table.column :average_kill_distance, :number

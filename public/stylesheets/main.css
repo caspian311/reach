@@ -133,6 +133,10 @@ tr.alternate {
    background: #ffffff;
 }
 
+tr.regular {
+   background: #ddd;
+}
+
 table.game_details {
    border: 1px solid #000
 }
