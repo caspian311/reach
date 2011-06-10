@@ -28,12 +28,12 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
 
       team1 = ReachTeam.new
       team1.team_id = 1
-      team1.score = 15
+      team1.score = 3
       game.reach_teams << team1
 
       team2 = ReachTeam.new
       team2.team_id = 2
-      team2.score = 10
+      team2.score = 2
       game.reach_teams << team2
 
       player1 = Player.new
@@ -66,23 +66,42 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
 
       player1_effectiveness = PlayerEffectiveness.find_by_service_tag("player1").first
       assert_equal map_name, player1_effectiveness.reach_map.name
-      assert_equal 15, player1_effectiveness.team_score
+      assert_equal 3, player1_effectiveness.team_score
       assert_equal 2, player1_effectiveness.team_size
-      assert_equal 10, player1_effectiveness.other_team_score
+      assert_equal 2, player1_effectiveness.other_team_score
       assert_equal 1, player1_effectiveness.other_team_size
 
       player2_effectiveness = PlayerEffectiveness.find_by_service_tag("player2").first
       assert_equal map_name, player2_effectiveness.reach_map.name
-      assert_equal 10, player2_effectiveness.team_score
+      assert_equal 2, player2_effectiveness.team_score
       assert_equal 1, player2_effectiveness.team_size
-      assert_equal 15, player2_effectiveness.other_team_score
+      assert_equal 3, player2_effectiveness.other_team_score
       assert_equal 2, player2_effectiveness.other_team_size
 
       player3_effectiveness = PlayerEffectiveness.find_by_service_tag("player3").first
       assert_equal map_name, player3_effectiveness.reach_map.name
-      assert_equal 15, player3_effectiveness.team_score
+      assert_equal 3, player3_effectiveness.team_score
       assert_equal 2, player3_effectiveness.team_size
-      assert_equal 10, player3_effectiveness.other_team_score
+      assert_equal 2, player3_effectiveness.other_team_score
       assert_equal 1, player3_effectiveness.other_team_size
+   end
+
+   def test_dont_record_games_with_really_high_scores
+      game = ReachGame.new
+      game.save
+
+      team1 = ReachTeam.new
+      team1.team_id = 1
+      team1.score = 15
+      game.reach_teams << team1
+
+      team2 = ReachTeam.new
+      team2.team_id = 2
+      team2.score = 10
+      game.reach_teams << team2
+
+      @test_object.process_game(game)
+
+      assert PlayerEffectiveness.all.empty?
    end
 end

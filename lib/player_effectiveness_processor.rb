@@ -1,21 +1,33 @@
 class PlayerEffectivenessProcessor
    def process_game(game)
-      game.reach_teams.each do |team|
-         team.reach_player_stats.each do |player_stat|
-            player_effectiveness = PlayerEffectiveness.new
-            player_effectiveness.player = player_stat.player
-            player_effectiveness.reach_map = game.reach_map
-            player_effectiveness.team_score = team_score(game, team.team_id)
-            player_effectiveness.team_size = team_size(game, team.team_id)
-            player_effectiveness.other_team_score = other_team_score(game, team.team_id)
-            player_effectiveness.other_team_size = other_team_size(game, team.team_id)
+      if highest_score(game) <= 5
+         game.reach_teams.each do |team|
+            team.reach_player_stats.each do |player_stat|
+               player_effectiveness = PlayerEffectiveness.new
+               player_effectiveness.player = player_stat.player
+               player_effectiveness.reach_map = game.reach_map
+               player_effectiveness.team_score = team_score(game, team.team_id)
+               player_effectiveness.team_size = team_size(game, team.team_id)
+               player_effectiveness.other_team_score = other_team_score(game, team.team_id)
+               player_effectiveness.other_team_size = other_team_size(game, team.team_id)
 
-            player_effectiveness.save
+               player_effectiveness.save
+            end
          end
       end
    end
 
    private 
+   def highest_score(game)
+      score = 0
+
+      game.reach_teams.each do |team|
+         score = [score, team.score].max
+      end
+
+      score
+   end
+
    def team_score(game, team_id)
       score = 0
 
