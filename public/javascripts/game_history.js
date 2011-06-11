@@ -28,15 +28,8 @@ function is_expanded(row) {
 function fetch_game_details(details_cell, reach_id) {
    details_cell.append('<div style="text-align: center">Loading...</div>')
 
-   $.ajax({
-      url: '/game_details/' + reach_id,
-      dataType: 'json',
-      success: function(game_details) {
-         populate_game_details(details_cell, game_details)
-      }, 
-      error: function(xhr, ajax_options, thrown_error) {
-         alert('ajax fail: ' + thrown_error);
-      }
+   $.getJSON('/game_details/' + reach_id, function(data){
+      populate_game_details(details_cell, data)
    })
 }
 

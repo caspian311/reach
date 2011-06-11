@@ -9,7 +9,7 @@ class GameDetailsController < ActionController::Base
             render :json => game.to_json(:include => { :reach_teams => { :include => { :reach_player_stats => { :include => :player } } } }) 
          }
          format.json {
-            render :json => game.to_json(:include => { :reach_teams => { :include => { :reach_player_stats => { :include => :player } } } })
+            render :json => game.to_json(:include => { :reach_teams => { :include => { :reach_player_stats => { :include => :player } } } }) 
          }
       end
    end

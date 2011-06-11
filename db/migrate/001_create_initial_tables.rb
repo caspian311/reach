@@ -10,6 +10,8 @@ class CreateInitialTables < ActiveRecord::Migration
       create_table :players do |table|
          table.column :real_name, :string
          table.column :service_tag, :string
+
+         table.references :reach_player_stats
       end
 
       create_table :player_effectivenesses do |table|
