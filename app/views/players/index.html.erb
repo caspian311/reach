@@ -1,0 +1,19 @@
+<div class="title"> 
+  <%= @title %>
+</div> 
+<div class="content"> 
+
+Below are some individual player statistics...
+
+<br /><br />
+
+<strong>Players:</strong>
+
+<select id="player_selector">
+   <option></option>
+<% @players.each do |player| %>
+   <option value="<%= player.id %>"><%= player.real_name %> (<%= player.service_tag %>)</option>
+<% end %>
+</select>
+
+</div>
