@@ -9,7 +9,7 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
 <br /><br />
 
 <strong>Map:</strong>
-<select onchange="window.location='/player_effectiveness/' + this.value">
+<select id="maps">
 <option value=""></option>
 <% @maps.each do |map| %>
    <option value="<%= map.name %>"><%= map.name %></option>
