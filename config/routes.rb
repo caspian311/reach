@@ -14,6 +14,7 @@ ReachWeb::Application.routes.draw do
 
    match "/players" => "players#index"
    match "/players/:id" => "players#show"
+   match "/players/:player_id/:map_id" => "players#effectiveness_graph"
 
    root :to => "home#index"
 end

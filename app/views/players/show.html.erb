@@ -1,5 +1,5 @@
 <div class="title"> 
-  <%= @title %>
+  <%= @title %>: <%= @selected_player.real_name %> (<%= @selected_player.service_tag %>)
 </div> 
 <div class="content"> 
 
@@ -12,12 +12,29 @@ Below are some individual player statistics...
 <select id="player_selector">
    <option></option>
 <% @players.each do |player| %>
-   <option value="<%= player.id %>"><%= player.real_name %> (<%= player.service_tag %>)</option>
+   <option <%= (player.id == @selected_player.id) ? "selected=\"selected\"" : "" %> value="<%= player.id %>"><%= player.real_name %> (<%= player.service_tag %>)</option>
 <% end %>
 </select>
 
-
-
-
 </div>
 
+<br /><br />
+
+<div class="title">
+   Effectiveness Graph
+</div>
+
+<div class="content">
+
+<select id="player_maps">
+   <option></option>
+<% @maps.each do |map| %>
+   <option value="<%= map.id %>"><%= map.name %></option>
+<% end %>
+</select>
+
+<br /><br />
+
+<div id="effectiveness_graph" class="graph"></div>
+
+</div>
