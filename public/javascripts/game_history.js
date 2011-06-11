@@ -3,11 +3,11 @@ function expand_game_details(reach_id) {
 
    if (is_expanded(original_row)) {
       original_row.removeClass('expanded')
-      $('.game_details').remove()
+      $('#' + reach_id +'_game_details').remove()
    } else {
       original_row.addClass('expanded')
 
-      var new_row_html = '<tr id="#' + reach_id + '_expanded" class="' + original_row.attr('class') + ' game_details"></tr>'
+      var new_row_html = '<tr id="' + reach_id + '_game_details" class="' + original_row.attr('class') + ' game_details"></tr>'
       var new_row = $(new_row_html)
       new_row.append('<td></td>')
 
