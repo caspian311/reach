@@ -18,14 +18,7 @@ Below are some individual player statistics...
 
 </div>
 
-<br /><br />
-
-<div class="title">
-   Effectiveness Graph
-</div>
-
-<div class="content">
-
+<strong>Maps:</strong>
 <select id="player_maps">
    <option></option>
 <% @maps.each do |map| %>
@@ -34,6 +27,26 @@ Below are some individual player statistics...
 </select>
 
 <br /><br />
+
+<div class="title">
+   Kills/Deaths
+</div>
+<div class="content">
+
+<div id="kill_death_graph_container" class="graph_container">
+   <div id="kill_death_map_legend" class="legend"></div>
+   <div id="kill_death_graph" class="graph"></div>
+</div>
+
+</div>
+
+<br /><br />
+
+<div class="title">
+   Effectiveness Graph
+</div>
+
+<div class="content">
 
 <div id="effectiveness_graph_container" class="graph_container">
    <div id="player_map_legend" class="legend"></div>
