@@ -19,18 +19,31 @@ class PlayersController < ActionController::Base
       player_id = params[:player_id]
       map_id = params[:map_id]
 
-      d2 = "[[0, 3], [4, 8], [8, 5], [9, 13]]"
-      d3 = "[[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]]"
+      all_stats = PlayerEffectivenessModel.all_stats_for_player_and_map(player_id, map_id)
+      average = PlayerEffectivenessModel.average_stats_for_player_and_map(player_id, map_id)
 
-      data = "[#{d2}, #{d3}]"
+      individual_points = ""
+      average_points = ""
 
+      all_stats.each_with_index do |stat, index|
+         individual_points << "[#{index}, #{stat}]"
+         average_points << "[#{index}, #{average}]"
+
+         if index < all_stats.size - 1
+            individual_points << ", "
+            average_points << ", "
+         end
+      end
+
+      graph_data = " [ { \"label\": \"Each game\", \"lines\": {\"show\": true}, \"points\": {\"show\": true}, \"data\": [ #{individual_points} ] }, 
+                     { \"label\": \"Average\" , \"lines\": {\"show\": true}, \"points\": {\"show\": false}, \"data\": [ #{average_points} ] } ]"
 
       respond_to do |format|
          format.html { 
-            render :json => data
+            render :json => "{\"graph_data\": #{graph_data}}"
          }
          format.json {
-            render :json => data
+            render :json => "{\"graph_data\": #{graph_data}}"
          }
       end
    end

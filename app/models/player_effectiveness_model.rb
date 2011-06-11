@@ -24,4 +24,29 @@ class PlayerEffectivenessModel
       end
       player_effectiveness_stats
    end
+
+   def self.all_stats_for_player_and_map(player_id, map_id)
+      sql = "  SELECT         ( (1.0 * pe.team_score + 1)  ) / ( (1.0 * pe.other_team_size) / (1.0 * pe.team_size) ) as effectiveness
+               FROM           player_effectivenesses pe
+               WHERE          pe.player_id = #{player_id}
+               AND            pe.reach_map_id = #{map_id}
+            "
+
+      effectivenesses = []
+      PlayerEffectiveness.find_by_sql(sql).each do |row|
+         player_effectiveness_stat = PlayerEffectivenessStat.new
+         effectivenesses << row.effectiveness
+      end
+      effectivenesses
+   end
+
+   def self.average_stats_for_player_and_map(player_id, map_id)
+      sql = "  SELECT         avg( (1.0 * pe.team_score + 1)  ) / ( (1.0 * pe.other_team_size) / (1.0 * pe.team_size) ) as effectiveness
+               FROM           player_effectivenesses pe
+               WHERE          pe.player_id = #{player_id}
+               AND            pe.reach_map_id = #{map_id}
+            "
+
+      PlayerEffectiveness.find_by_sql(sql).first.effectiveness
+   end
 end
