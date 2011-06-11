@@ -17,6 +17,8 @@ $(document).ready(
 
             var url = '/players/' +  selected_player + '/' + player_map
 
+            graph.html = ''
+
             if (player_map.length) {
                $.getJSON(url, function(data) {
                   var graph_data = data["graph_data"]
