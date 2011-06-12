@@ -143,20 +143,23 @@ table.game_details {
 
 .graph_container {
    display: none;
+   padding: 10px;
+   border: 1px solid #000;
+   background: #fff;
 }
 
 .graph_container .legend {
    position: absolute;
    z-index: 2;
    margin-top: 15px;
-   margin-left: 650px;
+   margin-left: 620px;
+   width: 110px;
    background: #fff;
 }
 
 .graph {
    width: 100%;
    height: 300px;
-   border: 1px solid #000;
    background: #fff;
 }
 
