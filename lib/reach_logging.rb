@@ -1,3 +1,7 @@
 require "logger"
 
-LOG = Logger.new(STDOUT)
+if Rails.env == "test"
+   LOG = Logger.new("reach.log")
+else
+   LOG = Logger.new(STDOUT)
+end
