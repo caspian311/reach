@@ -11,14 +11,23 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
-    when /^the game history$/
+    when /^the game history page$/
       '/game_history'
+
+    when /^the game history second page$/
+      '/game_history/1'
+
+    when /^the game history third page$/
+      '/game_history/2'
 
     when /^the kill death spread$/
       '/kill_death_spread'
 
     when /^the player effectiveness$/
       '/player_effectiveness'
+
+    when /^the players$/
+      '/players'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

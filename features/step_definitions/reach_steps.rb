@@ -6,9 +6,11 @@ Given /^there are (\d+) games in the database$/ do |number_of_games|
    map.name = "Breakpoint"
    map.save
 
-   number_of_games.times each do |i|
+   number_of_games.to_i.times.each do |i|
+      number = i + 1
+
       game = ReachGame.new
-      game.name = "Capture the Flag #{i}"
+      game.name = "Capture the Flag #{number}"
       game.timestamp = timestamp.advance(:days => -1)
       game.reach_map = map
       game.save

@@ -20,7 +20,7 @@
    <% if page_number == @page %>
       <strong><%= (page_number + 1) %></strong>
    <% else %>
-      <%= link_to (page_number + 1), :controller => "game_history", :action => "show", :page => page_number %>
+      <%= link_to (page_number + 1), "/game_history/#{page_number}" %>
    <% end %>
 <% end %>
 
