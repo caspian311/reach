@@ -5,9 +5,9 @@ BJ Self : FETT
 Brian Smith : BUCK
 Britain Oates : N30
 Dan King : Z262
-Ed Wells : ???		
-Eric Neunaber : ???
-Glenn Howard: ???
+# Ed Wells : ???		
+# Eric Neunaber : ???
+Glenn Howard: L138
 James McKie : JM9C
 Kyle Cross : D1ED
 Matt Todd : CASP
@@ -16,3 +16,4 @@ Tim Hamer : HAMR
 Wes Erhlichman : WES
 #Wes Erhlichman : [WES, L138]
 Alex Lapp: LAPR
+Brian Lombardo: C977
