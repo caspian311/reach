@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Player Effectiveness Graph" do
+describe "Player Graphs" do
    before do
       PlayerEffectiveness.delete_all
 
@@ -19,8 +19,8 @@ describe "Player Effectiveness Graph" do
    end
 
    describe "fetching effectivness graph data for player and map" do
-      it "should return json version of games" do
-         endpoint = player_effectiveness_data_endpoint(@player_id, @map_id)
+      it "should return effectiveness stats in json form" do
+         endpoint = effectiveness_data_endpoint(@player_id, @map_id)
 
          get endpoint, :format => :json
 
@@ -30,8 +30,25 @@ describe "Player Effectiveness Graph" do
          assert_equal "Average", effectiveness_data["graph_data"][1]["label"]
       end
    end
+
+   describe "fetching kill/death graph data for player and map" do
+      it "should return kill/death statis in json form" do
+         endpoint = kill_death_data_endpoint(@player_id, @map_id)
+
+         get endpoint, :format => :json
+
+         kill_death_data = JSON.parse(response.body)
+         assert_equal 2, kill_death_data["graph_data"].size
+         assert_equal "Kills", kill_death_data["graph_data"][0]["label"]
+         assert_equal "Deaths", kill_death_data["graph_data"][1]["label"]
+      end
+   end
 end
 
-def player_effectiveness_data_endpoint(player_id, map_id)
-   "/players/#{player_id}/#{map_id}"
+def effectiveness_data_endpoint(player_id, map_id)
+   "/player_stats/effectiveness/#{player_id}/#{map_id}"
+end
+
+def kill_death_data_endpoint(player_id, map_id)
+   "/player_stats/kill_deaths/#{player_id}/#{map_id}"
 end

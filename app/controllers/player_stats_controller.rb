@@ -29,7 +29,7 @@ class PlayerStatsController < ActionController::Base
 
       respond_to do |format|
          format.html { 
-            render :json => "{\"graph_data\": #{graph_data}}"
+            render
          }
          format.json {
             render :json => "{\"graph_data\": #{graph_data}}"
@@ -65,7 +65,7 @@ class PlayerStatsController < ActionController::Base
 
       respond_to do |format|
          format.html { 
-            render :json => "{\"graph_data\": #{graph_data}}"
+            render
          }
          format.json {
             render :json => "{\"graph_data\": #{graph_data}}"
