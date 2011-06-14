@@ -26,31 +26,29 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
       game1 = ReachGame.new
       game1.reach_map = map1
-      game1.reach_id = "123"
       game1.save
 
       game2 = ReachGame.new
       game2.reach_map = map2
-      game2.reach_id = "456"
       game2.save
 
       game3 = ReachGame.new
       game3.reach_map = map1
-      game3.reach_id = "789"
       game3.save
 
       game4 = ReachGame.new
       game4.reach_map = map3
-      game4.reach_id = "001"
       game4.save
 
       player1 = Player.new
-      player1.real_name = "player1"
       player1.save
 
+      @player1_id = player1.id
+
       player2 = Player.new
-      player2.real_name = "player2"
       player2.save
+
+      @player2_id = player2.id
 
       player1a_effectiveness = PlayerEffectiveness.new
       player1a_effectiveness.reach_game = game1
@@ -100,10 +98,10 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
       assert_equal 2, player_effectivenesses.size
 
-      assert_equal (5.to_f/2), effectiveness_by_name(player_effectivenesses, "player1").average_rating
-      assert_equal 2, effectiveness_by_name(player_effectivenesses, "player1").number_of_games
-      assert_equal 2, effectiveness_by_name(player_effectivenesses, "player2").average_rating
-      assert_equal 2, effectiveness_by_name(player_effectivenesses, "player2").number_of_games
+      assert_equal (5.to_f/2), effectiveness_by_name(player_effectivenesses, @player1_id).average_rating
+      assert_equal 2, effectiveness_by_name(player_effectivenesses, @player1_id).number_of_games
+      assert_equal 2, effectiveness_by_name(player_effectivenesses, @player2_id).average_rating
+      assert_equal 2, effectiveness_by_name(player_effectivenesses, @player2_id).number_of_games
    end
 
    def test_stats_from_map2
@@ -111,10 +109,10 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
       assert_equal 2, player_effectivenesses.size
 
-      assert_equal 1, effectiveness_by_name(player_effectivenesses, "player1").average_rating
-      assert_equal 1, effectiveness_by_name(player_effectivenesses, "player1").number_of_games
-      assert_equal 3, effectiveness_by_name(player_effectivenesses, "player2").average_rating
-      assert_equal 1, effectiveness_by_name(player_effectivenesses, "player2").number_of_games
+      assert_equal 1, effectiveness_by_name(player_effectivenesses, @player1_id).average_rating
+      assert_equal 1, effectiveness_by_name(player_effectivenesses, @player1_id).number_of_games
+      assert_equal 3, effectiveness_by_name(player_effectivenesses, @player2_id).average_rating
+      assert_equal 1, effectiveness_by_name(player_effectivenesses, @player2_id).number_of_games
    end
 
    def test_stats_from_map3
@@ -122,15 +120,64 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
       assert_equal 1, player_effectivenesses.size
 
-      assert_equal 5, effectiveness_by_name(player_effectivenesses, "player1").average_rating
-      assert_equal 1, effectiveness_by_name(player_effectivenesses, "player1").number_of_games
+      assert_equal 5, effectiveness_by_name(player_effectivenesses, @player1_id).average_rating
+      assert_equal 1, effectiveness_by_name(player_effectivenesses, @player1_id).number_of_games
    end
 
+   def test_all_stats_for_player1
+      player_effectivenesses = PlayerEffectivenessModel.all_stats_for_player(@player1_id)
+      assert_equal 4, player_effectivenesses.size
+      assert_equal 3, player_effectivenesses[0].effectiveness_rating
+      assert_equal 1, player_effectivenesses[1].effectiveness_rating
+      assert_equal 2, player_effectivenesses[2].effectiveness_rating
+      assert_equal 5, player_effectivenesses[3].effectiveness_rating
+   end
+
+   def test_all_stats_for_player2
+      player_effectivenesses = PlayerEffectivenessModel.all_stats_for_player(@player2_id)
+      assert_equal 3, player_effectivenesses.size
+      assert_equal 2, player_effectivenesses[0].effectiveness_rating
+      assert_equal 3, player_effectivenesses[1].effectiveness_rating
+      assert_equal 2, player_effectivenesses[2].effectiveness_rating
+   end
+
+   def test_average_stats_for_player1
+      effectiveness = PlayerEffectivenessModel.average_stats_for_player(@player1_id)
+      assert_equal (11.to_f/4), effectiveness
+   end
+
+   def test_average_stats_for_player2
+      effectiveness = PlayerEffectivenessModel.average_stats_for_player(@player2_id)
+      assert_equal (7.to_f/3), effectiveness
+   end
+
+   def test_all_stats_for_player1_on_map1
+      player_effectivenesses = PlayerEffectivenessModel.all_stats_for_player_and_map(@player1_id, @map1_id)
+      assert_equal 2, player_effectivenesses.size
+      assert_equal 3, player_effectivenesses[0].effectiveness_rating
+      assert_equal 2, player_effectivenesses[1].effectiveness_rating
+   end
+
+   def test_all_stats_for_player2_on_map2
+      player_effectivenesses = PlayerEffectivenessModel.all_stats_for_player_and_map(@player2_id, @map2_id)
+      assert_equal 1, player_effectivenesses.size
+      assert_equal 3, player_effectivenesses[0].effectiveness_rating
+   end
+
+   def test_average_stats_for_player1_on_map1
+      effectivenesses = PlayerEffectivenessModel.average_stats_for_player_and_map(@player1_id, @map1_id)
+      assert_equal (5.to_f/2), effectivenesses
+   end
+
+   def test_average_stats_for_player2_on_map2
+      effectivenesses = PlayerEffectivenessModel.average_stats_for_player_and_map(@player2_id, @map1_id)
+      assert_equal 2, effectivenesses
+   end
    private
-   def effectiveness_by_name(player_effectivenesses, player_name)
+   def effectiveness_by_name(player_effectivenesses, player_id)
       target = nil
       player_effectivenesses.each do |player_effectiveness|
-         if player_effectiveness.player.real_name == player_name
+         if player_effectiveness.player_id == player_id
             target = player_effectiveness
             break
          end

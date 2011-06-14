@@ -7,6 +7,14 @@ class PlayerEffectivenessModel
          :order => "average_rating desc")
    end
 
+   def self.all_stats_for_player(player_id)
+      PlayerEffectiveness.all(:conditions => {:player_id => player_id})
+   end
+
+   def self.average_stats_for_player(player_id)
+      PlayerEffectiveness.average(:effectiveness_rating, :conditions => {:player_id => player_id})
+   end
+
    def self.all_stats_for_player_and_map(player_id, map_id)
       PlayerEffectiveness.all(:joins => :reach_game,
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}})
@@ -16,13 +24,5 @@ class PlayerEffectivenessModel
       PlayerEffectiveness.average(:effectiveness_rating, 
          :joins => :reach_game,
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}})
-   end
-
-   def self.all_stats_for_player(player_id)
-      PlayerEffectiveness.all(:conditions => {:player_id => player_id})
-   end
-
-   def self.average_stats_for_player(player_id)
-      PlayerEffectiveness.average(:effectiveness_rating, :conditions => {:player_id => player_id})
    end
 end
