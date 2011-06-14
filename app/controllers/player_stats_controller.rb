@@ -44,7 +44,9 @@ class PlayerStatsController < ActionController::Base
       if map_id == nil
          all_stats = Player.find_by_id(player_id).reach_player_stats
       else
-         all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}})
+         all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
+            :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}},
+            :order => "reach_games.timestamp")
       end
 
       kill_points = ""

@@ -19,7 +19,7 @@
    <td><%= player_stat.player.real_name %></td>
    <td><%= number_with_precision(player_stat.average_kills, :precision => 2) %></td>
    <td><%= number_with_precision(player_stat.average_deaths, :precision => 2) %></td>
-   <td><%= number_with_precision(player_stat.average_kills - player_stat.average_deaths, :precision => 2) %></td>
+   <td><%= number_with_precision(player_stat.average_spread, :precision => 2) %></td>
    <td><%= player_stat.number_of_games %></td>
 </tr>
 <% end %>
