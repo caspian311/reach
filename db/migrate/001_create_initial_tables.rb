@@ -15,13 +15,10 @@ class CreateInitialTables < ActiveRecord::Migration
       end
 
       create_table :player_effectivenesses do |table|
-         table.column :team_size, :integer
-         table.column :team_score, :integer
-         table.column :other_team_size, :integer
-         table.column :other_team_score, :integer
+         table.column :effectiveness_rating, :number
 
          table.references :player         
-         table.references :reach_map
+         table.references :reach_game
       end
 
       create_table :kill_death_spreads do |table|

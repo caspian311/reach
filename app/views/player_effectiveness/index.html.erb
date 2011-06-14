@@ -12,7 +12,7 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
 <select id="maps">
 <option value=""></option>
 <% @maps.each do |map| %>
-   <option value="<%= map.name %>"><%= map.name %></option>
+   <option value="<%= map.id %>"><%= map.name %></option>
 <% end %>
 </select>
 

@@ -8,8 +8,8 @@ class PlayerEffectivenessController < ActionController::Base
    def show
       setup_page
 
-      @map_name = params[:map_name]
-      @player_stats = PlayerEffectivenessModel.stats_for_map(@map_name)
+      @map_id = params[:map_id]
+      @player_stats = PlayerEffectivenessModel.stats_for_map(@map_id)
    end
 
    private

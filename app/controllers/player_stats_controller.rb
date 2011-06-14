@@ -15,7 +15,7 @@ class PlayerStatsController < ActionController::Base
       average_points = ""
 
       all_stats.each_with_index do |stat, index|
-         individual_points << "[#{index}, #{stat}]"
+         individual_points << "[#{index}, #{stat.effectiveness_rating}]"
          average_points << "[#{index}, #{average}]"
 
          if index < all_stats.size - 1

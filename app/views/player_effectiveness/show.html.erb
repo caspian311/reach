@@ -12,7 +12,7 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
 <select onchange="window.location='/player_effectiveness/' + this.value">
 <option value=""></option>
 <% @maps.each do |map| %>
-   <option <%= (map.name == @map_name) ? "selected='selected'": "" %> value="<%= map.name %>"><%= map.name %></option>
+   <option <%= (map.id == @map_id.to_i) ? "selected='selected'": "" %> value="<%= map.id %>"><%= map.name %></option>
 <% end %>
 </select>
 
@@ -21,15 +21,13 @@ What is <%= link_to "player effectiveness", "/player_effectiveness_info#index" %
 <table>
 <tr>
    <th>Player Name</th>
-   <th>Map</th>
    <th>Effectiveness</th>
    <th>Number of Games</th>
 </tr>
 <% @player_stats.each do |player_stat| %>
 <tr class="<%= cycle("regular", "alternate") %>">
-   <td><%= player_stat.player_name %></td>
-   <td><%= player_stat.map %></td>
-   <td><%= number_with_precision(player_stat.effectiveness, :precision => 2) %></td>
+   <td><%= player_stat.player.real_name %></td>
+   <td><%= number_with_precision(player_stat.average_rating, :precision => 2) %></td>
    <td><%= player_stat.number_of_games %></td>
 </tr>
 <% end %>
