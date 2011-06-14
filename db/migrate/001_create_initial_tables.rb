@@ -21,14 +21,6 @@ class CreateInitialTables < ActiveRecord::Migration
          table.references :reach_game
       end
 
-      create_table :kill_death_spreads do |table|
-         table.column :kills, :integer
-         table.column :deaths, :integer
-         table.column :spread, :integer
-
-         table.references :player
-      end
-
       create_table :reach_maps do |table|
          table.column :name, :string
       end
@@ -80,7 +72,6 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :weapons
       drop_table :players
       drop_table :player_effectivenesses
-      drop_table :kill_death_spreads
       drop_table :reach_games
       drop_table :reach_maps
    end

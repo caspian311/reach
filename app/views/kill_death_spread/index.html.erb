@@ -16,11 +16,11 @@
 </tr>
 <% @player_stats.each do |player_stat| %>
 <tr class="<%= cycle("regular", "alternate") %>">
-   <td><%= player_stat.player_name %></td>
-   <td><%= number_with_precision(player_stat.kills, :precision => 2) %></td>
-   <td><%= number_with_precision(player_stat.deaths, :precision => 2) %></td>
-   <td><%= number_with_precision(player_stat.spread, :precision => 2) %></td>
-   <td><%= player_stat.games %></td>
+   <td><%= player_stat.player.real_name %></td>
+   <td><%= number_with_precision(player_stat.average_kills, :precision => 2) %></td>
+   <td><%= number_with_precision(player_stat.average_deaths, :precision => 2) %></td>
+   <td><%= number_with_precision(player_stat.average_kills - player_stat.average_deaths, :precision => 2) %></td>
+   <td><%= player_stat.number_of_games %></td>
 </tr>
 <% end %>
 </table>

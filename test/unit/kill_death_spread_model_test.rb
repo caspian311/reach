@@ -1,13 +1,10 @@
-require "kill_death_spread_processor"
+require "test_helper"
 
-class KillDeathSpreadProcessorTest < Test::Unit::TestCase
+class KillDeathSpreadModelTest < Test::Unit::TestCase
    def setup
-      @test_object = KillDeathSpreadProcessor.new(["player1", "player2"])
-
-      ReachPlayerStat.delete_all      
+      ReachPlayerStat.delete_all
       ReachTeam.delete_all      
       ReachGame.delete_all
-      KillDeathSpread.delete_all
    end
 
    def test_kill_death_spread_processor
@@ -43,18 +40,30 @@ class KillDeathSpreadProcessorTest < Test::Unit::TestCase
       player2_stat.deaths = 4
       team2.reach_player_stats << player2_stat
 
-      @test_object.process_game(game)
+      stats = KillDeathSpreadModel.average_stats
 
-      assert_equal 2, KillDeathSpread.all.count
+      assert_equal 2, stats.size
 
-      player1_spread = KillDeathSpread.find_by_service_tag("player1").first
-      assert_equal 6, player1_spread.kills
-      assert_equal 8, player1_spread.deaths
-      assert_equal -2, player1_spread.spread
+      player1_spread = find_stat_by_service_tag(stats, "player1")
+      assert_equal 6, player1_spread.average_kills
+      assert_equal 8, player1_spread.average_deaths
+      assert_equal 1, player1_spread.number_of_games
 
-      player2_spread = KillDeathSpread.find_by_service_tag("player2").first
-      assert_equal 10, player2_spread.kills
-      assert_equal 4, player2_spread.deaths
-      assert_equal 6, player2_spread.spread
+      player2_spread = find_stat_by_service_tag(stats, "player2")
+      assert_equal 10, player2_spread.average_kills
+      assert_equal 4, player2_spread.average_deaths
+      assert_equal 1, player2_spread.number_of_games
+   end
+
+   private
+   def find_stat_by_service_tag(stats, service_tag)
+      target = nil
+      stats.each do |stat|
+         if stat.player.service_tag == service_tag
+            target = stat
+            break
+         end
+      end
+      target
    end
 end
