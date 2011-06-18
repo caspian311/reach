@@ -42,7 +42,9 @@ class PlayerStatsController < ActionController::Base
       map_id = params[:map_id]
 
       if map_id == nil
-         all_stats = Player.find_by_id(player_id).reach_player_stats
+         all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
+            :conditions => {:reach_player_stats => {:player_id => player_id}},
+            :order => "reach_games.timestamp")
       else
          all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
             :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}},
@@ -52,7 +54,11 @@ class PlayerStatsController < ActionController::Base
       kill_points = ""
       death_points = ""
 
+      graph_meta_data = []
+
       all_stats.each_with_index do |stat, index|
+         graph_meta_data << get_game_meta_data(stat)
+
          kill_points << "[#{index}, #{stat.kills}]"
          death_points << "[#{index}, #{stat.deaths}]"
 
@@ -62,16 +68,28 @@ class PlayerStatsController < ActionController::Base
          end
       end
 
-      graph_data = " [ { \"label\": \"Kills\", \"lines\": {\"show\": true}, \"points\": {\"show\": false}, \"data\": [ #{kill_points} ] }, 
-                     { \"label\": \"Deaths\" , \"lines\": {\"show\": true}, \"points\": {\"show\": false}, \"data\": [ #{death_points} ] } ]"
+      graph_data = " [ { \"label\": \"Kills\", \"data\": [ #{kill_points} ] }, 
+                     { \"label\": \"Deaths\" , \"data\": [ #{death_points} ] } ]"
 
       respond_to do |format|
          format.html { 
             render
          }
          format.json {
-            render :json => "{\"graph_data\": #{graph_data}}"
+            render :json => "{\"graph_data\": #{graph_data}, \"kill_death_graph_meta_data\": #{graph_meta_data.to_json}}"
          }
       end
+
+   end
+
+   private
+   def get_game_meta_data(stat)
+         game = stat.reach_team.reach_game
+
+         game_name = game.name
+         game_map = game.reach_map.name
+         timestamp = game.timestamp.getlocal.strftime("%m/%d/%Y %I:%M%p")
+
+         "#{timestamp}<br /> #{game_name} <br />on #{game_map}" 
    end
 end
