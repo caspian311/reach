@@ -14,10 +14,8 @@ ReachWeb::Application.routes.draw do
 
    match "/players" => "players#index"
    match "/players/:id" => "players#show"
-   match "/player_stats/effectiveness/:player_id" => "player_stats#effectiveness_graph"
-   match "/player_stats/effectiveness/:player_id/:map_id" => "player_stats#effectiveness_graph"
-   match "/player_stats/kill_deaths/:player_id" => "player_stats#kill_death_graph"
-   match "/player_stats/kill_deaths/:player_id/:map_id" => "player_stats#kill_death_graph"
+   match "/player_stats/:player_id" => "player_stats#get_stats"
+   match "/player_stats/:player_id/:map_id" => "player_stats#get_stats"
 
    root :to => "home#index"
 end
