@@ -41,55 +41,16 @@ class PlayerStatsController < ActionController::Base
       player_id = params[:player_id]
       map_id = params[:map_id]
 
-      if map_id == nil
-         all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
-            :conditions => {:reach_player_stats => {:player_id => player_id}},
-            :order => "reach_games.timestamp")
-      else
-         all_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
-            :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}},
-            :order => "reach_games.timestamp")
-      end
-
-      kill_points = ""
-      death_points = ""
-
-      graph_meta_data = []
-
-      all_stats.each_with_index do |stat, index|
-         graph_meta_data << get_game_meta_data(stat)
-
-         kill_points << "[#{index}, #{stat.kills}]"
-         death_points << "[#{index}, #{stat.deaths}]"
-
-         if index < all_stats.size - 1
-            kill_points << ", "
-            death_points << ", "
-         end
-      end
-
-      graph_data = " [ { \"label\": \"Kills\", \"data\": [ #{kill_points} ] }, 
-                     { \"label\": \"Deaths\" , \"data\": [ #{death_points} ] } ]"
+      json = PlayerStatsModel.get_json_output_of_kill_death_stats(player_id, map_id)
 
       respond_to do |format|
          format.html { 
-            render
+            render :json => json
          }
          format.json {
-            render :json => "{\"graph_data\": #{graph_data}, \"kill_death_graph_meta_data\": #{graph_meta_data.to_json}}"
+            render :json => json
          }
       end
 
-   end
-
-   private
-   def get_game_meta_data(stat)
-         game = stat.reach_team.reach_game
-
-         game_name = game.name
-         game_map = game.reach_map.name
-         timestamp = game.timestamp.getlocal.strftime("%m/%d/%Y %I:%M%p")
-
-         "#{timestamp}<br /> #{game_name} <br />on #{game_map}" 
    end
 end
