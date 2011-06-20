@@ -29,49 +29,36 @@ describe "Player Graphs" do
       end
    end
 
-   describe "fetching effectivness graph data for player and map" do
-      it "should return effectiveness stats in json form" do
-         endpoint = effectiveness_data_endpoint(@player_id, @map_id)
+   describe "fetching player stats data for player and map" do
+      it "should return stats in json form" do
+         get endpoint(@player_id, @map_id), :format => :json
 
-         get endpoint, :format => :json
+         player_stats_data = JSON.parse(response.body)
 
-         effectiveness_data = JSON.parse(response.body)
-         assert_equal 2, effectiveness_data["graph_data"].size
-         assert_equal "Each game", effectiveness_data["graph_data"][0]["label"]
-         assert_equal 0, effectiveness_data["graph_data"][0]["data"][0][0]
-         assert_equal 1, effectiveness_data["graph_data"][0]["data"][1][0]
-         assert_equal 2, effectiveness_data["graph_data"][0]["data"][2][0]
-         assert_equal 1, effectiveness_data["graph_data"][0]["data"][0][1]
-         assert_equal 2, effectiveness_data["graph_data"][0]["data"][1][1]
-         assert_equal 3, effectiveness_data["graph_data"][0]["data"][2][1]
-         assert_equal "Average", effectiveness_data["graph_data"][1]["label"]
-         assert_equal 0, effectiveness_data["graph_data"][1]["data"][0][0]
-         assert_equal 1, effectiveness_data["graph_data"][1]["data"][1][0]
-         assert_equal 2, effectiveness_data["graph_data"][1]["data"][2][0]
-         assert_equal 2, effectiveness_data["graph_data"][1]["data"][0][1]
-         assert_equal 2, effectiveness_data["graph_data"][1]["data"][1][1]
-         assert_equal 2, effectiveness_data["graph_data"][1]["data"][2][1]
-      end
-   end
+         assert_equal 2, player_stats_data["effectiveness"].size
+         assert_equal "Each game", player_stats_data["effectiveness"][0]["label"]
+         assert_equal 0, player_stats_data["effectiveness"][0]["data"][0][0]
+         assert_equal 1,player_stats_data["effectiveness"][0]["data"][1][0]
+         assert_equal 2,player_stats_data["effectiveness"][0]["data"][2][0]
+         assert_equal 1, player_stats_data["effectiveness"][0]["data"][0][1]
+         assert_equal 2, player_stats_data["effectiveness"][0]["data"][1][1]
+         assert_equal 3, player_stats_data["effectiveness"][0]["data"][2][1]
 
-   describe "fetching kill/death graph data for player and map" do
-      it "should return kill/death stats in json form" do
-         endpoint = kill_death_data_endpoint(@player_id, @map_id)
+         assert_equal "Average", player_stats_data["effectiveness"][1]["label"]
+         assert_equal 0, player_stats_data["effectiveness"][1]["data"][0][0]
+         assert_equal 1, player_stats_data["effectiveness"][1]["data"][1][0]
+         assert_equal 2, player_stats_data["effectiveness"][1]["data"][2][0]
+         assert_equal 2, player_stats_data["effectiveness"][1]["data"][0][1]
+         assert_equal 2, player_stats_data["effectiveness"][1]["data"][1][1]
+         assert_equal 2, player_stats_data["effectiveness"][1]["data"][2][1]
 
-         get endpoint, :format => :json
-
-         kill_death_data = JSON.parse(response.body)
-         assert_equal 2, kill_death_data["graph_data"].size
-         assert_equal "Kills", kill_death_data["graph_data"][0]["label"]
-         assert_equal "Deaths", kill_death_data["graph_data"][1]["label"]
+         assert_equal 2, player_stats_data["kill_death"].size
+         assert_equal "Kills", player_stats_data["kill_death"][0]["label"]
+         assert_equal "Deaths", player_stats_data["kill_death"][1]["label"]
       end
    end
 end
 
-def effectiveness_data_endpoint(player_id, map_id)
-   "/player_stats/effectiveness/#{player_id}/#{map_id}"
-end
-
-def kill_death_data_endpoint(player_id, map_id)
-   "/player_stats/kill_deaths/#{player_id}/#{map_id}"
+def endpoint(player_id, map_id)
+   "/player_stats/#{player_id}/#{map_id}"
 end

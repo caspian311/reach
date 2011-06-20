@@ -21,7 +21,7 @@ class PlayerStatsModel
       death_points = []
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
-         individual_effectiveness << [index, effectiveness_stat.effectiveness_rating]
+         individual_effectiveness << [index, effectiveness_stat.effectiveness_rating.to_f]
          average_effectiveness << [index, effectiveness_average]
       end
 

@@ -26,6 +26,6 @@ class PlayerEffectivenessModel
    def self.average_stats_for_player_and_map(player_id, map_id)
       PlayerEffectiveness.average(:effectiveness_rating, 
          :joins => :reach_game,
-         :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}})
+         :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}}).to_f
    end
 end
