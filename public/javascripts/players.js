@@ -32,7 +32,7 @@ $(function(){
 
                var content = graph_meta_data[item.dataIndex]
 
-               showGameTooltip(content, item.pageX, item.pageY)
+               show_game_tooltip(content, item.pageX, item.pageY)
             }
          } else {
             $('#game_tool_tip').remove()
@@ -40,7 +40,21 @@ $(function(){
          }
       }
 
-      var options = {
+      $('#kill_death_graph').bind("plotselected", plot_selected)
+      $('#effectiveness_graph').bind("plotselected", plot_selected)
+
+      function plot_selected(event, ranges) {
+         $.plot($('#kill_death_graph'), kill_death_data,
+            $.extend(true, {}, graph_options, {
+               xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+            }))
+         $.plot($('#effectiveness_graph'), effectiveness_data,
+            $.extend(true, {}, graph_options, {
+               xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
+            }))
+      }
+
+      var graph_options = {
          legend: {
             show: true,
             position: "nw"
@@ -61,10 +75,15 @@ $(function(){
             hoverable: true,
             backgroundColor: { colors: ["#fff", "#ccc"] }
          }, 
+         selection: {
+            mode: "x"
+         },
          colors: ["#006DAD", "#FF2600"]
       }
 
       var graph_meta_data = []
+      var kill_death_data = []
+      var effectiveness_data = []
 
       function update_graphs(selected_player, selected_map) {
          var url = '/player_stats/' +  selected_player
@@ -76,22 +95,22 @@ $(function(){
          $('#kill_death_graph').html = ''
 
          $.getJSON(url, function(data) {
-            var kill_death_data = data["kill_death"]
-            var effectiveness_data = data["effectiveness"]
+            kill_death_data = data["kill_death"]
+            effectiveness_data = data["effectiveness"]
             graph_meta_data = data["graph_meta_data"]
 
             $('#effectiveness_graph_container').css('display', 'block')
             $('#kill_death_graph_container').css('display', 'block')
 
-            options["legend"]["container"] = $('#kill_death_map_legend')
-            $.plot($('#kill_death_graph'), kill_death_data, options)
+            graph_options["legend"]["container"] = $('#kill_death_map_legend')
+            $.plot($('#kill_death_graph'), kill_death_data, graph_options)
 
-            options["legend"]["container"] = $('#effectiveness_map_legend')
-            $.plot($('#effectiveness_graph'), effectiveness_data, options)
+            graph_options["legend"]["container"] = $('#effectiveness_map_legend')
+            $.plot($('#effectiveness_graph'), effectiveness_data, graph_options)
          })
       }
 
-      function showGameTooltip(content, x, y) {
+      function show_game_tooltip(content, x, y) {
          $('#game_tool_tip').remove()
          $('<div id="game_tool_tip">' + content + '</div>')
             .css({
@@ -101,6 +120,7 @@ $(function(){
                left: x + 5,
                border: 'solid 1px #000',
                padding: '2px',
+               'z-index': '99',
                'background-color': '#fff',
                opacity: 0.85
             })
