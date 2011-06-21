@@ -28,6 +28,7 @@ GEM
       activemodel (= 3.0.7)
       activesupport (= 3.0.7)
     activesupport (3.0.7)
+    annotate-models (1.0.4)
     arel (2.0.9)
     builder (2.1.2)
     capybara (1.0.0.beta1)
@@ -130,6 +131,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate-models (= 1.0.4)
   cucumber-rails
   database_cleaner
   halo-reach-api

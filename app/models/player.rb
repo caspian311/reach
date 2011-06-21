@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 1
+#
+# Table name: players
+#
+#  id                    :integer         not null, primary key
+#  real_name             :string(255)
+#  reach_player_stats_id :integer
+#
+
 class Player < ActiveRecord::Base
    has_many :reach_player_stats
    has_many :service_tags
