@@ -16,16 +16,26 @@ class MetaDataParser
 
       LOG.info "number of players: #{players.length}"
       players.keys.each_with_index do |real_name, index|
-         service_tag_name = players[real_name]
          player = Player.new
          player.id = index
          player.real_name = real_name
          player.save
 
-         service_tag = ServiceTag.new
-         service_tag.tag = service_tag_name
+         service_tag_name = players[real_name]
 
-         player.service_tags << service_tag
+         if service_tag_name.kind_of?(Array)
+            service_tag_name.each do |tag|
+               service_tag = ServiceTag.new
+               service_tag.tag = tag
+
+               player.service_tags << service_tag
+            end
+         else
+            service_tag = ServiceTag.new
+            service_tag.tag = service_tag_name
+
+            player.service_tags << service_tag
+         end
       end
    end
 

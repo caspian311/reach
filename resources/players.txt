@@ -13,7 +13,6 @@ Kyle Cross : D1ED
 Matt Todd : CASP
 Srdjan Grubor : GER
 Tim Hamer : HAMR
-Wes Erhlichman : WES
-#Wes Erhlichman : [WES, L138]
+Wes Erhlichman : [WES, L138]
 Alex Lapp: LAPR
 Brian Lombardo: C977
