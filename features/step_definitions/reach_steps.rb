@@ -16,3 +16,7 @@ Given /^there are (\d+) games in the database$/ do |number_of_games|
       game.save
    end
 end
+
+Then /^I should find a button called "([^"]*)"$/ do |button_name|
+   find_button button_name
+end
