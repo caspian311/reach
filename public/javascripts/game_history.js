@@ -59,9 +59,9 @@ function populate_game_details(details_cell, game_details) {
          var player_stat = team["reach_player_stats"][t]
          var player = player_stat["player"]
 
-         var player_service_tag = "Unknown player"
+         var player_name = "Unknown player"
          if (player) {
-            player_service_tag = player["real_name"]
+            player_name = player["real_name"]
          }
 
          var player_kills = player_stat["kills"]
@@ -75,7 +75,7 @@ function populate_game_details(details_cell, game_details) {
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
-         player_row.append($('<td>' + player_service_tag + '</td>'))
+         player_row.append($('<td>' + player_name + '</td>'))
          player_row.append($('<td>' + player_kills + '</td>'))
          player_row.append($('<td>' + player_assists + '</td>'))
          player_row.append($('<td>' + player_deaths + '</td>'))

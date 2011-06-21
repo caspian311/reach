@@ -21,16 +21,28 @@ describe "Game Details" do
       game.reach_teams << team2
 
       player1 = Player.new
-      player1.service_tag = "player1"
       player1.save
 
+      service_tag1 = ServiceTag.new
+      service_tag1.tag = "player1"
+
+      player1.service_tags << service_tag1
+
       player2 = Player.new
-      player2.service_tag = "player2"
       player2.save
 
+      service_tag2 = ServiceTag.new
+      service_tag2.tag = "player2"
+
+      player2.service_tags << service_tag2
+
       player3 = Player.new
-      player3.service_tag = "player3"
       player3.save
+
+      service_tag3 = ServiceTag.new
+      service_tag3.tag = "player3"
+
+      player3.service_tags << service_tag3
 
       player_stat1 = ReachPlayerStat.new
       player_stat1.player = player1
@@ -54,12 +66,12 @@ describe "Game Details" do
          assert_equal 1, game_details["reach_game"]["reach_teams"][0]["team_id"]
          assert_equal 15, game_details["reach_game"]["reach_teams"][0]["score"]
          assert_equal 2, game_details["reach_game"]["reach_teams"][0]["reach_player_stats"].size
-         assert_equal "player1", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][0]["player"]["service_tag"]
-         assert_equal "player3", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][1]["player"]["service_tag"]
+         assert_equal "player1", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
+         assert_equal "player3", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][1]["player"]["service_tags"][0]["tag"]
          assert_equal 2, game_details["reach_game"]["reach_teams"][1]["team_id"]
          assert_equal 10, game_details["reach_game"]["reach_teams"][1]["score"]
          assert_equal 1, game_details["reach_game"]["reach_teams"][1]["reach_player_stats"].size
-         assert_equal "player2", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][0]["player"]["service_tag"]
+         assert_equal "player2", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
       end
    end
 end

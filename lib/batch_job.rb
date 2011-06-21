@@ -5,7 +5,6 @@ require "reach_json_parser"
 require "api_key_provider"
 require "active_record"
 require "meta_data_parser"
-require "service_tag_provider"
 
 class BatchJob
    def initialize(meta_data_parser = MetaDataParser.new, reach_client = ReachClient.new, reach_json_parser = ReachJsonParser.new, game_filter = GameFilter.new, game_processor = GameProcessor.new)

@@ -7,6 +7,7 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
       @test_object = PlayerEffectivenessProcessor.new
       
       Player.delete_all
+      ServiceTag.delete_all
       ReachMap.delete_all
       ReachPlayerStat.delete_all
       ReachTeam.delete_all
@@ -37,16 +38,28 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
       game.reach_teams << team2
 
       player1 = Player.new
-      player1.service_tag = "player1"
       player1.save
 
+      service_tag1 = ServiceTag.new
+      service_tag1.tag = "player1"
+
+      player1.service_tags << service_tag1
+
       player2 = Player.new
-      player2.service_tag = "player2"
       player2.save
 
+      service_tag2 = ServiceTag.new
+      service_tag2.tag = "player2"
+
+      player2.service_tags << service_tag2
+
       player3 = Player.new
-      player3.service_tag = "player3"
       player3.save
+
+      service_tag3 = ServiceTag.new
+      service_tag3.tag = "player3"
+
+      player3.service_tags << service_tag3
 
       player_stat1 = ReachPlayerStat.new
       player_stat1.player = player1
@@ -100,24 +113,44 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
       game.reach_teams << team2
 
       player1 = Player.new
-      player1.service_tag = "player1"
       player1.save
 
+      service_tag1 = ServiceTag.new
+      service_tag1.tag = "player1"
+
+      player1.service_tags << service_tag1
+
       player2 = Player.new
-      player2.service_tag = "player2"
       player2.save
 
+      service_tag2 = ServiceTag.new
+      service_tag2.tag = "player2"
+
+      player2.service_tags << service_tag2
+
       player3 = Player.new
-      player3.service_tag = "player3"
       player3.save
 
+      service_tag3 = ServiceTag.new
+      service_tag3.tag = "player3"
+
+      player3.service_tags << service_tag3
+
       player4 = Player.new
-      player4.service_tag = "player4"
       player4.save
 
+      service_tag4 = ServiceTag.new
+      service_tag4.tag = "player4"
+
+      player4.service_tags << service_tag4
+
       player5 = Player.new
-      player5.service_tag = "player5"
       player5.save
+
+      service_tag5 = ServiceTag.new
+      service_tag5.tag = "player5"
+
+      player5.service_tags << service_tag5
 
       player_stat1 = ReachPlayerStat.new
       player_stat1.player = player1
@@ -186,21 +219,37 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
       team2.score = 2
       game.reach_teams << team2
 
-      player1 = Player.new
-      player1.service_tag = "player1"
+     player1 = Player.new
       player1.save
 
+      service_tag1 = ServiceTag.new
+      service_tag1.tag = "player1"
+
+      player1.service_tags << service_tag1
+
       player2 = Player.new
-      player2.service_tag = "player2"
       player2.save
 
+      service_tag2 = ServiceTag.new
+      service_tag2.tag = "player2"
+
+      player2.service_tags << service_tag2
+
       player3 = Player.new
-      player3.service_tag = "player3"
       player3.save
 
+      service_tag3 = ServiceTag.new
+      service_tag3.tag = "player3"
+
+      player3.service_tags << service_tag3
+
       player4 = Player.new
-      player4.service_tag = "player4"
       player4.save
+
+      service_tag4 = ServiceTag.new
+      service_tag4.tag = "player4"
+
+      player4.service_tags << service_tag4
 
       player_stat1 = ReachPlayerStat.new
       player_stat1.player = player1

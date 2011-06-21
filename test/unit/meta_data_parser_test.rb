@@ -11,6 +11,7 @@ class MetaDataParserTest < Test::Unit::TestCase
 
       Weapon.delete_all
       Player.delete_all
+      ServiceTag.delete_all
    end
 
    def test_all_weapons_are_pulled_from_file
@@ -26,11 +27,14 @@ class MetaDataParserTest < Test::Unit::TestCase
    def test_all_players_are_pulled_in_from_file
       @test_object.all_players
 
-      assert_equal(2, Player.all.length)
-      assert_equal("player 1", Player.all.first.real_name)
-      assert_equal("service tag 1", Player.all.first.service_tag)
-      assert_equal("player 2", Player.all.last.real_name)
-      assert_equal("service tag 2", Player.all.last.service_tag)
+      assert_equal 2, Player.all.size
 
+      player1 = Player.all.first
+      player2 = Player.all.last
+
+      assert_equal "player 1", player1.real_name
+      assert player1.uses_tag?("service tag 1")
+      assert_equal "player 2", player2.real_name
+      assert player2.uses_tag?("service tag 2")
    end
 end

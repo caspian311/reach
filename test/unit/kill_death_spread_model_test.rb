@@ -7,15 +7,21 @@ class KillDeathSpreadModelTest < Test::Unit::TestCase
       ReachGame.delete_all
    end
 
-   def test_kill_death_spread_processor
+   def test_kill_death_spread
       reach_id = random_string
 
+      player1_service_tag = ServiceTag.new
+      player1_service_tag.tag = "player1"
+
       player1 = Player.new
-      player1.service_tag = "player1"
+      player1.service_tags <<  player1_service_tag
       player1.save
 
+      player2_service_tag = ServiceTag.new
+      player2_service_tag.tag = "player2"
+
       player2 = Player.new
-      player2.service_tag = "player2"
+      player2.service_tags << player2_service_tag
       player2.save
 
       game = ReachGame.new
@@ -61,7 +67,7 @@ class KillDeathSpreadModelTest < Test::Unit::TestCase
    def find_stat_by_service_tag(stats, service_tag)
       target = nil
       stats.each do |stat|
-         if stat.player.service_tag == service_tag
+         if stat.player.uses_tag?(service_tag)
             target = stat
             break
          end

@@ -17,39 +17,67 @@ class ReachJsonParserTest < Test::Unit::TestCase
 
    def test_populate_details
       player1 = Player.new
-      player1.service_tag = "JM9C"
       player1.real_name = "Player 1"
       player1.save
 
+      service_tag1 = ServiceTag.new
+      service_tag1.tag = "JM9C"
+
+      player1.service_tags << service_tag1
+
       player2 = Player.new
-      player2.service_tag = "HAMR"
       player2.real_name = "Player 2"
       player2.save
 
+      service_tag2 = ServiceTag.new
+      service_tag2.tag = "HAMR"
+
+      player2.service_tags << service_tag2
+
       player3 = Player.new
-      player3.service_tag = "W707"
       player3.real_name = "Player 3"
       player3.save
 
+      service_tag3 = ServiceTag.new
+      service_tag3.tag = "W707"
+
+      player3.service_tags << service_tag3
+
       player4 = Player.new
-      player4.service_tag = "MAC"
       player4.real_name = "Player 4"
       player4.save
 
+      service_tag4 = ServiceTag.new
+      service_tag4.tag = "MAC"
+
+      player4.service_tags << service_tag4
+
       player5 = Player.new
-      player5.service_tag = "X251"
       player5.real_name = "Player 5"
       player5.save
 
+      service_tag5 = ServiceTag.new
+      service_tag5.tag = "X251"
+
+      player5.service_tags << service_tag5
+
       player6 = Player.new
-      player6.service_tag = "U525"
       player6.real_name = "Player 6"
       player6.save
 
+      service_tag6 = ServiceTag.new
+      service_tag6.tag = "U525"
+
+      player6.service_tags << service_tag6
+
       player7 = Player.new
-      player7.service_tag = "O331"
       player7.real_name = "Player 7"
       player7.save
+
+      service_tag7 = ServiceTag.new
+      service_tag7.tag = "0331"
+
+      player7.service_tags << service_tag7
 
       ids = ["123", "456", "789"]
 
