@@ -1,4 +1,3 @@
-
 $(function(){
       $('#player_selector').change(
          function(event) {

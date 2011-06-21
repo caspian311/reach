@@ -19,6 +19,7 @@ ReachWeb::Application.routes.draw do
 
    match "/admin" => "admin#index"
    match "/admin/update" => "admin#update"
+   match "/admin/results" => "admin#results"
 
    root :to => "home#index"
 end

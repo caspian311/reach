@@ -11,9 +11,17 @@ describe AdminController do
        end
    end
 
-   describe "make ajax call to 'update' page" do
+   describe "make ajax call to do 'update'" do
       it "should be successful" do
          get 'update', :format => :json
+
+         response.should be_success
+       end
+   end
+
+   describe "make ajax call to fetch 'results'" do
+      it "should be successful" do
+         get 'results', :format => :json
 
          response.should be_success
        end
