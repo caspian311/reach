@@ -71,13 +71,21 @@ class CreateInitialTables < ActiveRecord::Migration
          table.references :reach_map
          table.references :reach_teams
       end
+
+      create_table :job_statuses do |table|
+         table.column :status, :string
+         table.column :content, :text
+      end
    end
 
    def self.down
       drop_table :weapons
       drop_table :players
-      drop_table :player_effectivenesses
-      drop_table :reach_games
       drop_table :reach_maps
+      drop_table :service_tags
+      drop_table :reach_games
+      drop_table :reach_teams
+      drop_table :reach_player_stats
+      drop_table :player_effectivenesses
    end
 end

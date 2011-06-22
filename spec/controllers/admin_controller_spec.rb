@@ -21,7 +21,7 @@ describe AdminController do
 
    describe "make ajax call to fetch 'results'" do
       it "should be successful" do
-         get 'results', :format => :json
+         get 'results', :job_id => "123", :format => :json
 
          response.should be_success
        end

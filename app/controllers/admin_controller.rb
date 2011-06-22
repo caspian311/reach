@@ -6,13 +6,16 @@ class AdminController < ActionController::Base
    end
 
    def update
-      AdminModel.start_job
+      job_status = AdminModel.start_job
 
-      render_content("")
+      render_content(job_status.to_json)
    end
 
    def results
-      render_content(AdminModel.current_status.to_json)
+      job_id = params[:job_id].to_i
+      current_status = AdminModel.current_status(job_id)
+
+      render_content(current_status.to_json)
    end
 
    def render_content(content)
