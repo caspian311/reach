@@ -1,6 +1,29 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe "Admin Functionality" do
+describe AdminController do
+   describe "pulling up the update page" do
+      it "current running job should be pulled up" do
+         expected_status = JobStatus.new
+         expected_status.id = 123
+         expected_status.status = "Running"
+         AdminModel.should_receive(:running_job).and_return(expected_status)
+
+         get "/admin"
+
+         response.body.should contain("Running")
+      end
+   end
+
+   describe "pulling up the update page" do
+      it "should show that nothing is running if there is no current running job" do
+         AdminModel.should_receive(:running_job).and_return(nil)
+
+         get "/admin"
+
+         response.body.should contain("Not started")
+      end
+   end
+
    describe "updating the data" do
       it "should not really return anything but call into the model" do
          expected_status = JobStatus.new

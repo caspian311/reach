@@ -1,5 +1,5 @@
-require 'spec_helper'
-require './test/unit/random_string'
+require "spec_helper"
+require "./test/unit/random_string"
 
 describe "Player Graphs" do
    before(:all) do

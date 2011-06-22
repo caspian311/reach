@@ -1,8 +1,6 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe GameHistoryController do
-   render_views
-
    describe "GET 'show'" do
       it "should be successful" do
          get 'show'

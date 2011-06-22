@@ -2,8 +2,10 @@
   <%= @title %>
 </div> 
 <div class="content"> 
-   <input id="admin-update" type="button" value="Update" />
+   <input id="admin-job-id" type="hidden" value="<%= @running_job == nil ? "" : @running_job.id %>" />
+   <input id="admin-update" type="button" value="Update" <%= @running_job == nil ? "" : "disabled=\"disabled\"" %> />
    <br />
-   <div id="admin-status"></div>
-   <textarea id="admin-results" readonly="readonly"></textarea>
+   Status: <div id="admin-status"><%= @running_job == nil ? "Not started" : @running_job.status %></div>
+   <br />
+   <textarea id="admin-results" readonly="readonly"><%= @running_job == nil ? "" : @running_job.content %></textarea>
 </div> 
