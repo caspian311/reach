@@ -9,7 +9,7 @@ class AdminModelTest < Test::Unit::TestCase
    def test_after_starting_the_job_the_current_stats_is_running
       id = AdminModel.start_job.id
 
-      assert_equal "Running", AdminModel.current_status(id).status
+      assert_equal JobState::RUNNING, AdminModel.current_status(id).status
    end
 
    def test_if_no_job_is_running_then_running_job_returns_nil
@@ -18,17 +18,17 @@ class AdminModelTest < Test::Unit::TestCase
 
    def test_running_job_returns_the_job_that_is_currently_running
       job1 = JobStatus.new
-      job1.status = "Finished"
+      job1.status = JobState::FINISHED
       job1.save
 
       job2 = JobStatus.new
-      job2.status = "Running"
+      job2.status = JobState::RUNNING
       job2.save
 
       running_job_id = job2.id
 
       job3 = JobStatus.new
-      job3.status = "Finished"
+      job3.status = JobState::FINISHED
       job3.save
 
       assert_equal running_job_id, AdminModel.running_job.id

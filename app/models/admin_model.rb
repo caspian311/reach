@@ -1,3 +1,5 @@
+require "thread"
+
 class AdminModel
    @@threads = []
 
@@ -6,20 +8,42 @@ class AdminModel
    end
 
    def self.start_job
-      status = JobStatus.new
-      status.status = "Running"
-      status.save
+      status = nil
 
-      @@threads << Thread.new(status) do |status|
-         status.content = ""
+      Mutex.new.synchronize do
+         status = JobStatus.new
+         status.status = JobState::RUNNING
          status.save
-         3.times do |i|
-            status.content = status.content + "step #{(i + 1)}\n"
-            status.save
-            sleep(2)
+      end
+
+      Thread.abort_on_exception = true
+
+      @@threads << Thread.new(status.id) do |job_id|
+         mutex = Mutex.new
+
+         begin
+            3.times do |i|
+               mutex.synchronize do
+                  status = JobStatus.find_by_id(job_id)
+                  status.content = "#{status.content}step #{(i + 1)}\n"
+                  status.save
+                  sleep(2)
+               end
+            end
+         rescue Exception => e
+            mutex.synchronize do
+               status = JobStatus.find_by_id(job_id)
+               status.status = JobState::ERROR
+               status.content = "error when calling batchjob: #{e}"
+               status.save
+            end
          end
-         status.status = "Finished"
-         status.save
+
+         mutex.synchronize do
+            status = JobStatus.find_by_id(job_id)
+            status.status = JobState::FINISHED
+            status.save
+         end
       end
 
       status
