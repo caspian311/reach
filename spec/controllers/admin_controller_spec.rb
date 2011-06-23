@@ -13,6 +13,8 @@ describe AdminController do
 
    describe "make ajax call to do 'update'" do
       it "should be successful" do
+         AdminModel.should_receive(:start_job).and_return(nil)
+
          get 'update', :format => :json
 
          response.should be_success
