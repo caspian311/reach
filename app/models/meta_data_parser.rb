@@ -15,9 +15,8 @@ class MetaDataParser
       players = YAML.load_file(@player_file_location)
 
       LOG.info "number of players: #{players.length}"
-      players.keys.each_with_index do |real_name, index|
+      players.keys.each do |real_name|
          player = Player.new
-         player.id = index
          player.real_name = real_name
          player.save
 
@@ -48,7 +47,7 @@ class MetaDataParser
       meta_data["Data"]["AllWeaponsById"].each do |json_weapon|
          weapon = Weapon.new
 
-         weapon.id = json_weapon["Key"].to_i
+         # weapon.id = json_weapon["Key"].to_i
          weapon.name = json_weapon["Value"]["Name"]
          weapon.description = json_weapon["Value"]["Description"]
 

@@ -1,7 +1,5 @@
 require "test_helper"
 
-require "player_effectiveness_processor"
-
 class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
    def setup
       @test_object = PlayerEffectivenessProcessor.new
@@ -186,15 +184,15 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
 
       player3_effectiveness = PlayerEffectiveness.find_by_service_tag("player3").first
       assert_equal map_name, player3_effectiveness.reach_game.reach_map.name
-      assert_equal (2.to_f/3), player3_effectiveness.effectiveness_rating
+      assert_in_delta (2.to_f/3), player3_effectiveness.effectiveness_rating, 0.0001
 
       player4_effectiveness = PlayerEffectiveness.find_by_service_tag("player4").first
       assert_equal map_name, player4_effectiveness.reach_game.reach_map.name
-      assert_equal (2.to_f/3), player4_effectiveness.effectiveness_rating
+      assert_in_delta (2.to_f/3), player4_effectiveness.effectiveness_rating, 0.0001
 
       player5_effectiveness = PlayerEffectiveness.find_by_service_tag("player5").first
       assert_equal map_name, player5_effectiveness.reach_game.reach_map.name
-      assert_equal (2.to_f/3), player5_effectiveness.effectiveness_rating
+      assert_in_delta (2.to_f/3), player5_effectiveness.effectiveness_rating, 0.0001
    end
 
    def test_player_effectiveness_is_same_as_score_if_teams_are_event
@@ -219,7 +217,7 @@ class PlayerEffectivenessProcessorTest < Test::Unit::TestCase
       team2.score = 2
       game.reach_teams << team2
 
-     player1 = Player.new
+      player1 = Player.new
       player1.save
 
       service_tag1 = ServiceTag.new

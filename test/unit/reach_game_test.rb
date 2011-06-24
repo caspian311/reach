@@ -1,3 +1,5 @@
+require "test_helper"
+
 class ReachGameTest < Test::Unit::TestCase
    def setup
       ReachGame.delete_all
@@ -5,15 +7,15 @@ class ReachGameTest < Test::Unit::TestCase
 
    def test_retreive_by_reach_id
       reach_id = random_string
-      now = Time.now.to_i
+      now = Time.now
 
       game = ReachGame.new
       game.reach_id = reach_id
-      game.timestamp = now
+      game.game_time = now
       game.save
 
       actual_game = ReachGame.find_by_reach_id(reach_id)
 
-      assert_equal now, actual_game.timestamp.to_i
+      assert_equal now.to_i, actual_game.game_time.to_i
    end
 end

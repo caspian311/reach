@@ -9,8 +9,6 @@ class CreateInitialTables < ActiveRecord::Migration
 
       create_table :players do |table|
          table.column :real_name, :string
-
-         table.references :reach_player_stats
       end
 
       create_table :service_tags do |table|
@@ -20,7 +18,7 @@ class CreateInitialTables < ActiveRecord::Migration
       end
 
       create_table :player_effectivenesses do |table|
-         table.column :effectiveness_rating, :number
+         table.column :effectiveness_rating, :float
 
          table.references :player         
          table.references :reach_game
@@ -33,8 +31,8 @@ class CreateInitialTables < ActiveRecord::Migration
       create_table :reach_player_stats do |table|
          table.column :score, :integer
          table.column :assists, :integer
-         table.column :average_death_distance, :number
-         table.column :average_kill_distance, :number
+         table.column :average_death_distance, :decimal
+         table.column :average_kill_distance, :decimal
          table.column :betrayals, :integer
          table.column :did_not_finish, :boolean
          table.column :deaths, :integer
@@ -59,17 +57,15 @@ class CreateInitialTables < ActiveRecord::Migration
          table.column :medals, :integer
 
          table.references :reach_game
-         table.references :reach_players
       end
 
       create_table :reach_games do |table|
          table.column :reach_id, :string
          table.column :name, :string
          table.column :duration, :string
-         table.column :timestamp, :datetime
+         table.column :game_time, :datetime
 
          table.references :reach_map
-         table.references :reach_teams
       end
 
       create_table :job_statuses do |table|

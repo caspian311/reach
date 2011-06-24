@@ -22,19 +22,16 @@ class AdminModel
          mutex = Mutex.new
 
          begin
-            3.times do |i|
-               mutex.synchronize do
-                  status = JobStatus.find_by_id(job_id)
-                  status.content = "#{status.content}step #{(i + 1)}\n"
-                  status.save
-                  sleep(2)
-               end
-            end
+            # BatchJob.new.execute
          rescue Exception => e
             mutex.synchronize do
                status = JobStatus.find_by_id(job_id)
                status.status = JobState::ERROR
-               status.content = "error when calling batchjob: #{e}"
+               error_message = "error when calling batchjob: #{e}\n"
+               e.backtrace.each do |line|
+                  error_message = "#{error_message}#{line}\n"
+               end
+               status.content = "#{status.content}\n#{error_message}"
                status.save
             end
          end
@@ -50,7 +47,7 @@ class AdminModel
    end
 
    def self.running_job
-      JobStatus.where(:status => "Running").first
+      JobStatus.where(:status => JobState::RUNNING).first
    end
 
    def self.clean_up

@@ -25,13 +25,14 @@ function continuously_update_admin_screen() {
 
          $('#admin-job-id').val(job_id)
          $('#admin-status').html(status)
-         $('#admin-results').val(content)
+         $('#admin-results').html(content)
+         $('#admin-results-container').scrollTo('max')
 
          if (status == 'Finished') {
             clearInterval(thread_id)
             $('#admin-update').removeAttr("disabled")
          }
       })
-   }, 1000)
+   }, 500)
 }
 

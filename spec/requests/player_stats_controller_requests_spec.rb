@@ -27,7 +27,7 @@ describe "Player Graphs" do
 
       game = ReachGame.new
       game.reach_map = map
-      game.timestamp = Time.now
+      game.game_time = Time.now
       game.name = @game_name
       game.save
 

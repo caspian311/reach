@@ -1,7 +1,5 @@
 require "test_helper"
 
-require "meta_data_parser"
-
 class MetaDataParserTest < Test::Unit::TestCase
    def setup
       player_list_file = "test_resources/test_player_list.txt"

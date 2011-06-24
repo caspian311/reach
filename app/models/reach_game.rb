@@ -7,7 +7,7 @@
 #  reach_id       :string(255)
 #  name           :string(255)
 #  duration       :string(255)
-#  timestamp      :datetime
+#  game_time      :datetime
 #  reach_map_id   :integer
 #  reach_teams_id :integer
 #

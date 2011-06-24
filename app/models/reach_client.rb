@@ -2,8 +2,6 @@ require "rubygems"
 require "json"
 require "halo-reach-api"
 
-require "reach_logging"
-
 class ReachClient
    ACCOUNT_1 ="Buckethead Died"
    ACCOUNT_2 = "jaymz9mm"
@@ -39,9 +37,7 @@ class ReachClient
          current_game += 1
 
          filename = "#{@output_directory}/#{id}.json"
-         if File.exists? filename
-            LOG.info " - already have game: #{current_game} out of #{total_games}"
-         else
+         if !File.exists? filename
             sleep(@throttle)
             LOG.info " - downloading: #{current_game} out of #{total_games}"
 
@@ -71,9 +67,22 @@ class ReachClient
    end
 
    def games_on_page(page_number)
-      game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
-      game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
+      games = []
 
-      game_history1 | game_history2
+      begin
+         LOG.info "Getting game history from Halo Reach services..."
+
+         game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
+         game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
+
+         games = game_history1 | game_history2
+
+         LOG.info "Game history retrieved successfully"
+      rescue Exception => e
+         LOG.info "Error getting data from Halo Reach services: #{e}"
+         retry
+      end
+
+      games
    end
 end

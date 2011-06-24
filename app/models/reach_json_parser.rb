@@ -9,7 +9,7 @@ class ReachJsonParser
       total_games = game_ids.length
       current_game = 0
 
-      ignored_game_ids = []
+      all_games = []
 
       game_ids.each do |game_id|
          current_game += 1
@@ -23,7 +23,7 @@ class ReachJsonParser
             game.reach_id = game_id
             game.name = game_details_json["GameVariantName"]
             game.duration = game_details_json["GameDuration"]
-            game.timestamp = parse_timestamp(game_details_json["GameTimestamp"])
+            game.game_time = parse_timestamp(game_details_json["GameTimestamp"])
             
             map_name = game_details_json["MapName"]
             map = ReachMap.find_by_name(map_name)
@@ -39,8 +39,11 @@ class ReachJsonParser
             parse_player_stats(reach_teams, game_details_json["Players"])
 
             game.save
+            all_games << game
          end
       end
+
+      all_games
    end
 
    private
@@ -106,7 +109,9 @@ class ReachJsonParser
          team.suicides = json_team["TeamTotalSuicides"]
          team.medals = json_team["TeamTotalMedals"]
 
+         team.reach_game_id = game.id
          game.reach_teams << team
+
          teams[team_id] = team
       end
 
@@ -129,15 +134,19 @@ class ReachJsonParser
    end
 
    def games_on_page(page_number)
-      game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
-      game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
+      begin
+         game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
+         game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
 
-      game_history1 | game_history2
+         game_history1 | game_history2
+      rescue
+         retry
+      end
    end
 
    def parse_timestamp(timestamp)
       if timestamp && (timestamp =~ /^\/Date\((\d+)-(\d+)\)\/$/)
-         return [Time.at($1.to_i / 1000).utc, $2]
+         return Time.at($1.to_i / 1000).utc
       else
          raise ArgumentError.new('Invalid timestamp') 
       end

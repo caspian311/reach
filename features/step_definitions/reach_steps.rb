@@ -11,7 +11,7 @@ Given /^there are (\d+) games in the database$/ do |number_of_games|
 
       game = ReachGame.new
       game.name = "Capture the Flag #{number}"
-      game.timestamp = timestamp.advance(:days => -1)
+      game.game_time = timestamp.advance(:days => -1)
       game.reach_map = map
       game.save
    end

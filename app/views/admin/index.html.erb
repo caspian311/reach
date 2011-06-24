@@ -7,5 +7,5 @@
    <br />
    Status: <div id="admin-status"><%= @running_job == nil ? "Not started" : @running_job.status %></div>
    <br />
-   <textarea id="admin-results" readonly="readonly"><%= @running_job == nil ? "" : @running_job.content %></textarea>
+   <div id="admin-results-container"><pre id="admin-results"><%= @running_job == nil ? "" : @running_job.content == nil ? "" : @running_job.content.html_safe %></pre></div>
 </div> 
