@@ -7,9 +7,12 @@ class AdminModelTest < Test::Unit::TestCase
    end
 
    def test_after_starting_the_job_the_current_stats_is_running
+      BatchJob.any_instance.stubs(:execute)
+
       id = AdminModel.start_job.id
 
       assert_equal JobState::RUNNING, AdminModel.current_status(id).status
+      AdminModel.clean_up
    end
 
    def test_if_no_job_is_running_then_running_job_returns_nil

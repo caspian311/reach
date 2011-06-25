@@ -2,10 +2,10 @@
   <%= @title %>
 </div> 
 <div class="content"> 
-   <input id="admin-job-id" type="hidden" value="<%= @running_job == nil ? "" : @running_job.id %>" />
-   <input id="admin-update" type="button" value="Update" <%= @running_job == nil ? "" : "disabled=\"disabled\"" %> />
+   <input id="admin-job-id" type="hidden" value="<%= @selected_job == nil ? "" : @selected_job.id %>" />
+   <input id="admin-update" type="button" value="Update" <%= @selected_job == nil ? "" : "disabled=\"disabled\"" %> />
    <br />
-   Status: <div id="admin-status"><%= @running_job == nil ? "Not started" : @running_job.status %></div>
+   Status: <div id="admin-status"><%= @selected_job == nil ? "Not started" : @selected_job.status %></div>
    <br />
-   <div id="admin-results-container"><pre id="admin-results"><%= @running_job == nil ? "" : @running_job.content == nil ? "" : @running_job.content.html_safe %></pre></div>
+   <div id="admin-results-container"><pre id="admin-results"><%= @selected_job == nil ? "" : @selected_job.content == nil ? "" : @selected_job.content.html_safe %></pre></div>
 </div> 

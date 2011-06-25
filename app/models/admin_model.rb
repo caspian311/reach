@@ -22,7 +22,7 @@ class AdminModel
          mutex = Mutex.new
 
          begin
-            # BatchJob.new.execute
+            BatchJob.new.execute
          rescue Exception => e
             mutex.synchronize do
                status = JobStatus.find_by_id(job_id)

@@ -4,7 +4,7 @@ class AdminController < ActionController::Base
    def index
       @title = "Admin"
 
-      @running_job = AdminModel.running_job
+      @selected_job = AdminModel.running_job
    end
 
    def update
