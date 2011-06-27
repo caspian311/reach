@@ -1,29 +1,42 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# development:
+#  adapter: mysql2
+#  database: reach_dev
+#  username: root
+#  password: root
+#  pool: 50
+#  timeout: 15000
+
 development:
-  adapter: mysql2
-  database: reach_dev
-  username: root
-  password: root
+  adapter: sqlite3
+  database: db/dev.sqlite
   pool: 50
   timeout: 15000
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
+# test: &test
+#  adapter: mysql2
+#  database: reach_test
+#  username: root
+#  password: root
+#  pool: 20
+#  timeout: 15000
+
 test: &test
-  adapter: mysql2
-  database: reach_test
-  username: root
-  password: root
+  adapter: sqlite3
+  database: db/test.sqlite
   pool: 20
   timeout: 15000
+
+# production:
+#   adapter: mysql2
+#   database: reach
+#   username: root
+#   password: root
+#   pool: 50
+#   timeout: 15000
 production:
-  adapter: mysql2
-  database: reach
-  username: root
-  password: root
-  pool: 50
-  timeout: 15000
+   adapter: sqlite3
+   database: db/prod.sqlite
+   pool: 50
+   timeout: 15000
 cucumber:
   <<: *test
