@@ -18,8 +18,10 @@ ReachWeb::Application.routes.draw do
    match "/player_stats/:player_id/:map_id" => "player_stats#get_stats"
 
    match "/admin" => "admin#index"
-   match "/admin/update" => "admin#update"
-   match "/admin/results/:job_id" => "admin#results"
+   match "/admin/:job_id" => "admin#index"
+   match "/admin-ajax/update" => "admin_ajax#update"
+   match "/admin-ajax/results/:job_id" => "admin_ajax#results"
+   match "/admin-ajax/all_jobs" => "admin_ajax#all_jobs"
 
    root :to => "home#index"
 end

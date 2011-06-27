@@ -61,6 +61,7 @@ body {
 }
 
 .container .content {
+   padding: 0px 0px 20px 0px;
 }
 
 .nav-column .title, .main-column .title {

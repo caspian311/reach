@@ -71,6 +71,7 @@ class CreateInitialTables < ActiveRecord::Migration
       create_table :job_statuses do |table|
          table.column :status, :string
          table.column :content, :text
+         table.column :created_at, :datetime
       end
    end
 
@@ -83,5 +84,6 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :reach_teams
       drop_table :reach_player_stats
       drop_table :player_effectivenesses
+      drop_table :job_statuses
    end
 end

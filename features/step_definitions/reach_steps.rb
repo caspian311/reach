@@ -17,6 +17,10 @@ Given /^there are (\d+) games in the database$/ do |number_of_games|
    end
 end
 
+Given /^no previous jobs were run$/ do
+   JobStatus.delete_all
+end
+
 Then /^I should find a button called "([^"]*)"$/ do |button_name|
    find_button button_name
 end

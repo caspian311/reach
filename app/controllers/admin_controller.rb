@@ -4,30 +4,17 @@ class AdminController < ActionController::Base
    def index
       @title = "Admin"
 
-      @selected_job = AdminModel.running_job
-   end
+      @all_jobs = AdminModel.all_jobs
 
-   def update
-      job_status = AdminModel.start_job
+      @selected_job_id = params[:job_id].to_i
 
-      render_content(job_status.to_json)
-   end
+      running_job = AdminModel.running_job
+      @is_job_running = running_job != nil
 
-   def results
-      job_id = params[:job_id].to_i
-      current_status = AdminModel.current_status(job_id)
-
-      render_content(current_status.to_json)
-   end
-
-   def render_content(content)
-      respond_to do |format|
-         format.html { 
-            render :json => content
-         }
-         format.json {
-            render :json => content
-         }
+      if @selected_job_id == nil or @selected_job_id == 0
+         @selected_job = running_job
+      else
+         @selected_job = AdminModel.get_job(@selected_job_id)
       end
    end
 end

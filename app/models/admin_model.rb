@@ -3,8 +3,12 @@ require "thread"
 class AdminModel
    @@threads = []
 
-   def self.current_status(id)
-      JobStatus.find_by_id(id)
+   def self.all_jobs
+      JobStatus.all(:order => "created_at DESC")
+   end
+
+   def self.get_job(id)
+      JobStatus.find(id)
    end
 
    def self.start_job
@@ -21,11 +25,20 @@ class AdminModel
       @@threads << Thread.new(status.id) do |job_id|
          mutex = Mutex.new
 
+         status = nil
+         mutex.synchronize do
+            status = JobStatus.find_by_id(job_id)
+         end
+
          begin
             BatchJob.new.execute
+
+            mutex.synchronize do
+               status.status = JobState::FINISHED
+               status.save
+            end
          rescue Exception => e
             mutex.synchronize do
-               status = JobStatus.find_by_id(job_id)
                status.status = JobState::ERROR
                error_message = "error when calling batchjob: #{e}\n"
                e.backtrace.each do |line|
@@ -34,12 +47,6 @@ class AdminModel
                status.content = "#{status.content}\n#{error_message}"
                status.save
             end
-         end
-
-         mutex.synchronize do
-            status = JobStatus.find_by_id(job_id)
-            status.status = JobState::FINISHED
-            status.save
          end
       end
 
