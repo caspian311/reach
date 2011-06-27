@@ -1,5 +1,4 @@
-require 'test/unit'
-require 'api_key_provider'
+require "test_helper"
 
 class ApiKeyProviderTest < Test::Unit::TestCase
    def setup

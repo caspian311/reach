@@ -1,0 +1,40 @@
+<div class="title"> 
+  <%= @title %>
+</div> 
+<div class="content">
+   This page allows you to run an update and sync up the site with all the games that have been recorded by the Bungie services.
+
+   <br /><br />
+   <input id="admin-update" type="button" value="Run update" <%= @is_job_running ? "disabled=\"disabled\"" : "" %> />
+</div>
+
+<div class="title">
+   Previously Run Jobs
+</div>
+<div class="content">
+   <% if not @all_jobs.empty? %>
+      <select id="admin-job-selection">
+         <option></option>
+         <% @all_jobs.each do |job| %>
+         <option value="<%= job.id %>" <%= job.id != @selected_job_id ? "" : "selected=\"selected\"" %> ><%= job.created_at.getlocal.strftime("%m/%d/%Y %I:%M%p") %> - <%= job.status %></option>
+         <% end %>
+      </select>
+   <% else %>
+      There are no previously run jobs.
+   <% end %>
+</div>
+
+<% if @selected_job != nil %>
+   <div class="title">
+      Job: <%= @selected_job.created_at.getlocal.strftime("%m/%d/%Y %I:%M%p") %>
+   </div>
+   <div class="content">
+      <input id="admin-job-id" type="hidden" value="<%= @selected_job.id %>" />
+
+      Status: <div id="admin-status"><%= @selected_job.status %></div>
+
+      <div id="admin-results-container">
+         <pre id="admin-results"><%= @selected_job.content == nil ? "" : @selected_job.content.html_safe %></pre>
+      </div>
+   </div>
+<% end %>

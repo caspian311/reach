@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class PlayerEffectivenessModelTest < Test::Unit::TestCase
    def setup
@@ -148,7 +148,7 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
    def test_average_stats_for_player2
       effectiveness = PlayerEffectivenessModel.average_stats_for_player(@player2_id)
-      assert_equal (7.to_f/3), effectiveness
+      assert_in_delta (7.to_f/3), effectiveness.to_f, 0.001
    end
 
    def test_all_stats_for_player1_on_map1
@@ -166,7 +166,7 @@ class PlayerEffectivenessModelTest < Test::Unit::TestCase
 
    def test_average_stats_for_player1_on_map1
       effectivenesses = PlayerEffectivenessModel.average_stats_for_player_and_map(@player1_id, @map1_id)
-      assert_equal (5.to_f/2), effectivenesses
+      assert_equal (5.to_f/2), effectivenesses.to_f
    end
 
    def test_average_stats_for_player2_on_map2

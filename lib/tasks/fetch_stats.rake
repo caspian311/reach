@@ -1,5 +1,3 @@
-require "batch_job"
-
 namespace :reach do 
    desc "Fetch stats from service and populate database with results"
    task :run_batch_job => :environment do

@@ -10,7 +10,7 @@ class PlayerEffectivenessModel
    def self.all_stats_for_player(player_id)
       PlayerEffectiveness.all(:conditions => {:player_id => player_id},
          :joins => :reach_game,
-         :order => {:reach_game => :timestamp})
+         :order => {:reach_game => :game_time})
    end
 
    def self.average_stats_for_player(player_id)
@@ -20,7 +20,7 @@ class PlayerEffectivenessModel
    def self.all_stats_for_player_and_map(player_id, map_id)
       PlayerEffectiveness.all(:joins => :reach_game,
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}},
-         :order => {:reach_game => :timestamp})
+         :order => {:reach_game => :game_time})
    end
 
    def self.average_stats_for_player_and_map(player_id, map_id)

@@ -11,7 +11,7 @@ class GameHistoryController < ActionController::Base
 
       @pages = pages_to_display(@page, @total_pages)
 
-      @games = ReachGame.offset(@page * GAMES_PER_PAGE).limit(GAMES_PER_PAGE).find(:all, :order => "timestamp DESC")
+      @games = ReachGame.offset(@page * GAMES_PER_PAGE).limit(GAMES_PER_PAGE).find(:all, :order => "game_time DESC")
    end
 
    private

@@ -1,7 +1,5 @@
 require "test_helper"
 
-require "game_filter"
-
 class GameFilterTest < Test::Unit::TestCase
    def setup
       @test_object = GameFilter.new("test_resources/game_filter_data")

@@ -43,7 +43,7 @@
    <td><%= link_to_function game.reach_id, "expand_game_details('#{game.reach_id}')" %></td>
    <td><%= game.name %></td>
    <td><%= game.reach_map.name %></td>
-   <td><%= game.timestamp.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>
+   <td><%= game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>
    <td><%= seconds_to_minutes(game.duration) %></td>
 </tr>
 <% end %>

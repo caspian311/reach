@@ -1,5 +1,7 @@
 class PlayerEffectivenessProcessor
    def process_game(game)
+      LOG.info "Calculating effectiveness for game: #{game.reach_id}"
+
       if highest_score(game) <= 5
          game.reach_teams.each do |team|
             team.reach_player_stats.each do |player_stat|
@@ -18,6 +20,8 @@ class PlayerEffectivenessProcessor
                player_effectiveness.save
             end
          end
+      else
+         LOG.info "disregarded because the score was too high... probably a team slayer game"
       end
    end
 

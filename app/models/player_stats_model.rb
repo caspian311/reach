@@ -3,13 +3,13 @@ class PlayerStatsModel
       if map_id == nil
          kill_death_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
             :conditions => {:reach_player_stats => {:player_id => player_id}},
-            :order => "reach_games.timestamp")
+            :order => "reach_games.game_time")
          effectiveness_stats = PlayerEffectivenessModel.all_stats_for_player(player_id)
          effectiveness_average = PlayerEffectivenessModel.average_stats_for_player(player_id)
       else
          kill_death_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
             :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}},
-            :order => "reach_games.timestamp")
+            :order => "reach_games.game_time")
          effectiveness_stats = PlayerEffectivenessModel.all_stats_for_player_and_map(player_id, map_id)
          effectiveness_average = PlayerEffectivenessModel.average_stats_for_player_and_map(player_id, map_id)
       end
@@ -68,7 +68,7 @@ class PlayerStatsModel
    def self.get_game_description(stat)
          game = stat.reach_team.reach_game
 
-         formatted_timestamp = game.timestamp.getlocal.strftime("%m/%d/%Y %I:%M%p")
+         formatted_timestamp = game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p")
 
          "#{formatted_timestamp}<br />#{game.name} <br />#{game.reach_map.name}" 
    end

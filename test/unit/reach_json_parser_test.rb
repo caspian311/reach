@@ -1,7 +1,5 @@
 require "test_helper"
 
-require "reach_json_parser"
-
 class ReachJsonParserTest < Test::Unit::TestCase
    def setup
       @test_data_directory = "test_resources/reach_json_parser_data"

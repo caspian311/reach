@@ -1,4 +1,4 @@
-require "game_processor"
+require "test_helper"
 
 class GameProcessorTest < Test::Unit::TestCase
    def setup
@@ -11,30 +11,20 @@ class GameProcessorTest < Test::Unit::TestCase
    end
 
    def test_each_processor_is_called_with_the_given_game
-      reach_id = random_string
-
       game = ReachGame.new
-      game.reach_id = reach_id
       game.save
 
-      @test_object.process_game(reach_id)
+      @test_object.process_game(game)
 
-      assert_equal reach_id, @processor1.given_id
-      assert_equal reach_id, @processor2.given_id
-   end
-
-   def test_games_that_arent_in_the_db_dont_get_processed
-      @test_object.process_game(random_string)
-
-      assert_nil @processor1.given_id
-      assert_nil @processor2.given_id
+      assert_equal game.id, @processor1.given_game.id
+      assert_equal game.id, @processor2.given_game.id
    end
 end
 
 class StubProcessor
-   attr_accessor :given_id
+   attr_accessor :given_game
 
    def process_game(game)
-      @given_id = game.reach_id
+      @given_game = game
    end
 end

@@ -1,5 +1,5 @@
-require 'spec_helper'
-require './test/unit/random_string'
+require "spec_helper"
+require "./test/unit/random_string"
 
 describe "Player Graphs" do
    before(:all) do
@@ -27,7 +27,7 @@ describe "Player Graphs" do
 
       game = ReachGame.new
       game.reach_map = map
-      game.timestamp = Time.now
+      game.game_time = Time.now
       game.name = @game_name
       game.save
 
