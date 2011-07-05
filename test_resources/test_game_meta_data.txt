@@ -57,6 +57,35 @@
             "Key":"Custom",
             "Value":6
          }
+      ],
+      "AllMedalsById":[
+         {
+            "Key":0,
+            "Value":{
+               "Description":"Wipe out an enemy team with at least one overkill.",
+               "Id":0,
+               "ImageName":"extermination",
+               "Name":"Extermination"
+            }
+         },
+         {
+            "Key":1,
+            "Value":{
+               "Description":"Win a Slayer game without dying with at least 15 kills.",
+               "Id":1,
+               "ImageName":"perfection",
+               "Name":"Perfection"
+            }
+         },
+         {
+            "Key":88,
+            "Value":{
+               "Description":"Complete a wave as the last man standing.",
+               "Id":88,
+               "ImageName":"hero",
+               "Name":"Hero"
+            }
+         }
       ]
    }
 }

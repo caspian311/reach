@@ -1,22 +1,22 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: reach_player_stats
 #
-#  id                     :integer         not null, primary key
-#  score                  :integer
-#  assists                :integer
-#  average_death_distance :decimal(, )
-#  average_kill_distance  :decimal(, )
-#  betrayals              :integer
-#  did_not_finish         :boolean
-#  deaths                 :integer
-#  head_shots             :integer
-#  overall_standing       :integer
-#  kills                  :integer
-#  total_medals           :integer
-#  player_id              :integer
-#  reach_team_id          :integer
+#  id                     :integer(4)      not null, primary key
+#  score                  :integer(4)
+#  assists                :integer(4)
+#  average_death_distance :integer(10)
+#  average_kill_distance  :integer(10)
+#  betrayals              :integer(4)
+#  did_not_finish         :boolean(1)
+#  deaths                 :integer(4)
+#  head_shots             :integer(4)
+#  overall_standing       :integer(4)
+#  kills                  :integer(4)
+#  total_medals           :integer(4)
+#  player_id              :integer(4)
+#  reach_team_id          :integer(4)
 #
 
 class ReachPlayerStat < ActiveRecord::Base

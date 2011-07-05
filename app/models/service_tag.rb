@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: service_tags
 #
-#  id        :integer         not null, primary key
+#  id        :integer(4)      not null, primary key
 #  tag       :string(255)
-#  player_id :integer
+#  player_id :integer(4)
 #
 
 class ServiceTag < ActiveRecord::Base
