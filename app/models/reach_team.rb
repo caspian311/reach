@@ -1,19 +1,18 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: reach_teams
 #
-#  id               :integer         not null, primary key
-#  team_id          :integer
-#  standing         :integer
-#  score            :integer
-#  kills            :integer
-#  assists          :integer
-#  betrayals        :integer
-#  suicides         :integer
-#  medals           :integer
-#  reach_game_id    :integer
-#  reach_players_id :integer
+#  id            :integer(4)      not null, primary key
+#  team_id       :integer(4)
+#  standing      :integer(4)
+#  score         :integer(4)
+#  kills         :integer(4)
+#  assists       :integer(4)
+#  betrayals     :integer(4)
+#  suicides      :integer(4)
+#  medals        :integer(4)
+#  reach_game_id :integer(4)
 #
 
 class ReachTeam < ActiveRecord::Base

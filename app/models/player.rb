@@ -1,11 +1,10 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: players
 #
-#  id                    :integer         not null, primary key
-#  real_name             :string(255)
-#  reach_player_stats_id :integer
+#  id        :integer(4)      not null, primary key
+#  real_name :string(255)
 #
 
 class Player < ActiveRecord::Base
