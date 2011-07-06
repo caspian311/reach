@@ -2,12 +2,6 @@ require "active_record"
 
 class CreateInitialTables < ActiveRecord::Migration
    def self.up
-      create_table :weapons, :id => false do |table|
-         table.column :id, :integer, :null => false
-         table.column :name, :string
-         table.column :description, :string
-      end
-
       create_table :players do |table|
          table.column :real_name, :string
       end
@@ -74,10 +68,22 @@ class CreateInitialTables < ActiveRecord::Migration
          table.column :content, :text
          table.column :created_at, :datetime
       end
+
+      create_table :weapons, :id => false do |table|
+         table.column :id, :integer, :null => false
+         table.column :name, :string
+         table.column :description, :string
+      end
+
+      create_table :medals, :id => false do |table|
+         table.column :id, :integer, :null => false         
+         table.column :name, :string
+         table.column :description, :string
+         table.column :image, :string
+      end
    end
 
    def self.down
-      drop_table :weapons
       drop_table :players
       drop_table :reach_maps
       drop_table :service_tags
@@ -86,5 +92,7 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :reach_player_stats
       drop_table :player_effectivenesses
       drop_table :job_statuses
+      drop_table :weapons
+      drop_table :medals
    end
 end
