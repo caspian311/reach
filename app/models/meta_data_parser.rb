@@ -63,6 +63,7 @@ class MetaDataParser
       meta_data["Data"]["AllMedalsById"].each do |json_weapon|
          medal = Medal.new
 
+         medal.id = json_weapon["Value"]["Id"]         
          medal.name = json_weapon["Value"]["Name"]
          medal.description = json_weapon["Value"]["Description"]
          medal.image = json_weapon["Value"]["ImageName"]
