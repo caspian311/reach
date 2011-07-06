@@ -17,11 +17,16 @@ class MetaDataParserTest < Test::Unit::TestCase
 
       assert_equal 3, Weapon.all.size
       
-      first_weapon = Weapon.all.first
-      last_weapon = Weapon.all.last
+      first_weapon = Weapon.find(0)
+      second_weapon = Weapon.find(1)
+      last_weapon = Weapon.find(55)
 
       assert_equal "Weapon one", first_weapon.name
       assert_equal "This is the first weapon", first_weapon.description
+
+      assert_equal "Weapon two", second_weapon.name
+      assert_equal "This is the second weapon", second_weapon.description
+
       assert_equal "Weapon three", last_weapon.name
       assert_equal "This is the third weapon", last_weapon.description
    end
