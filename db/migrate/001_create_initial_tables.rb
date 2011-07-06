@@ -2,7 +2,8 @@ require "active_record"
 
 class CreateInitialTables < ActiveRecord::Migration
    def self.up
-      create_table :weapons do |table|
+      create_table :weapons, :id => false do |table|
+         table.column :id, :integer, :null => false
          table.column :name, :string
          table.column :description, :string
       end
