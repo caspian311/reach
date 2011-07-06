@@ -51,9 +51,9 @@ class MetaDataParserTest < Test::Unit::TestCase
 
       assert_equal 3, Medal.all.size
 
-      medal1 = Medal.all[0]
-      medal2 = Medal.all[1]
-      medal3 = Medal.all[2]
+      medal1 = Medal.find(0)
+      medal2 = Medal.find(1)
+      medal3 = Medal.find(88)
 
       assert_equal "Extermination", medal1.name
       assert_equal "Perfection", medal2.name
