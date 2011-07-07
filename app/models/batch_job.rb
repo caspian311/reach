@@ -29,6 +29,10 @@ class BatchJob
       if Player.all.empty?
          @meta_data_parser.all_players
       end
+
+      if Medal.all.empty?
+         @meta_data_parser.all_medals
+      end
       LOG.info "Populating meta-data: complete."
    end
 
