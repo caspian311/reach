@@ -1,15 +1,14 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: reach_games
 #
-#  id             :integer         not null, primary key
-#  reach_id       :string(255)
-#  name           :string(255)
-#  duration       :string(255)
-#  game_time      :datetime
-#  reach_map_id   :integer
-#  reach_teams_id :integer
+#  id           :integer(4)      not null, primary key
+#  reach_id     :string(255)
+#  name         :string(255)
+#  duration     :string(255)
+#  game_time    :datetime
+#  reach_map_id :integer(4)
 #
 
 class ReachGame < ActiveRecord::Base

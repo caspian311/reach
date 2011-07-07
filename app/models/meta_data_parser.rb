@@ -47,11 +47,29 @@ class MetaDataParser
       meta_data["Data"]["AllWeaponsById"].each do |json_weapon|
          weapon = Weapon.new
 
-         # weapon.id = json_weapon["Key"].to_i
+         weapon.id = json_weapon["Value"]["Id"]
          weapon.name = json_weapon["Value"]["Name"]
          weapon.description = json_weapon["Value"]["Description"]
 
          weapon.save
+      end
+   end
+
+   def all_medals
+      LOG.info "removing all medals"
+      Medal.delete_all
+
+      LOG.info "loading all weapons"
+      meta_data = JSON.parse(@meta_data_file.read)
+      meta_data["Data"]["AllMedalsById"].each do |json_weapon|
+         medal = Medal.new
+
+         medal.id = json_weapon["Value"]["Id"]         
+         medal.name = json_weapon["Value"]["Name"]
+         medal.description = json_weapon["Value"]["Description"]
+         medal.image = json_weapon["Value"]["ImageName"]
+
+         medal.save
       end
    end
 end
