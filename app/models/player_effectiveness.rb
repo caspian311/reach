@@ -1,12 +1,12 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: player_effectivenesses
 #
-#  id                   :integer         not null, primary key
-#  effectiveness_rating :decimal(, )
-#  player_id            :integer
-#  reach_game_id        :integer
+#  id                   :integer(4)      not null, primary key
+#  effectiveness_rating :float
+#  player_id            :integer(4)
+#  reach_game_id        :integer(4)
 #
 
 class PlayerEffectiveness < ActiveRecord::Base

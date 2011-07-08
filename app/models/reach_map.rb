@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 1
+# Schema version: 2
 #
 # Table name: reach_maps
 #
-#  id   :integer         not null, primary key
+#  id   :integer(4)      not null, primary key
 #  name :string(255)
 #
 

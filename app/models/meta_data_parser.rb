@@ -3,7 +3,8 @@ require "reach_logging"
 class MetaDataParser
    def initialize(player_file_location = "resources/players.txt", meta_data_file_location = "resources/game_meta_data.txt")
       @player_file_location = player_file_location
-      @meta_data_file = File.new(meta_data_file_location)
+      meta_data_file = File.new(meta_data_file_location)
+      @meta_data = JSON.parse(meta_data_file.read)
    end
 
    def all_players
@@ -43,15 +44,31 @@ class MetaDataParser
       Weapon.delete_all
 
       LOG.info "loading all weapons"
-      meta_data = JSON.parse(@meta_data_file.read)
-      meta_data["Data"]["AllWeaponsById"].each do |json_weapon|
+      @meta_data["Data"]["AllWeaponsById"].each do |json_weapon|
          weapon = Weapon.new
 
-         # weapon.id = json_weapon["Key"].to_i
+         weapon.id = json_weapon["Value"]["Id"]
          weapon.name = json_weapon["Value"]["Name"]
          weapon.description = json_weapon["Value"]["Description"]
 
          weapon.save
+      end
+   end
+
+   def all_medals
+      LOG.info "removing all medals"
+      Medal.delete_all
+
+      LOG.info "loading all medals"
+      @meta_data["Data"]["AllMedalsById"].each do |json_medal|
+         medal = Medal.new
+
+         medal.id = json_medal["Value"]["Id"]
+         medal.name = json_medal["Value"]["Name"]
+         medal.description = json_medal["Value"]["Description"]
+         medal.image = json_medal["Value"]["ImageName"]
+
+         medal.save
       end
    end
 end
