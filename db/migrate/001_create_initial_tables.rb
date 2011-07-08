@@ -38,7 +38,6 @@ class CreateInitialTables < ActiveRecord::Migration
 
          table.references :player
          table.references :reach_team
-         # table.references :weapon_carnage
       end
 
       create_table :reach_teams do |table|
@@ -61,6 +60,16 @@ class CreateInitialTables < ActiveRecord::Migration
          table.column :game_time, :datetime
 
          table.references :reach_map
+      end
+
+      create_table :reach_weapon_carnage_reports do |table|
+         table.column :weapon_id, :integer
+         table.column :deaths, :integer
+         table.column :head_shots, :integer
+         table.column :kills, :integer
+         table.column :penalties, :integer
+
+         table.references :reach_player_stat
       end
 
       create_table :job_statuses do |table|
@@ -90,6 +99,7 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :reach_games
       drop_table :reach_teams
       drop_table :reach_player_stats
+      drop_table :reach_weapon_carnage_reports
       drop_table :player_effectivenesses
       drop_table :job_statuses
       drop_table :weapons
