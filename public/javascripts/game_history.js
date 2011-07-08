@@ -7,8 +7,7 @@ function expand_game_details(reach_id) {
    } else {
       original_row.addClass('expanded')
 
-      var new_row_html = '<tr id="' + reach_id + '_game_details" class="' + original_row.attr('class') + ' game_details"></tr>'
-      var new_row = $(new_row_html)
+      var new_row = $('<tr id="' + reach_id + '_game_details" class="' + original_row.attr('class') + ' game_details"></tr>')
       new_row.append('<td></td>')
 
       var details_cell = $('<td colspan="4"></td>')
@@ -71,16 +70,37 @@ function populate_game_details(details_cell, game_details) {
 
          var player_row_class = (t % 2 == 0) ? 'regular' : 'alternate'
 
-         var player_row = $('<tr class="' + player_row_class + '"></tr>')
+         var player_stat_id = player_stat['id']
+
+         var player_row = $('<tr id="' + player_stat_id + '_player_details" class="' + player_row_class + '"></tr>')
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
-         player_row.append($('<td>' + player_name + '</td>'))
+         player_row.append($('<td><a href="#" onclick="expand_player_carnage_report(' + player_stat_id + ')">' + player_name + '</a></td>'))
          player_row.append($('<td>' + player_kills + '</td>'))
          player_row.append($('<td>' + player_assists + '</td>'))
          player_row.append($('<td>' + player_deaths + '</td>'))
          player_row.append($('<td>' + player_spread + '</td>'))
       }
+   }
+}
+
+function expand_player_carnage_report(player_stat_id) {
+   var original_row = $('#' + player_stat_id + '_player_details')
+
+   if (is_expanded(original_row)) {
+      original_row.removeClass('expanded')
+      $('#' + player_stat_id +'_weapon_details').remove()
+   } else {
+      original_row.addClass('expanded')
+
+      var new_row = $('<tr id="' + player_stat_id + '_weapon_details" class="' + original_row.attr('class') + '"></tr>')
+
+      var loading_cell = $('<td colspan="6" style="text-align:center">Loading...</td>')
+      
+      new_row.append(loading_cell)
+
+      new_row.insertAfter(original_row)
    }
 }
 
