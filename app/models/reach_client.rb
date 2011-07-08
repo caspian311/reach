@@ -70,9 +70,10 @@ class ReachClient
       games = []
 
       begin
-         LOG.info "Getting game history from Halo Reach services..."
-
+         LOG.info "Getting game history page #{page_number} from Halo Reach services for #{ACCOUNT_1}..."
          game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
+
+         LOG.info "Getting game history page #{page_number} from Halo Reach services for #{ACCOUNT_2}..."
          game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
 
          games = game_history1 | game_history2
