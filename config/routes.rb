@@ -23,5 +23,7 @@ ReachWeb::Application.routes.draw do
    match "/admin-ajax/results/:job_id" => "admin_ajax#results"
    match "/admin-ajax/all_jobs" => "admin_ajax#all_jobs"
 
+   match "/carnage_report/:player_stat_id" => "carnage_report#show"
+
    root :to => "home#index"
 end
