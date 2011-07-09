@@ -14,4 +14,8 @@
 
 class ReachWeaponCarnageReport < ActiveRecord::Base
    belongs_to :reach_player_stat
+
+   def self.find_by_player_stat_id(player_stat_id)
+      where(:reach_player_stat_id => player_stat_id)
+   end
 end
