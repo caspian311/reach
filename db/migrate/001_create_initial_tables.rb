@@ -70,6 +70,7 @@ class CreateInitialTables < ActiveRecord::Migration
          table.column :penalties, :integer
 
          table.references :reach_player_stat
+         table.references :weapon
       end
 
       create_table :job_statuses do |table|
