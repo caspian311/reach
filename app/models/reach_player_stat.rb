@@ -22,4 +22,5 @@
 class ReachPlayerStat < ActiveRecord::Base
    belongs_to :reach_team
    belongs_to :player
+   has_many :reach_weapon_carnage_reports
 end
