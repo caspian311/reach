@@ -25,4 +25,12 @@ class Player < ActiveRecord::Base
       end
       uses_tag
    end
+
+   def last_game
+      Player.all(
+         :select => "reach_games.*",
+         :joins => {:reach_player_stats => {:reach_team => :reach_game}}, 
+         :conditions => {:id => id},
+         :order => "reach_games.game_time DESC").first
+   end
 end

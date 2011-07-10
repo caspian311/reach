@@ -1,12 +1,5 @@
 $(function(){
-   $('#player_selector').change(
-      function(event) {
-         var player_id = $('#player_selector').val()
-         window.location.href = '/players/' + player_id
-      }
-   )
-
-   var selected_player = $('#player_selector').val()
+   var selected_player = $('#selected_player').val()
 
    update_graphs(selected_player)
 

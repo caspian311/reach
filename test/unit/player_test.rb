@@ -57,4 +57,8 @@ class PlayerTest < Test::Unit::TestCase
       assert Player.find_by_id(@player2_id).uses_tag?(@player2_service_tag1)
       assert Player.find_by_id(@player2_id).uses_tag?(@player2_service_tag2)
    end
+
+   def test_last_game
+      Player.last_game
+   end
 end
