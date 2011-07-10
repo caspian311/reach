@@ -7,8 +7,7 @@ function expand_game_details(reach_id) {
    } else {
       original_row.addClass('expanded')
 
-      var new_row_html = '<tr id="' + reach_id + '_game_details" class="' + original_row.attr('class') + ' game_details"></tr>'
-      var new_row = $(new_row_html)
+      var new_row = $('<tr id="' + reach_id + '_game_details" class="' + original_row.attr('class') + ' game_details"></tr>')
       new_row.append('<td></td>')
 
       var details_cell = $('<td colspan="4"></td>')
@@ -71,11 +70,13 @@ function populate_game_details(details_cell, game_details) {
 
          var player_row_class = (t % 2 == 0) ? 'regular' : 'alternate'
 
-         var player_row = $('<tr class="' + player_row_class + '"></tr>')
+         var player_stat_id = player_stat['id']
+
+         var player_row = $('<tr id="' + player_stat_id + '_player_details" class="' + player_row_class + '"></tr>')
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
-         player_row.append($('<td>' + player_name + '</td>'))
+         player_row.append($('<td><a href="#" onclick="expand_player_carnage_report(' + player_stat_id + ')">' + player_name + '</a></td>'))
          player_row.append($('<td>' + player_kills + '</td>'))
          player_row.append($('<td>' + player_assists + '</td>'))
          player_row.append($('<td>' + player_deaths + '</td>'))
@@ -84,3 +85,56 @@ function populate_game_details(details_cell, game_details) {
    }
 }
 
+function expand_player_carnage_report(player_stat_id) {
+   var original_row = $('#' + player_stat_id + '_player_details')
+
+   if (is_expanded(original_row)) {
+      original_row.removeClass('expanded')
+      $('#' + player_stat_id +'_weapon_details').remove()
+   } else {
+      original_row.addClass('expanded')
+
+      var new_row = $('<tr id="' + player_stat_id + '_weapon_details" class="' + original_row.attr('class') + '"></tr>')
+
+      var new_cell = $('<td colspan="5"></td>')
+      new_row.append('<td></td>')      
+      new_row.append(new_cell)
+      new_row.insertAfter(original_row)
+
+      populate_player_carnage_report(new_cell, player_stat_id);
+   }
+}
+
+function populate_player_carnage_report(new_cell, player_stat_id) {
+   new_cell.append("<div style=\"text-align:center\">Loading...</div>")
+   $.getJSON('/carnage_report/' + player_stat_id, function(data) {
+      new_cell.empty()
+      var carnage_report_table = $("<table></table>")
+      var header_row = $('<tr></tr>')
+      header_row.append('<th>Weapon</th>')
+      header_row.append('<th>Kills</th>')
+      header_row.append('<th>Deaths</th>')
+      header_row.append('<th>Headshots</th>')
+      header_row.append('<th>Penalties</th>')
+      carnage_report_table.append(header_row)
+      for (var i=0; i<data.length; i++) {
+            var weapon = data[i]['reach_weapon_carnage_report']['weapon']['name']
+            var kills = data[i]['reach_weapon_carnage_report']['kills']
+            var deaths = data[i]['reach_weapon_carnage_report']['deaths']
+            var headshots = data[i]['reach_weapon_carnage_report']['head_shots']
+            var penalties = data[i]['reach_weapon_carnage_report']['penalties']
+
+            var row_class = i % 2 == 0 ? 'regular' : 'alternate'
+
+            var detail_row = $('<tr class="' + row_class + '"></tr>')
+            detail_row.append('<td>' + weapon + '</td>')
+            detail_row.append('<td>' + kills + '</td>')
+            detail_row.append('<td>' + deaths + '</td>')
+            detail_row.append('<td>' + headshots + '</td>')
+            detail_row.append('<td>' + penalties + '</td>')
+
+            carnage_report_table.append(detail_row)
+      }
+      new_cell.append(carnage_report_table)
+   })
+}
