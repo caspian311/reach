@@ -2,6 +2,9 @@ require "test_helper"
 
 class ReachWeaponCarnageReportTest < Test::Unit::TestCase
    def setup
+      ReachPlayerStat.delete_all
+      Weapon.delete_all
+
       player1 = ReachPlayerStat.new
       player1.save
 

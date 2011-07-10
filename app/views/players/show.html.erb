@@ -3,20 +3,10 @@
 </div> 
 <div class="content"> 
 
+<input type="hidden" id="selected_player" value="<%= @selected_player.id %>" />
+
 Below are some individual player statistics...
-
 <br /><br />
-
-<strong>Players:</strong>
-
-<select id="player_selector">
-   <option></option>
-<% @players.each do |player| %>
-   <option <%= (player.id == @selected_player.id) ? "selected=\"selected\"" : "" %> value="<%= player.id %>"><%= player.real_name %></option>
-<% end %>
-</select>
-
-</div>
 
 <strong>Maps:</strong>
 <select id="player_maps">

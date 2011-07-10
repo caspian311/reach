@@ -3,17 +3,23 @@
 </div> 
 <div class="content"> 
 
-Below are some individual player statistics...
+Below are all the players currently in the system.
 
 <br /><br />
 
-<strong>Players:</strong>
-
-<select id="player_selector">
-   <option></option>
+<table>
+<tr>
+   <th>Player</th>
+   <th>Number of games recorded</th>
+   <th>Last game recorded</th>
+</tr>
 <% @players.each do |player| %>
-   <option value="<%= player.id %>"><%= player.real_name %></option>
+   <tr>
+   <td><%= link_to player.real_name, :controller => "players", :action => "show", :id => player.id %></td>
+   <td><%= player.reach_player_stats.size %></td>
+   <td><%= player.last_game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>
+   </tr>
 <% end %>
-</select>
+</table>
 
 </div>
