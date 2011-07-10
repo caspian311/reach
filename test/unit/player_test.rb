@@ -59,6 +59,49 @@ class PlayerTest < Test::Unit::TestCase
    end
 
    def test_last_game
-      Player.last_game
+      player = Player.new
+      player.save
+      player_id = player.id
+
+      game1_stats = ReachPlayerStat.new
+      game1_stats.player = player 
+
+      game1 = ReachGame.new
+      game1.game_time = Time.now.advance(:days => -5)
+      game1.save
+
+      team1 = ReachTeam.new
+      game1.reach_teams << team1
+
+      team1.reach_player_stats << game1_stats
+
+      game2_stats = ReachPlayerStat.new
+      game2_stats.player = player 
+
+      game2 = ReachGame.new
+      game2.game_time = Time.now.advance(:days => -1)
+      game2.save
+
+      team2 = ReachTeam.new
+      game2.reach_teams << team2
+
+      team2.reach_player_stats << game2_stats
+
+      game3_stats = ReachPlayerStat.new
+      game3_stats.player = player 
+
+      game3 = ReachGame.new
+      game3.game_time = Time.now.advance(:days => -3)
+      game3.save
+
+      team3 = ReachTeam.new
+      game3.reach_teams << team3
+
+      team3.reach_player_stats << game3_stats
+
+      player_from_db = Player.find(player_id)
+      last_game = player_from_db.last_game
+
+      assert_equal game2.id, last_game.id
    end
 end
