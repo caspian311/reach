@@ -101,7 +101,24 @@ function expand_player_carnage_report(player_stat_id) {
       new_row.append(new_cell)
       new_row.insertAfter(original_row)
 
-      populate_player_carnage_report(new_cell, player_stat_id);
+      var tabs_container = $('<div class="tabs-container"></div>')
+      var tabs_labels = $('<div class="tabs-labels"></div>')
+      var carnage_report_tab = $('<div class="tab selected">Carnage Report</div>')
+      var medals_tab = $('<div class="tab">Medals</div>')
+
+      tabs_container.append(tabs_labels)
+      tabs_labels.append(carnage_report_tab).append(medals_tab)
+
+      var tabs_bodies = $('<div class="tabs-bodies"></div>')
+      var carnage_report_body = $('<div class="tab-content selected"></div>')
+      var medals_body = $('<div class="tab-content"></div>')
+      
+      tabs_bodies.append(carnage_report_body).append(medals_body)
+      tabs_container.append(tabs_bodies)
+
+      new_cell.append(tabs_container)
+
+      populate_player_carnage_report(carnage_report_body, player_stat_id);
    }
 }
 
