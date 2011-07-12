@@ -132,6 +132,7 @@ function populate_player_carnage_report(new_cell, player_stat_id) {
             weapon_cell.append(weapon)
             weapon_cell.append('<input id="weapon_description_' + i + '" type="hidden" value="' + weapon_description + '" />')
 
+            weapon_cell.css('cursor', 'pointer')
             weapon_cell.click(function(event) {
                var hidden_input = $('td#' + event.target.id + ' input')
                var weapon_description = hidden_input.val()
