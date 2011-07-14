@@ -25,5 +25,7 @@ ReachWeb::Application.routes.draw do
 
    match "/carnage_report/:player_stat_id" => "carnage_report#show"
 
+   match "/medals/:player_stat_id" => "medals#show"
+
    root :to => "home#index"
 end

@@ -101,31 +101,79 @@ function expand_player_carnage_report(player_stat_id) {
       new_row.append(new_cell)
       new_row.insertAfter(original_row)
 
-      var tabs_container = $('<div class="tabs-container"></div>')
+      var tabs_container = $('<div id="' + player_stat_id + '-tabs-container" class="tabs-container"></div>')
       var tabs_labels = $('<div class="tabs-labels"></div>')
-      var carnage_report_tab = $('<div class="tab selected">Carnage Report</div>')
-      var medals_tab = $('<div class="tab">Medals</div>')
+      var carnage_report_tab = $('<div id="' + player_stat_id + '-carnage-report-tab" class="tab">Carnage Report</div>')
+      var medals_tab = $('<div id="' + player_stat_id + '-medals-tab" class="tab">Medals</div>')
+
+      var tabs_bodies = $('<div id="' + player_stat_id + '-tabs-bodies" class="tabs-bodies"></div>')
+      var carnage_report_body = $('<div id="' + player_stat_id + '-carnage-report-body" class="tab-content"></div>')
+      var medals_body = $('<div id="' + player_stat_id + '-medals-body" class="tab-content"></div>')
+      
+      medals_tab.click(function() {
+         populate_medals(player_stat_id)
+      })
+      carnage_report_tab.click(function() {
+         populate_carnage_report(player_stat_id)
+      })
 
       tabs_container.append(tabs_labels)
       tabs_labels.append(carnage_report_tab).append(medals_tab)
-
-      var tabs_bodies = $('<div class="tabs-bodies"></div>')
-      var carnage_report_body = $('<div class="tab-content selected"></div>')
-      var medals_body = $('<div class="tab-content"></div>')
-      
       tabs_bodies.append(carnage_report_body).append(medals_body)
       tabs_container.append(tabs_bodies)
 
       new_cell.append(tabs_container)
 
-      populate_player_carnage_report(carnage_report_body, player_stat_id);
+      populate_carnage_report(player_stat_id);
    }
 }
 
-function populate_player_carnage_report(new_cell, player_stat_id) {
-   new_cell.append("<div style=\"text-align:center\">Loading...</div>")
+function populate_medals(player_stat_id) {
+   $('#' + player_stat_id + '-tabs-container .tab').removeClass('selected')
+   $('#' + player_stat_id + '-tabs-container .tab-content').removeClass('selected')
+   $('#' + player_stat_id + '-medals-tab').addClass('selected')
+   $('#' + player_stat_id + '-medals-body').addClass('selected')
+
+   $('#' + player_stat_id + '-medals-body').append('<div style="text-align:center">Loading...</div>')
+
+   $.getJSON('/medals/' + player_stat_id, function(data) {
+      var medals_table = $('<table></table>')
+      var header_row = $('<tr></tr>')
+      header_row.append('<th>Medal</th>')
+      header_row.append('<th>Count</th>')
+      medals_table.append(header_row)
+
+      for (var i=0; i<data.length; i++) {
+         var medal = data[i]['reach_player_medal']['medal']['name']
+         var count = data[i]['reach_player_medal']['count']
+
+         var medal_row = $('<tr></tr>')
+         medal_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
+
+         var medal_cell = $('<td></td>')
+         medal_cell.append(medal)
+         medal_cell.css('cursor', 'pointer')
+         medal_cell.click(function() {
+            
+         })
+         medal_row.append(medal_cell)
+         medal_row.append('<td>' + count + '</td>')
+
+         medals_table.append(medal_row)
+      }
+
+      $('#' + player_stat_id + '-medals-body').empty().append(medals_table)
+   })
+}
+
+function populate_carnage_report(player_stat_id) {
+   $('#' + player_stat_id + '-tabs-container .tab').removeClass('selected')
+   $('#' + player_stat_id + '-tabs-container .tab-content').removeClass('selected')
+   $('#' + player_stat_id + '-carnage-report-tab').addClass('selected')
+   $('#' + player_stat_id + '-carnage-report-body').addClass('selected')
+
+   $('#' + player_stat_id + '-carnage-report-body').append("<div style=\"text-align:center\">Loading...</div>")
    $.getJSON('/carnage_report/' + player_stat_id, function(data) {
-      new_cell.empty()
       var carnage_report_table = $("<table></table>")
       var header_row = $('<tr></tr>')
       header_row.append('<th>Weapon</th>')
@@ -142,9 +190,9 @@ function populate_player_carnage_report(new_cell, player_stat_id) {
             var headshots = data[i]['reach_weapon_carnage_report']['head_shots']
             var penalties = data[i]['reach_weapon_carnage_report']['penalties']
 
-            var row_class = i % 2 == 0 ? 'regular' : 'alternate'
+            var detail_row = $('<tr></tr>')
+            detail_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
 
-            var detail_row = $('<tr class="' + row_class + '"></tr>')
             var weapon_cell = $('<td id="weapon_cell_' + i + '"></td>')
             weapon_cell.append(weapon)
             weapon_cell.append('<input id="weapon_description_' + i + '" type="hidden" value="' + weapon_description + '" />')
@@ -167,6 +215,6 @@ function populate_player_carnage_report(new_cell, player_stat_id) {
 
             carnage_report_table.append(detail_row)
       }
-      new_cell.append(carnage_report_table)
+      $('#' + player_stat_id + '-carnage-report-body').empty().append(carnage_report_table)
    })
 }
