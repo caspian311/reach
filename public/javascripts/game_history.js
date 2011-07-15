@@ -145,16 +145,22 @@ function populate_medals(player_stat_id) {
 
       for (var i=0; i<data.length; i++) {
          var medal = data[i]['reach_player_medal']['medal']['name']
+         var description = data[i]['reach_player_medal']['medal']['description']
          var count = data[i]['reach_player_medal']['count']
 
          var medal_row = $('<tr></tr>')
          medal_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
 
          var medal_cell = $('<td></td>')
+         medal_cell.append('<input name="name" type="hidden" value="' + medal + '" />')
+         medal_cell.append('<input name="description" type="hidden" value="' + description + '" />')
          medal_cell.append(medal)
          medal_cell.css('cursor', 'pointer')
-         medal_cell.click(function() {
-            
+         medal_cell.click(function(event) {
+            var medal_name = $('input[name="name"]', this).val()
+            var medal_description = $('input[name="description"]', this).val()
+
+            show_description_window(medal_name, medal_description, event.pageX, event.pageY)
          })
          medal_row.append(medal_cell)
          medal_row.append('<td>' + count + '</td>')
@@ -193,19 +199,17 @@ function populate_carnage_report(player_stat_id) {
             var detail_row = $('<tr></tr>')
             detail_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
 
-            var weapon_cell = $('<td id="weapon_cell_' + i + '"></td>')
+            var weapon_cell = $('<td></td>')
             weapon_cell.append(weapon)
-            weapon_cell.append('<input id="weapon_description_' + i + '" type="hidden" value="' + weapon_description + '" />')
+            weapon_cell.append('<input name="name" type="hidden" value="' + weapon + '" />')
+            weapon_cell.append('<input name="description" type="hidden" value="' + weapon_description + '" />')
 
             weapon_cell.css('cursor', 'pointer')
             weapon_cell.click(function(event) {
-               var hidden_input = $('td#' + event.target.id + ' input')
-               var weapon_description = hidden_input.val()
-               $('#weapon_description_body').empty().append(weapon_description)
-               $('#weapon_description_window').css('left', event.pageX).css('top', event.pageY).fadeIn()
-               $('#weapon_description_close').click(function() {
-                  $('#weapon_description_window').fadeOut()
-               })
+               var weapon = $('input[name="name"]', this).val()
+               var weapon_description = $('input[name="description"]', this).val()
+
+               show_description_window(weapon, weapon_description, event.pageX, event.pageY)
             })
             detail_row.append(weapon_cell)
             detail_row.append('<td>' + kills + '</td>')
@@ -216,5 +220,14 @@ function populate_carnage_report(player_stat_id) {
             carnage_report_table.append(detail_row)
       }
       $('#' + player_stat_id + '-carnage-report-body').empty().append(carnage_report_table)
+   })
+}
+
+function show_description_window(title, body, left, top) {
+   $('#description_header').empty().append(title)
+   $('#description_body').empty().append(body)
+   $('#description_window').css('left', left).css('top', top).fadeIn()
+   $('#description_close').click(function() {
+      $('#description_window').fadeOut()
    })
 }
