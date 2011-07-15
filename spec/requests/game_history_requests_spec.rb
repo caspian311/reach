@@ -15,8 +15,10 @@ describe "Game History" do
          response.should render_template("game_history/show")
       end
    end
+
+   def game_history_page
+      "/game_history"
+   end
 end
 
-def game_history_page
-   "/game_history"
-end
+

@@ -4,6 +4,7 @@ class ReachWeaponCarnageReportTest < Test::Unit::TestCase
    def setup
       ReachPlayerStat.delete_all
       Weapon.delete_all
+      ReachWeaponCarnageReport.delete_all
 
       player1 = ReachPlayerStat.new
       player1.save

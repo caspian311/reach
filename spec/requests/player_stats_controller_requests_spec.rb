@@ -89,8 +89,10 @@ describe "Player Graphs" do
          assert_equal [0, 5], player_stats_data["kill_death"][1]["data"][0]
       end
    end
+
+   def endpoint(player_id, map_id)
+      "/player_stats/#{player_id}/#{map_id}"
+   end
 end
 
-def endpoint(player_id, map_id)
-   "/player_stats/#{player_id}/#{map_id}"
-end
+
