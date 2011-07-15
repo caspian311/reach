@@ -74,8 +74,10 @@ describe "Game Details" do
          assert_equal "player2", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
       end
    end
+   
+   def game_details_page
+      "/game_details/#{@reach_id}"
+   end
 end
 
-def game_details_page
-   "/game_details/#{@reach_id}"
-end
+

@@ -48,8 +48,10 @@ describe "Carnage Report" do
          assert_equal 45, report[1]["reach_weapon_carnage_report"]["deaths"]
       end
    end
+   
+   def game_report_page
+      "/carnage_report/#{@player_stat_id}"
+   end
 end
 
-def game_report_page
-   "/carnage_report/#{@player_stat_id}"
-end
+

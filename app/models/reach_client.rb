@@ -3,14 +3,13 @@ require "json"
 require "halo-reach-api"
 
 class ReachClient
-   ACCOUNT_1 ="Buckethead Died"
-   ACCOUNT_2 = "jaymz9mm"
    CUSTOM_GAME = 6
 
-   def initialize(reach = Halo::Reach::API.new(ApiKeyProvider.new.api_key), throttle = 0.5, output_directory = "reach_data")
+   def initialize(reach = Halo::Reach::API.new(ApiKeyProvider.new.api_key), throttle = 0.5, output_directory = "reach_data", accounts = ["Buckethead Died", "jaymz9mm"])
       @reach = reach
       @throttle = throttle
       @output_directory = output_directory
+      @accounts = accounts
    end
 
    def most_recent_games
@@ -70,13 +69,12 @@ class ReachClient
       games = []
 
       begin
-         LOG.info "Getting game history page #{page_number} from Halo Reach services for #{ACCOUNT_1}..."
-         game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
+         @accounts.each do |account|
+            LOG.info "Getting game history page #{page_number} from Halo Reach services for #{account}..."
+            game_from_account = @reach.get_game_history(account, CUSTOM_GAME, page_number)["RecentGames"]
 
-         LOG.info "Getting game history page #{page_number} from Halo Reach services for #{ACCOUNT_2}..."
-         game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
-
-         games = game_history1 | game_history2
+            games = games | game_from_account
+         end
 
          LOG.info "Game history retrieved successfully"
       rescue Exception => e

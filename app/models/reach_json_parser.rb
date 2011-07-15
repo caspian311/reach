@@ -70,12 +70,27 @@ class ReachJsonParser
 
          player_stat.reach_weapon_carnage_reports = parse_weapon_carnage(json_player["WeaponCarnageReport"])
 
+         player_stat.reach_player_medals = parse_player_medals(json_player["SpecificMedalCounts"])
+
          # player_stat.multi_kill_medals = json_player["MultiMedalCount"]
          # player_stat.other_medals = json_player["OtherMedalCount"]
          # player_stat.emblem = json_player["PlayerDetail"]["ReachEmblem"]
 
          reach_teams[json_player["Team"]].reach_player_stats << player_stat
       end
+   end
+
+   def parse_player_medals(player_medals_jsons)
+      player_medals = []
+      player_medals_jsons.each do |player_medals_json|
+         player_medal = ReachPlayerMedal.new
+         player_medals << player_medal
+
+         player_medal.medal_id = player_medals_json["Key"]
+         player_medal.count = player_medals_json["Value"]
+      end
+
+      player_medals
    end
 
    def parse_weapon_carnage(weapon_carnage_jsons)

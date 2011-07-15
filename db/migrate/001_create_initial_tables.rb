@@ -73,6 +73,13 @@ class CreateInitialTables < ActiveRecord::Migration
          table.references :weapon
       end
 
+      create_table :reach_player_medals do |table|
+         table.column :count, :integer
+
+         table.references :reach_player_stat
+         table.references :medal
+      end
+
       create_table :job_statuses do |table|
          table.column :status, :string
          table.column :content, :text

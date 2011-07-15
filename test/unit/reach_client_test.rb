@@ -2,13 +2,16 @@ require "mocha"
 require "test_helper"
 
 class ReachClientTest < Test::Unit::TestCase
+   ACCOUNT_1 = "account 1"
+   ACCOUNT_2 = "account 2"
+
    def setup
       @test_data_directory = "test_resources/reach_client_data"
       FileUtils.rm_rf @test_data_directory
       FileUtils.mkdir @test_data_directory
 
       @reach_mock = mock()
-      @test_object = ReachClient.new(@reach_mock, 0, @test_data_directory)
+      @test_object = ReachClient.new(@reach_mock, 0, @test_data_directory, [ACCOUNT_1, ACCOUNT_2])
    end
 
    def teardown
@@ -18,9 +21,9 @@ class ReachClientTest < Test::Unit::TestCase
 
    def a_test_unique_game_ids_are_returned_from_most_recent_games
       response1 = JSON.parse '{"RecentGames": [{"GameId": 123}, {"GameId": 456}]}'
-      @reach_mock.stubs(:get_game_history).with(ReachClient::ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
+      @reach_mock.stubs(:get_game_history).with(ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
       response2 = JSON.parse '{"RecentGames": [{"GameId": 123}, {"GameId": 789}]}'
-      @reach_mock.stubs(:get_game_history).with(ReachClient::ACCOUNT_2, ReachClient::CUSTOM_GAME, 0).returns(response2)
+      @reach_mock.stubs(:get_game_history).with(ACCOUNT_2, ReachClient::CUSTOM_GAME, 0).returns(response2)
 
       game_details = JSON.parse(File.new("test_resources/game_details.txt").read)
       details_response = mock()
@@ -41,9 +44,9 @@ class ReachClientTest < Test::Unit::TestCase
       @reach_mock.stubs(:get_game_history).with(any_parameters()).returns(generic_response)
 
       response1 = JSON.parse '{"RecentGames": [{"GameId": 2}]}'
-      @reach_mock.expects(:get_game_history).with(ReachClient::ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
+      @reach_mock.expects(:get_game_history).with(ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
       response2 = JSON.parse '{"RecentGames": [{"GameId": 3}]}'
-      @reach_mock.expects(:get_game_history).with(ReachClient::ACCOUNT_2, ReachClient::CUSTOM_GAME, 24).returns(response2)
+      @reach_mock.expects(:get_game_history).with(ACCOUNT_2, ReachClient::CUSTOM_GAME, 24).returns(response2)
 
       game_details = JSON.parse(File.new("test_resources/game_details.txt").read)
       details_response = mock()
@@ -80,9 +83,9 @@ class ReachClientTest < Test::Unit::TestCase
       game_id2 = random_string
 
       response1 = JSON.parse '{"RecentGames": [{"GameId": "' + game_id1 + '"}]}'
-      @reach_mock.stubs(:get_game_history).with(ReachClient::ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
+      @reach_mock.stubs(:get_game_history).with(ACCOUNT_1, ReachClient::CUSTOM_GAME, 0).returns(response1)
       response2 = JSON.parse '{"RecentGames": [{"GameId": "' + game_id2 + '"}]}'
-      @reach_mock.stubs(:get_game_history).with(ReachClient::ACCOUNT_2, ReachClient::CUSTOM_GAME, 0).returns(response2)
+      @reach_mock.stubs(:get_game_history).with(ACCOUNT_2, ReachClient::CUSTOM_GAME, 0).returns(response2)
 
       game_details = JSON.parse(File.new("test_resources/game_details.txt").read)
       details_response = mock()
