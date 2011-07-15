@@ -146,6 +146,7 @@ function populate_medals(player_stat_id) {
       for (var i=0; i<data.length; i++) {
          var medal = data[i]['reach_player_medal']['medal']['name']
          var description = data[i]['reach_player_medal']['medal']['description']
+         var image = data[i]['reach_player_medal']['medal']['image']
          var count = data[i]['reach_player_medal']['count']
 
          var medal_row = $('<tr></tr>')
@@ -154,7 +155,7 @@ function populate_medals(player_stat_id) {
          var medal_cell = $('<td></td>')
          medal_cell.append('<input name="name" type="hidden" value="' + medal + '" />')
          medal_cell.append('<input name="description" type="hidden" value="' + description + '" />')
-         medal_cell.append(medal)
+         medal_cell.append('<img class="medal" src="/images/medals/' + image + '.png" title="' + medal + '" />')
          medal_cell.css('cursor', 'pointer')
          medal_cell.click(function(event) {
             var medal_name = $('input[name="name"]', this).val()
