@@ -1,0 +1,62 @@
+.reach_weapons {
+   background: #000;
+   background-image: url(/images/weapons.png); 
+   background-repeat: no-repeat; 
+}
+.airstrike { width: 147px; height: 51px; background-position: 0px 0px;  }
+.ar { width: 147px; height: 51px; background-position: 0px -51px;  }
+.armorlock { width: 147px; height: 51px; background-position: 0px -102px;  }
+.banshee { width: 147px; height: 51px; background-position: 0px -153px;  }
+.birthdayparty { width: 147px; height: 51px; background-position: 0px -204px;  }
+.bomb { width: 147px; height: 51px; background-position: 0px -255px;  }
+.bombexplosion { width: 147px; height: 51px; background-position: 0px -306px;  }
+.bombkill { width: 147px; height: 51px; background-position: 0px -357px;  }
+.collisiondamage { width: 147px; height: 51px; background-position: 0px -408px;  }
+.dmr { width: 147px; height: 51px; background-position: 0px -459px;  }
+.falcon { width: 147px; height: 51px; background-position: 0px -510px;  }
+.falcon_gunner { width: 147px; height: 51px; background-position: 0px -561px;  }
+.fallingdeath { width: 147px; height: 51px; background-position: 0px -612px;  }
+.flagkill { width: 147px; height: 51px; background-position: 0px -663px;  }
+.flakcannon { width: 147px; height: 51px; background-position: 0px -714px;  }
+.focusrifle { width: 147px; height: 51px; background-position: 0px -765px;  }
+.frag_grenade { width: 147px; height: 51px; background-position: 0px -816px;  }
+.gausshog { width: 147px; height: 51px; background-position: 0px -867px;  }
+.genericexplosion { width: 147px; height: 51px; background-position: 0px -918px;  }
+.ghost { width: 147px; height: 51px; background-position: 0px -969px;  }
+.grenade_launcher { width: 147px; height: 51px; background-position: 0px -1020px;  }
+.guardians { width: 147px; height: 51px; background-position: 0px -1071px;  }
+.hammer { width: 147px; height: 51px; background-position: 0px -1122px;  }
+.magnum { width: 147px; height: 51px; background-position: 0px -1173px;  }
+.massdriver { width: 147px; height: 51px; background-position: 0px -1224px;  }
+.melee { width: 147px; height: 51px; background-position: 0px -1275px;  }
+.mongoose { width: 147px; height: 51px; background-position: 0px -1326px;  }
+.needler { width: 147px; height: 51px; background-position: 0px -1377px;  }
+.needlerifle { width: 147px; height: 51px; background-position: 0px -1428px;  }
+.oddballkill { width: 147px; height: 51px; background-position: 0px -1479px;  }
+.plasmacannon { width: 147px; height: 51px; background-position: 0px -1530px;  }
+.plasmagrenade { width: 147px; height: 51px; background-position: 0px -1581px;  }
+.plasmapistol { width: 147px; height: 51px; background-position: 0px -1632px;  }
+.plasmarifle { width: 147px; height: 51px; background-position: 0px -1683px;  }
+.plasmashot { width: 147px; height: 51px; background-position: 0px -1734px;  }
+.plasma_grenade_launcher { width: 147px; height: 51px; background-position: 0px -1785px;  }
+.plasma_repeater { width: 147px; height: 51px; background-position: 0px -1836px;  }
+.revenant { width: 147px; height: 51px; background-position: 0px -1887px;  }
+.sabre { width: 147px; height: 51px; background-position: 0px -1938px;  }
+.scorpion { width: 147px; height: 51px; background-position: 0px -1989px;  }
+.scorpion_turret { width: 147px; height: 51px; background-position: 0px -2040px;  }
+.seraph { width: 147px; height: 51px; background-position: 0px -2091px;  }
+.shadeturret { width: 147px; height: 51px; background-position: 0px -2142px;  }
+.shotgun { width: 147px; height: 51px; background-position: 0px -2193px;  }
+.sniper { width: 147px; height: 51px; background-position: 0px -2244px;  }
+.spartanlaser { width: 147px; height: 51px; background-position: 0px -2295px;  }
+.spiker { width: 147px; height: 51px; background-position: 0px -2346px;  }
+.spnkr { width: 147px; height: 51px; background-position: 0px -2397px;  }
+.sword { width: 147px; height: 51px; background-position: 0px -2448px;  }
+.teleporter { width: 147px; height: 51px; background-position: 0px -2499px;  }
+.turret { width: 147px; height: 51px; background-position: 0px -2550px;  }
+.unknown { width: 147px; height: 51px; background-position: 0px -2601px;  }
+.warthog { width: 147px; height: 51px; background-position: 0px -2652px;  }
+.warthogrocket { width: 147px; height: 51px; background-position: 0px -2703px;  }
+.warthogturret { width: 147px; height: 51px; background-position: 0px -2754px;  }
+.wraith { width: 147px; height: 51px; background-position: 0px -2805px;  }
+.wraithturret { width: 147px; height: 51px; background-position: 0px -2856px;  }

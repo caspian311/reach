@@ -90,6 +90,7 @@ class CreateInitialTables < ActiveRecord::Migration
          table.column :id, :integer, :null => false
          table.column :name, :string
          table.column :description, :string
+         table.column :image, :string
       end
 
       create_table :medals, :id => false do |table|

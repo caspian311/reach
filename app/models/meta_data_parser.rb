@@ -5,6 +5,7 @@ class MetaDataParser
       @player_file_location = player_file_location
       meta_data_file = File.new(meta_data_file_location)
       @meta_data = JSON.parse(meta_data_file.read)
+      @weapons_with_images = YAML.load_file("resources/weapon_mapping.yml")
    end
 
    def all_players
@@ -50,6 +51,11 @@ class MetaDataParser
          weapon.id = json_weapon["Value"]["Id"]
          weapon.name = json_weapon["Value"]["Name"]
          weapon.description = json_weapon["Value"]["Description"]
+         image = @weapons_with_images[json_weapon["Value"]["Id"]]
+         if image == nil
+            image = "unknown"
+         end
+         weapon.image = image
 
          weapon.save
       end

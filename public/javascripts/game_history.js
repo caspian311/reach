@@ -192,6 +192,7 @@ function populate_carnage_report(player_stat_id) {
       for (var i=0; i<data.length; i++) {
             var weapon = data[i]['reach_weapon_carnage_report']['weapon']['name']
             var weapon_description = data[i]['reach_weapon_carnage_report']['weapon']['description']
+            var weapon_image = data[i]['reach_weapon_carnage_report']['weapon']['image']
             var kills = data[i]['reach_weapon_carnage_report']['kills']
             var deaths = data[i]['reach_weapon_carnage_report']['deaths']
             var headshots = data[i]['reach_weapon_carnage_report']['head_shots']
@@ -201,7 +202,8 @@ function populate_carnage_report(player_stat_id) {
             detail_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
 
             var weapon_cell = $('<td></td>')
-            weapon_cell.append(weapon)
+            weapon_cell.append('<div class="reach_weapons ' + weapon_image + '"></div>')
+            weapon_cell.append('<div>' + weapon + '</div>')
             weapon_cell.append('<input name="name" type="hidden" value="' + weapon + '" />')
             weapon_cell.append('<input name="description" type="hidden" value="' + weapon_description + '" />')
 
