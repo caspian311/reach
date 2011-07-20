@@ -1,6 +1,9 @@
 $(function(){
-   var selected_player = $('#selected_player').val()
+   if ($('#selected_player').length == 0) {
+      return
+   }
 
+   var selected_player = $('#selected_player').val()
    update_graphs(selected_player)
 
    $('#player_maps').change(
@@ -83,10 +86,13 @@ $(function(){
          url += '/' + selected_map
       }
 
-      $('#effectiveness_graph').html = ''
-      $('#kill_death_graph').html = ''
+      $('#effectiveness_graph').empty().append("Loading...")
+      $('#kill_death_graph').empty().append("Loading...")
 
       $.getJSON(url, function(data) {
+         $('#effectiveness_graph').empty()
+         $('#kill_death_graph').empty()
+
          kill_death_data = data["kill_death"]
          effectiveness_data = data["effectiveness"]
          graph_meta_data = data["graph_meta_data"]
