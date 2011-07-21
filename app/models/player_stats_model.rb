@@ -15,7 +15,8 @@ class PlayerStatsModel
       death_points = []
 
       kill_death_stats.each_with_index do |kill_death_stat, index|
-         graph_meta_data << get_game_description(kill_death_stat)
+         game = kill_death_stat.reach_team.reach_game
+         graph_meta_data << get_game_description(game)
          kill_points << [index, kill_death_stat.kills]
          death_points << [index, kill_death_stat.deaths]
       end
@@ -52,6 +53,8 @@ class PlayerStatsModel
       graph_meta_data = []
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
+         game = effectiveness_stat.reach_game
+         graph_meta_data << get_game_description(game)
          individual_effectiveness << [index, effectiveness_stat.effectiveness_rating.to_f]
          average_effectiveness << [index, effectiveness_average]
       end
@@ -77,9 +80,7 @@ class PlayerStatsModel
    end
 
    private
-   def self.get_game_description(stat)
-         game = stat.reach_team.reach_game
-
+   def self.get_game_description(game)
          formatted_timestamp = game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p")
 
          "#{formatted_timestamp}<br />#{game.name} <br />#{game.reach_map.name}" 
