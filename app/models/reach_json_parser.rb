@@ -72,10 +72,6 @@ class ReachJsonParser
 
          player_stat.reach_player_medals = parse_player_medals(json_player["SpecificMedalCounts"])
 
-         # player_stat.multi_kill_medals = json_player["MultiMedalCount"]
-         # player_stat.other_medals = json_player["OtherMedalCount"]
-         # player_stat.emblem = json_player["PlayerDetail"]["ReachEmblem"]
-
          reach_teams[json_player["Team"]].reach_player_stats << player_stat
       end
    end
@@ -132,32 +128,6 @@ class ReachJsonParser
       end
 
       teams
-   end
-
-   def populate_game_ids(json_games)
-      games = []
-      json_games.each do |game_json|
-         game = ReachGame.new
-         game.id = game_json["GameId"]
-         games << game
-      end
-
-      games.sort! do |game1, game2|
-         game1.id <=> game2.id
-      end
-
-      games
-   end
-
-   def games_on_page(page_number)
-      begin
-         game_history1 = @reach.get_game_history(ACCOUNT_1, CUSTOM_GAME, page_number)["RecentGames"]
-         game_history2 = @reach.get_game_history(ACCOUNT_2, CUSTOM_GAME, page_number)["RecentGames"]
-
-         game_history1 | game_history2
-      rescue
-         retry
-      end
    end
 
    def parse_timestamp(timestamp)
