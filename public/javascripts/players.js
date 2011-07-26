@@ -4,8 +4,10 @@ $(function(){
    }
 
    $('#player-graphs-kill_death-tab').click(show_kill_death_graph)
+   $('#kill_death_player_maps').change(show_kill_death_graph)
    $('#player-graphs-medals-tab').click(show_medals_graph)
    $('#player-graphs-effectiveness-tab').click(show_effectiveness_graph)
+   $('#effectiveness_player_maps').change(show_effectiveness_graph)
 
    show_kill_death_graph()
 
@@ -36,8 +38,6 @@ $(function(){
       $('#player-graphs-tabs-container .tab-content').removeClass('selected')
       $('#player-graphs-' + graph_type + '-tab').addClass('selected')
       $('#player-graphs-' + graph_type + '-body').addClass('selected')
-
-      $('#player-graphs-' + graph_type + '-body').append("<div style=\"text-align:center\"></div>")
    }
 
    function create_graph_containers(graph_type) {
@@ -48,7 +48,7 @@ $(function(){
       graph_container.append(map_legend)
       graph_container.append(graph)
 
-      $('#player-graphs-' + graph_type + '-body').empty().append(graph_container)
+      $('#player-graphs-' + graph_type).empty().append(graph_container)
    }
 
    function fetch_line_graph(graph_type) {
@@ -153,11 +153,13 @@ $(function(){
    }
 
    function graph_url(graph_type) {
-      var selected_map = $('#player_maps').val()
-      var selected_player = $('#selected_player').val()
-      var url = '/player_stats/' + graph_type + '/' +  selected_player
-      if (selected_map){
-         url += '/' + selected_map
+      var url = '/player_stats/' + graph_type + '/' + $('#selected_player').val()
+
+      if (graph_type == 'effectiveness' || graph_type == 'kill_death') {
+         var selected_map = $('#' + graph_type + '_player_maps').val()
+         if (selected_map){
+            url += '/' + selected_map
+         }
       }
 
       return url

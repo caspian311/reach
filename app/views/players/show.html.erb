@@ -8,16 +8,6 @@
 Below are some individual player statistics...
 <br /><br />
 
-<strong>Maps:</strong>
-<select id="player_maps">
-   <option value="">All maps</option>
-<% @maps.each do |map| %>
-   <option value="<%= map.id %>"><%= map.name %></option>
-<% end %>
-</select>
-
-<br /><br />
-
 <div id="player-graphs-tabs-container" class="tabs-container">
    <div class="tabs-labels">
       <div id="player-graphs-kill_death-tab" class="tab">Kill/Deaths</div>
@@ -25,9 +15,29 @@ Below are some individual player statistics...
       <div id="player-graphs-effectiveness-tab" class="tab">Effectiveness</div>
    </div>
    <div id="player-graphs-tabs-bodies" class="tabs-bodies">
-      <div id="player-graphs-kill_death-body" class="tab-content"></div>
-      <div id="player-graphs-medals-body" class="tab-content"></div>
-      <div id="player-graphs-effectiveness-body" class="tab-content"></div>
+      <div id="player-graphs-kill_death-body" class="tab-content">
+         <select id="kill_death_player_maps">
+            <option value="">All maps</option>
+         <% @maps.each do |map| %>
+            <option value="<%= map.id %>"><%= map.name %></option>
+         <% end %>
+         </select>
+
+         <div id="player-graphs-kill_death"></div>
+      </div>
+      <div id="player-graphs-medals-body" class="tab-content">
+         <div id="player-graphs-medals"></div>
+      </div>
+      <div id="player-graphs-effectiveness-body" class="tab-content">
+         <select id="effectiveness_player_maps">
+            <option value="">All maps</option>
+         <% @maps.each do |map| %>
+            <option value="<%= map.id %>"><%= map.name %></option>
+         <% end %>
+         </select>
+
+         <div id="player-graphs-effectiveness"></div>
+      </div>
    </div>
 </div>
       
