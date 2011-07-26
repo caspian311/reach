@@ -4,32 +4,31 @@ $(function(){
    }
 
    $('#player-graphs-kill_death-tab').click(show_kill_death_graph)
+   $('#player-graphs-medals-tab').click(show_medals_graph)
    $('#player-graphs-effectiveness-tab').click(show_effectiveness_graph)
 
    show_kill_death_graph()
 
-//   update_graphs()
-
-//   $('#player_maps').change(
-//      function(event) {
-//         update_graphs()
-//      }
-//   )
-
    function show_kill_death_graph() {
-      var graph_type = 'kill_death'
+      show_stats('kill_death')
+   }
+
+   function show_medals_graph() {
+      var graph_type = 'medals'
 
       select_tab(graph_type)
       create_graph_containers(graph_type)
-      update_graphs(graph_type)
+      fetch_bar_graph(graph_type)
    }
 
    function show_effectiveness_graph() {
-      var graph_type = 'effectiveness'
+      show_stats('effectiveness')
+   }
 
+   function show_stats(graph_type) {
       select_tab(graph_type)
       create_graph_containers(graph_type)
-      update_graphs(graph_type)
+      fetch_line_graph(graph_type)
    }
 
    function select_tab(graph_type) {
@@ -52,7 +51,7 @@ $(function(){
       $('#player-graphs-' + graph_type + '-body').empty().append(graph_container)
    }
 
-   function update_graphs(graph_type) {
+   function fetch_line_graph(graph_type) {
       var graph_div = $('#' + graph_type + '_graph')
       graph_div.append('<div style="text-align:center">Loading...</div>')      
 
@@ -94,26 +93,60 @@ $(function(){
          graph_div.empty()
          $.plot(graph_div, stats_data, graph_options)
          graph_div.bind("plotselected", function (event, ranges) {
-            $.plot(graph_div, stats_data,
-               $.extend(true, {}, graph_options, {
+            $.plot(graph_div, stats_data, $.extend(true, {}, graph_options, {
                   xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
                }))
          })
-         var previous_point = null
          graph_div.bind("plothover", function (event, pos, item) {
             if (item) {
-               if (previous_point != item.dataIndex) {
-                  previous_point = item.dataIndex;
-
-                  $('#game_tool_tip').remove()
-
-                  var content = graph_meta_data[item.dataIndex]
-
-                  show_game_tooltip(content, item.pageX, item.pageY)
-               }
+               var content = graph_meta_data[item.dataIndex]
+               show_graph_tooltip(content, item.pageX, item.pageY)
             } else {
                $('#game_tool_tip').remove()
-               previous_point = null
+            }
+         })
+      })
+   }
+
+   function fetch_bar_graph(graph_type) {
+      var graph_div = $('#' + graph_type + '_graph')
+      graph_div.append('<div style="text-align:center">Loading...</div>')      
+
+      var url = graph_url(graph_type)
+      $.getJSON(url, function(data) {
+         graph_div.empty()
+
+         var stats_data = data["stats"]
+         var graph_meta_data = data["graph_meta_data"]
+
+         var graph_options = {
+            bars: {
+               show: true
+            }, 
+            lines: {
+               show: false
+            }, 
+            points: {
+               show: false
+            },
+            xaxis: {
+               show: false
+            },
+            grid: {
+               hoverable: true,
+               backgroundColor: { colors: ["#fff", "#ccc"] }
+            }, 
+            colors: ["#006DAD"]
+         }
+
+         graph_div.empty()
+         $.plot(graph_div, stats_data, graph_options)
+         graph_div.bind("plothover", function (event, pos, item) {
+            if (item) {
+               var content = graph_meta_data[item.dataIndex]
+               show_graph_tooltip(content, item.pageX, item.pageY)
+            } else {
+               $('#game_tool_tip').remove()
             }
          })
       })
@@ -130,7 +163,7 @@ $(function(){
       return url
    }
 
-   function show_game_tooltip(content, x, y) {
+   function show_graph_tooltip(content, x, y) {
       $('#game_tool_tip').remove()
       $('<div id="game_tool_tip">' + content + '</div>')
          .css({

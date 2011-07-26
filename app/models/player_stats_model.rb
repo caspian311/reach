@@ -16,7 +16,7 @@ class PlayerStatsModel
 
       kill_death_stats.each_with_index do |kill_death_stat, index|
          game = kill_death_stat.reach_team.reach_game
-         graph_meta_data << get_game_description(game)
+         graph_meta_data << game_description(game)
          kill_points << [index, kill_death_stat.kills]
          death_points << [index, kill_death_stat.deaths]
       end
@@ -54,7 +54,7 @@ class PlayerStatsModel
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
          game = effectiveness_stat.reach_game
-         graph_meta_data << get_game_description(game)
+         graph_meta_data << game_description(game)
          individual_effectiveness << [index, effectiveness_stat.effectiveness_rating.to_f]
          average_effectiveness << [index, effectiveness_average]
       end
@@ -79,8 +79,33 @@ class PlayerStatsModel
       player_stats_data
    end
 
+   def self.medal_stats(player_id)
+      medal_stats = ReachPlayerMedal.all(
+         :select => "medals.id, medals.name, sum(reach_player_medals.count) as count",
+         :joins => [:reach_player_stat, :medal],
+         :conditions => {:reach_player_stats => {:player_id => player_id}},
+         :group => :medal_id,
+         :order => "count desc")
+
+      data = []
+      graph_meta_data = []
+      medal_stats.each_with_index do |medal_stat, index|
+         data << [index, medal_stat.count]
+         graph_meta_data << "#{medal_stat.count} - #{medal_stat.name}"
+      end
+
+
+      medal_graph_data = GraphData.new
+      medal_graph_data.data = data
+
+      player_stats_data = PlayerStatsData.new
+      player_stats_data.stats = [ medal_graph_data ]
+      player_stats_data.graph_meta_data = graph_meta_data
+      player_stats_data
+   end
+
    private
-   def self.get_game_description(game)
+   def self.game_description(game)
          formatted_timestamp = game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p")
 
          "#{formatted_timestamp}<br />#{game.name} <br />#{game.reach_map.name}" 

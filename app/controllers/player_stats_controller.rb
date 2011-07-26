@@ -29,6 +29,13 @@ class PlayerStatsController < ActionController::Base
       render_stats(stats)
    end
 
+   def medal_stats
+      player_id = params[:player_id]
+
+      stats = PlayerStatsModel.medal_stats(player_id)
+      render_stats(stats)
+   end
+
    def render_stats(stats)
       respond_to do |format|
          format.html { 
