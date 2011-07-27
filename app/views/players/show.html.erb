@@ -5,7 +5,36 @@
 
 <input type="hidden" id="selected_player" value="<%= @selected_player.id %>" />
 
-Below are some individual player statistics...
+<table style="border: 0px">
+   <tr>
+      <td valign="top">
+         <table>
+            <tr>
+               <th>Top 3 Medals</ht>
+            </tr>
+            <% @top_3_medals.each do |medal| %>
+               <tr><td><%= medal.name %> (<%= medal.count %>)</td></tr>
+            <% end %>
+         </table>
+      </td>
+      <td valign="top">
+         <table>
+            <tr>
+               <th>Career Kills</ht>
+               <th>Career Deaths</ht>
+               <th>Career Spread</ht>
+            </tr>
+            <tr>
+               <td><%= @career_kill_deaths.total_kills.to_i %></td>
+               <td><%= @career_kill_deaths.total_deaths.to_i %></td>
+               <td><%= @career_kill_deaths.total_kills.to_i - @career_kill_deaths.total_deaths.to_i %></td>
+            </tr>
+         </table>
+      </td>
+   </tr>
+</table>
+
+
 <br /><br />
 
 <div id="player-graphs-tabs-container" class="tabs-container">

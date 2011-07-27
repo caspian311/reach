@@ -1,13 +1,9 @@
 class PlayerStatsModel
    def self.kill_death_stats(player_id, map_id = nil)
       if map_id == nil
-         kill_death_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
-            :conditions => {:reach_player_stats => {:player_id => player_id}},
-            :order => "reach_games.game_time")
+         kill_death_stats = PlayerModel.all_kill_stats(player_id)
       else
-         kill_death_stats = ReachPlayerStat.all(:joins => {:reach_team => :reach_game}, 
-            :conditions => {:reach_player_stats => {:player_id => player_id}, :reach_games => {:reach_map_id => map_id}},
-            :order => "reach_games.game_time")
+         kill_death_stats = PlayerModel.all_kill_stats_for_map(player_id, map_id)
       end
 
       graph_meta_data = []
@@ -80,12 +76,7 @@ class PlayerStatsModel
    end
 
    def self.medal_stats(player_id)
-      medal_stats = ReachPlayerMedal.all(
-         :select => "medals.id, medals.name, sum(reach_player_medals.count) as count",
-         :joins => [:reach_player_stat, :medal],
-         :conditions => {:reach_player_stats => {:player_id => player_id}},
-         :group => :medal_id,
-         :order => "count desc")
+      medal_stats = PlayerModel.all_medals_for_player(player_id)
 
       data = []
       graph_meta_data = []

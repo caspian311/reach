@@ -8,10 +8,13 @@ class PlayersController < ActionController::Base
    end
 
    def show
-      @selected_player = Player.find(params[:id])
+      player_id = params[:id]
+      @selected_player = Player.find(player_id)
       @title = "Players"
 
-      @players = Player.find(:all, :order => :real_name)
       @maps = ReachMap.find(:all, :order => :name)
+
+      @top_3_medals = PlayerModel.top_3_medals(player_id)
+      @career_kill_deaths = PlayerModel.career_kills(player_id)
    end
 end
