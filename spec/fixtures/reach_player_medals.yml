@@ -1,0 +1,29 @@
+player1_game1_medal1:
+   id: 1
+   reach_player_stat_id: 1
+   medal_id: 1
+   count: 1
+
+player2_game1_medal1:
+   id: 2
+   reach_player_stat_id: 2
+   medal_id: 1
+   count: 2
+
+player3_game1_medal1:
+   id: 3
+   reach_player_stat_id: 3
+   medal_id: 1
+   count: 3
+
+player3_game1_medal2:
+   id: 4
+   reach_player_stat_id: 3
+   medal_id: 2
+   count: 2
+
+player4_game1_medal1:
+   id: 5
+   reach_player_stat_id: 4
+   medal_id: 1
+   count: 2

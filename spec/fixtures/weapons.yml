@@ -1,0 +1,9 @@
+weapon1:
+   id: 1
+   name: "Weapon One"
+   description: "This is weapon one"
+
+weapon2:
+   id: 2
+   name: "Weapon Two"
+   description: "This is weapon two"

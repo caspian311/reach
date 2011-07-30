@@ -1,0 +1,14 @@
+team1_1: 
+   id: 1
+   team_id: 0
+   standing: 0
+   score: 3
+   reach_game_id: 1
+
+team1_2:
+   id: 2
+   team_id: 1
+   standing: 1
+   score: 2
+   reach_game_id: 1
+   

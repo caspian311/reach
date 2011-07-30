@@ -30,8 +30,10 @@ ReachWeb::Application.routes.draw do
    match "/admin-ajax/all_jobs" => "admin_ajax#all_jobs"
 
    match "/carnage_report/:player_stat_id" => "carnage_report#show"
+   match "/medals_history/:player_stat_id" => "medals_history#show"
 
-   match "/medals/:player_stat_id" => "medals#show"
+   match "/medals" => "medals#index"
+   match "/medals/:medal_id" => "medals#show"
 
    root :to => "home#index"
 end

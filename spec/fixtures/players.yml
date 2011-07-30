@@ -1,0 +1,15 @@
+player1:
+   id: 1
+   real_name: "Player One"
+
+player2:
+   id: 2
+   real_name: "Player Two"
+
+player3:
+   id: 3
+   real_name: "Player Three"
+
+player4:
+   id: 4
+   real_name: "Player Four"
