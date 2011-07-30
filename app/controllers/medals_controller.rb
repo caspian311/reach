@@ -1,18 +1,24 @@
 class MedalsController < ActionController::Base
+   layout "application"
+
+   def index
+      @title = "Medals"
+      @medals = Medal.all(:order => :name)
+   end
+
    def show
-      player_stat_id = params[:player_stat_id]
+      @title = "Medals"
+      @medals = Medal.all(:order => :name)
 
-      player_medals = ReachPlayerMedal.find_by_player_stat_id(player_stat_id)
+      medal_id = params[:medal_id]
 
-      json = player_medals.to_json(:include => :medal)
-
-      respond_to do |format|
-         format.html { 
-            render :json => json
-         }
-         format.json {
-            render :json => json
-         }
-      end
+      @selected_medal = Medal.find(medal_id)
+      @ranked_medals = ReachPlayerMedal.all(
+         :select => "players.real_name, sum(reach_player_medals.count) as total",
+         :joins => {:reach_player_stat => :player},
+         :conditions => {:reach_player_medals => {:medal_id => medal_id}},
+         :group => "players.real_name",
+         :order => "total desc"
+      )
    end
 end

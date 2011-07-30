@@ -1,0 +1,39 @@
+player1_game1_weapon1:
+   id: 1
+   reach_player_stat_id: 1
+   weapon_id: 1
+   kills: 10
+   deaths: 5
+   head_shots: 1
+
+player2_game1_weapon1:
+   id: 2
+   reach_player_stat_id: 1
+   weapon_id: 1
+   kills: 8
+   deaths: 6
+   head_shots: 1
+
+player3_game1_weapon1:
+   id: 3
+   reach_player_stat_id: 1
+   weapon_id: 1
+   kills: 2
+   deaths: 7
+   head_shots: 1
+
+player3_game1_weapon2:
+   id: 4
+   reach_player_stat_id: 1
+   weapon_id: 2
+   kills: 2
+   deaths: 0
+   head_shots: 1
+
+player4_game1_weapon1:
+   id: 5
+   reach_player_stat_id: 1
+   weapon_id: 1
+   kills: 7
+   deaths: 3
+   head_shots: 1

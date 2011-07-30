@@ -1,0 +1,9 @@
+medal1:
+   id: 1
+   name: "Medal One"
+   description: "This is the first medal"
+
+medal2:
+   id: 2
+   name: "Medal Two"
+   description: "This is the second medal"

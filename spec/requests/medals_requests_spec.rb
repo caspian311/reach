@@ -1,52 +1,84 @@
 require 'spec_helper'
 
 describe "Medals" do
+   fixtures :all
+
    before do
-      ReachPlayerStat.delete_all
-      ReachPlayerMedal.delete_all
-      Medal.delete_all
-
-      player_stat = ReachPlayerStat.new
-      player_stat.save
-      @player_stat_id = player_stat.id
-
-      medal1 = Medal.new
-      medal1.id = 1
-      medal1.name = "Medal 1"
-      medal1.save
-
-      medal2 = Medal.new
-      medal2.id = 2
-      medal2.name = "Medal 2"
-      medal2.save
-
-      report1 = ReachPlayerMedal.new
-      report1.medal = medal1
-      report1.count = 5
-
-      report2 = ReachPlayerMedal.new
-      report2.medal = medal2
-      report2.count = 3
-
-      player_stat.reach_player_medals << report1
-      player_stat.reach_player_medals << report2
+      @medal1_id = medals(:medal1).id
+      @medal2_id = medals(:medal2).id
    end
 
-   describe "fetching medals for a player's game" do
-      it "should return json version of report" do
-         get game_report_page, :format => :json
+   describe "medals page for medal 1" do
+      it "should have the name and description" do
+         get fetch_page_for_medal(@medal1_id)
 
-         report = JSON.parse(response.body)
-         assert_equal 2, report.size
-         assert_equal "Medal 1", report[0]["reach_player_medal"]["medal"]["name"]
-         assert_equal 5, report[0]["reach_player_medal"]["count"]
-         assert_equal "Medal 2", report[1]["reach_player_medal"]["medal"]["name"]
-         assert_equal 3, report[1]["reach_player_medal"]["count"]
+         response.should have_selector("div.main-column div.title") do |div|
+            div.should contain("Medals: Medal One")
+         end
+
+         response.should have_selector("div.main-column div.content") do |div|
+            div.should contain("This is the first medal")
+         end
+      end
+   end
+
+   describe "medals page for medal 2" do
+      it "should have the name and description" do
+         get fetch_page_for_medal(@medal2_id)
+
+         response.should have_selector("div.main-column div.title") do |div|
+            div.should contain("Medals: Medal Two")
+         end
+
+         response.should have_selector("div.main-column div.content") do |div|
+            div.should contain("This is the second medal")
+         end
+      end
+   end
+
+   describe "fetching all player counts for medal1" do
+      it "a ordered list of all the players who have gotten medal 1" do
+         get fetch_page_for_medal(@medal1_id)
+
+         response.should have_selector("table tr", :count => 5)
+
+         response.should have_selector("table tr:nth-child(2)") do |tr|
+            tr.should have_selector("td:nth-child(1)", :content=> "Player Three")
+            tr.should have_selector("td:nth-child(2)", :content=> "3")
+         end
+
+         response.should have_selector("table tr:nth-child(3)") do |tr|
+            tr.should have_selector("td:nth-child(1)", :content=> "Player Two")
+            tr.should have_selector("td:nth-child(2)", :content=> "2")
+         end
+
+         response.should have_selector("table tr:nth-child(4)") do |tr|
+            tr.should have_selector("td:nth-child(1)", :content=> "Player Four")
+            tr.should have_selector("td:nth-child(2)", :content=> "2")
+         end
+
+         response.should have_selector("table tr:nth-child(5)") do |tr|
+            tr.should have_selector("td:nth-child(1)", :content=> "Player One")
+            tr.should have_selector("td:nth-child(2)", :content=> "1")
+         end
       end
    end
    
-   def game_report_page
-      "/medals/#{@player_stat_id}"
+   describe "fetching all player counts for medal2" do
+      it "a ordered list of all the players who have gotten medal 2" do
+         get fetch_page_for_medal(@medal2_id)
+
+         response.should have_selector("table tr", :count => 2)
+
+         response.should have_selector("table tr:nth-child(2)") do |tr|
+            tr.should have_selector("td:nth-child(1)", :content=> "Player Three")
+            tr.should have_selector("td:nth-child(2)", :content=> "2")
+         end
+      end
+   end
+
+   def fetch_page_for_medal(medal_id)
+      "/medals/#{medal_id}"
    end
 end
 

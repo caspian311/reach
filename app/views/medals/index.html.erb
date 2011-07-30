@@ -1,0 +1,13 @@
+<div class="title"> 
+  <%= @title %>:
+</div> 
+<div class="content"> 
+
+<select id="selected_medals">
+<option value="">Select a Medal</option>
+<% @medals.each do |medal| %>
+   <option value="<%= medal.id %>"><%= medal.name %></option>
+<% end %>
+</select>
+
+</div>

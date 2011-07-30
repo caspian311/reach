@@ -1,0 +1,29 @@
+player1_game1_stat:
+   id: 1
+   reach_team_id: 1
+   player_id: 1
+   kills: 10
+   deaths: 5
+
+player2_game1_stat:
+   id: 2
+   reach_team_id: 2
+   player_id: 2
+   kills: 8
+   deaths: 6
+
+player3_game1_stat:
+   id: 3
+   reach_team_id: 1
+   player_id: 3
+   kills: 4
+   deaths: 7
+
+player4_game1_stat:
+   id: 4
+   reach_team_id: 2
+   player_id: 4
+   kills: 7
+   deaths: 3
+
+

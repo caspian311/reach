@@ -136,7 +136,7 @@ function populate_medals(player_stat_id) {
 
    $('#' + player_stat_id + '-medals-body').append('<div style="text-align:center">Loading...</div>')
 
-   $.getJSON('/medals/' + player_stat_id, function(data) {
+   $.getJSON('/medals_history/' + player_stat_id, function(data) {
       var medals_table = $('<table></table>')
       var header_row = $('<tr></tr>')
       header_row.append('<th>Medal</th>')

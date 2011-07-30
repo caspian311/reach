@@ -1,0 +1,32 @@
+<div class="title"> 
+  <%= @title %>: <%= @selected_medal.name %>
+</div> 
+<div class="content"> 
+
+<%= @selected_medal.description %>
+
+<br />
+<select id="selected_medals">
+<% @medals.each do |medal| %>
+   <% if medal.id == @selected_medal.id %>
+      <option selected="selected" value="<%= medal.id %>"><%= medal.name %></option>
+   <% else %>
+      <option value="<%= medal.id %>"><%= medal.name %></option>
+   <% end %>
+<% end %>
+</select>
+
+<table>
+   <tr>
+      <th>Player</th>
+      <th>Count</th>
+   </tr>
+   <% @ranked_medals.each_with_index do |player_stat, index| %>
+   <tr class="<%= cycle("regular", "alternate") %>">
+      <td><%= player_stat.real_name %></td>
+      <td><%= player_stat.total.to_i %></td>
+   </tr>
+   <% end %>
+<table>
+
+</div>
