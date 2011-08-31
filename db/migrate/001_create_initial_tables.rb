@@ -87,18 +87,22 @@ class CreateInitialTables < ActiveRecord::Migration
       end
 
       create_table :weapons, :id => false do |table|
-         table.column :id, :integer, :null => false
+         table.column :id, :integer, :null => false, :unique => true
          table.column :name, :string
          table.column :description, :string
          table.column :image, :string
       end
 
+      add_index :weapons, :id
+
       create_table :medals, :id => false do |table|
-         table.column :id, :integer, :null => false         
+         table.column :id, :integer, :null => false, :unique => true
          table.column :name, :string
          table.column :description, :string
          table.column :image, :string
       end
+
+      add_index :medals, :id
    end
 
    def self.down
@@ -109,6 +113,7 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :reach_teams
       drop_table :reach_player_stats
       drop_table :reach_weapon_carnage_reports
+      drop_table :reach_player_medals
       drop_table :player_effectivenesses
       drop_table :job_statuses
       drop_table :weapons
