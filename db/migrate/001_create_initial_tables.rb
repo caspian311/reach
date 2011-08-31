@@ -87,18 +87,22 @@ class CreateInitialTables < ActiveRecord::Migration
       end
 
       create_table :weapons, :id => false do |table|
-         table.column :id, :integer, :null => false
+         table.column :id, :integer, :null => false, :unique => true
          table.column :name, :string
          table.column :description, :string
          table.column :image, :string
       end
 
+      add_index :weapons, :id
+
       create_table :medals, :id => false do |table|
-         table.column :id, :integer, :null => false         
+         table.column :id, :integer, :null => false, :unique => true
          table.column :name, :string
          table.column :description, :string
          table.column :image, :string
       end
+
+      add_index :medals, :id
    end
 
    def self.down
