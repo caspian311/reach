@@ -109,6 +109,7 @@ class CreateInitialTables < ActiveRecord::Migration
       drop_table :reach_teams
       drop_table :reach_player_stats
       drop_table :reach_weapon_carnage_reports
+      drop_table :reach_player_medals
       drop_table :player_effectivenesses
       drop_table :job_statuses
       drop_table :weapons
