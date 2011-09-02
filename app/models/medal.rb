@@ -10,4 +10,7 @@
 #
 
 class Medal < ActiveRecord::Base
+   def self.earned_medals
+      all(:order => :name)
+   end
 end

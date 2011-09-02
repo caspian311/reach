@@ -7,3 +7,8 @@ medal2:
    id: 2
    name: "Medal Two"
    description: "This is the second medal"
+
+medal3:
+   id: 3
+   name: "Medal Three"
+   description: "The medal that no one actually gets"

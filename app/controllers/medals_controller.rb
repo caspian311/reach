@@ -3,22 +3,16 @@ class MedalsController < ActionController::Base
 
    def index
       @title = "Medals"
-      @medals = Medal.all(:order => :name)
+      @medals = Medal.earned_medals
    end
 
    def show
       @title = "Medals"
-      @medals = Medal.all(:order => :name)
+      @medals = Medal.earned_medals
 
       medal_id = params[:medal_id]
 
       @selected_medal = Medal.find(medal_id)
-      @ranked_medals = ReachPlayerMedal.all(
-         :select => "players.real_name, sum(reach_player_medals.count) as total",
-         :joins => {:reach_player_stat => :player},
-         :conditions => {:reach_player_medals => {:medal_id => medal_id}},
-         :group => "players.real_name",
-         :order => "total desc"
-      )
+      @ranked_medals = ReachPlayerMedal.ranked_medals(medal_id)
    end
 end
