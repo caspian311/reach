@@ -31,12 +31,18 @@ class ReachPlayerMedalTest < ActiveSupport::TestCase
       assert_equal 2, report4.count
    end
 
-   test "earned_medals" do
+   test "earned_medals only returns medals that were earned" do
       medal1 = medals(:medal1)
       medal2 = medals(:medal2)
       medal3 = medals(:medal3)
 
-      assert_equal [medal1, medal2], ReachPlayerMedal.earned_medals
+      earned_medals = ReachPlayerMedal.earned_medals
+
+      assert_equal 2, earned_medals.length
+      assert_equal medal1.id, earned_medals[0].id
+      assert_equal medal1.name, earned_medals[0].name
+      assert_equal medal2.id, earned_medals[1].id
+      assert_equal medal2.name, earned_medals[1].name
    end
 
    private
