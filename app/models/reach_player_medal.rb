@@ -26,4 +26,8 @@ class ReachPlayerMedal < ActiveRecord::Base
          :order => "total desc"
       )
    end
+
+   def self.earned_medals
+      joins(:medal).select("medals.*").group("medals.id").order(:name)
+   end
 end
