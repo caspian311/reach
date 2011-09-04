@@ -48,20 +48,6 @@ class ReachPlayerMedalTest < ActiveSupport::TestCase
 
       assert earned_medal3s.empty?
    end
-
-   private
-   def find_by_medal_id(reports, medal_id)
-      target = nil
-
-      reports.each do |report|
-         if report.medal_id == medal_id
-            target = report
-            break
-         end
-      end
-
-      target
-   end
 end
 
 
