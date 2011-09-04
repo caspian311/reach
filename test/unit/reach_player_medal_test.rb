@@ -10,23 +10,23 @@ class ReachPlayerMedalTest < ActiveSupport::TestCase
 
       reports_for_player1 = ReachPlayerMedal.find_by_player_stat_id(player1_id)
 
-      report1 = find_by_medal_id(reports_for_player1, medal1_id)
+      report1 = reports_for_player1.select { |report| report.medal_id == medal1_id }.first
       assert_equal "Medal A", report1.medal.name
       assert_equal 1, report1.count
 
       reports_for_player2 = ReachPlayerMedal.find_by_player_stat_id(player2_id)
 
-      report2 = find_by_medal_id(reports_for_player2, medal1_id)
+      report2 = reports_for_player2.select { |report| report.medal_id == medal1_id }.first
       assert_equal "Medal A", report2.medal.name
       assert_equal 2, report2.count
 
       reports_for_player3 = ReachPlayerMedal.find_by_player_stat_id(player3_id)
 
-      report3 = find_by_medal_id(reports_for_player3, medal1_id)
+      report3 = reports_for_player3.select { |report| report.medal_id == medal1_id }.first
       assert_equal "Medal A", report3.medal.name
       assert_equal 3, report3.count
 
-      report4 = find_by_medal_id(reports_for_player3, medal2_id)
+      report4 = reports_for_player3.select { |report| report.medal_id == medal2_id }.first
       assert_equal "Medal B", report4.medal.name
       assert_equal 2, report4.count
    end
@@ -43,6 +43,10 @@ class ReachPlayerMedalTest < ActiveSupport::TestCase
       assert_equal medal1.name, earned_medals[0].name
       assert_equal medal2.id, earned_medals[1].id
       assert_equal medal2.name, earned_medals[1].name
+
+      earned_medal3s = earned_medals.select { |medal| medal.id == medal3.id }
+
+      assert earned_medal3s.empty?
    end
 
    private
