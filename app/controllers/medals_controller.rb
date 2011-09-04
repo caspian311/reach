@@ -8,11 +8,11 @@ class MedalsController < ActionController::Base
 
    def show
       @title = "Medals"
-      @medals = Medal.earned_medals
+      @medals = ReachPlayerMedal.earned_medals
 
       medal_id = params[:medal_id]
 
-      @selected_medal = ReachPlayerMedal.find(medal_id)
+      @selected_medal = Medal.find(medal_id)
       @ranked_medals = ReachPlayerMedal.ranked_medals(medal_id)
    end
 end

@@ -13,7 +13,7 @@ describe "Medals" do
          get fetch_page_for_medal(@medal1_id)
 
          response.should have_selector("div.main-column div.title") do |div|
-            div.should contain("Medals: Medal One")
+            div.should contain("Medals: Medal A")
          end
 
          response.should have_selector("div.main-column div.content") do |div|
@@ -27,7 +27,7 @@ describe "Medals" do
          get fetch_page_for_medal(@medal2_id)
 
          response.should have_selector("div.main-column div.title") do |div|
-            div.should contain("Medals: Medal Two")
+            div.should contain("Medals: Medal B")
          end
 
          response.should have_selector("div.main-column div.content") do |div|
