@@ -82,6 +82,7 @@ $(function(){
             },
             grid: {
                hoverable: true,
+               clickable: true,
                backgroundColor: { colors: ["#fff", "#ccc"] }
             }, 
             selection: {
@@ -92,17 +93,25 @@ $(function(){
 
          graph_div.empty()
          $.plot(graph_div, stats_data, graph_options)
+
          graph_div.bind("plotselected", function (event, ranges) {
             $.plot(graph_div, stats_data, $.extend(true, {}, graph_options, {
                   xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
                }))
          })
+
          graph_div.bind("plothover", function (event, pos, item) {
             if (item) {
                var content = graph_meta_data[item.dataIndex]
                show_graph_tooltip(content, item.pageX, item.pageY)
             } else {
                $('#game_tool_tip').remove()
+            }
+         })
+
+         graph_div.bind("plotclick", function(event, pos, item) {
+            if (item){
+               alert("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
             }
          })
       })
