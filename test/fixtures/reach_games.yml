@@ -2,6 +2,6 @@ game1:
    id: 1
    reach_map_id: 1
    name: "Capture the Flag"
-   game_time: Time.now.to_s
+   game_time: <%= Time.now %>
    duration: 594
    reach_id: 1234567890
