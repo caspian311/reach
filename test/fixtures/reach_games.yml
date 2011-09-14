@@ -5,3 +5,155 @@ game1:
    game_time: <%= Time.now %>
    duration: 594
    reach_id: 1234567890
+
+game2:
+   id: 2
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -1) %>
+   duration: 594
+   reach_id: 2345678901
+
+game3:
+   id: 3
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -2) %>
+   duration: 594
+   reach_id: 3456789012
+
+game4:
+   id: 4
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -3) %>
+   duration: 594
+   reach_id: 4567890123
+
+game5:
+   id: 5
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -4) %>
+   duration: 594
+   reach_id: 5678901234
+
+game6:
+   id: 6
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -5) %>
+   duration: 594
+   reach_id: 6789012345
+
+game7:
+   id: 7
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -6) %>
+   duration: 594
+   reach_id: 7890123456
+
+game8:
+   id: 8
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -7) %>
+   duration: 594
+   reach_id: 8901234567
+
+game9:
+   id: 9
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -8) %>
+   duration: 594
+   reach_id: 9012345678
+
+game10:
+   id: 10
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -9) %>
+   duration: 594
+   reach_id: a123456789
+
+game11:
+   id: 11
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -10) %>
+   duration: 594
+   reach_id: 123456789a
+
+game12:
+   id: 12
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -11) %>
+   duration: 594
+   reach_id: 23456789a1
+
+game13:
+   id: 13
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -12) %>
+   duration: 594
+   reach_id: 3456789a12
+
+game14:
+   id: 14
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -13) %>
+   duration: 594
+   reach_id: 456789a123
+
+game15:
+   id: 15
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -14) %>
+   duration: 594
+   reach_id: 56789a1234
+
+game16:
+   id: 16
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -15) %>
+   duration: 594
+   reach_id: 6789a12345
+
+game17:
+   id: 17
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -16) %>
+   duration: 594
+   reach_id: 789a123456
+
+game18:
+   id: 18
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -17) %>
+   duration: 594
+   reach_id: 89a1234567
+
+game19:
+   id: 19
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -18) %>
+   duration: 594
+   reach_id: 9a12345678
+
+game20:
+   id: 20
+   reach_map_id: 1
+   name: "Capture the Flag"
+   game_time: <%= Time.now.advance(:days => -19) %>
+   duration: 594
+   reach_id: b123456789
