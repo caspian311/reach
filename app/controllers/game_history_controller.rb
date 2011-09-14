@@ -14,6 +14,10 @@ class GameHistoryController < ActionController::Base
       @games = ReachGame.offset(@page * GAMES_PER_PAGE).limit(GAMES_PER_PAGE).find(:all, :order => "game_time DESC")
    end
 
+   def info
+      @title = "Game History"
+   end
+
    private
    def current_page(params)
       @page = params[:page]
