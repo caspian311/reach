@@ -112,7 +112,7 @@ $(function(){
          graph_div.bind("plotclick", function(event, pos, item) {
             if (item){
                var game_id = graph_meta_data[item.dataIndex]['id']
-               alert("taking you to game: " + game_id);
+               window.location = "/game_history/search/" + game_id
             }
          })
       })

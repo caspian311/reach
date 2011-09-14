@@ -1,6 +1,4 @@
 class GameHistoryController < ActionController::Base
-   GAMES_PER_PAGE = 10
-
    layout "application"
 
    def show
@@ -11,11 +9,18 @@ class GameHistoryController < ActionController::Base
 
       @pages = pages_to_display(@page, @total_pages)
 
-      @games = ReachGame.offset(@page * GAMES_PER_PAGE).limit(GAMES_PER_PAGE).find(:all, :order => "game_time DESC")
+      @games = GameHistoryModel.games_for_page(@page)
    end
 
    def info
       @title = "Game History"
+   end
+
+   def search
+      game_id = params[:game_id]
+      page = GameHistoryModel.page_for_game(game_id)
+
+      redirect_to :action => "show", :page => page
    end
 
    private
@@ -28,6 +33,7 @@ class GameHistoryController < ActionController::Base
       end
    end
 
+   private
    def pages_to_display(current_page, total_pages)
       all_pages = (0..total_pages).to_a
 
