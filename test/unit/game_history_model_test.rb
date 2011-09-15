@@ -41,9 +41,9 @@ class GameHistoryModelTest < ActiveSupport::TestCase
    end
 
    test "retreive page for a given game id" do
-      assert_equal 1, GameHistoryModel.page_for_game(@game1.id)
-      assert_equal 1, GameHistoryModel.page_for_game(@game10.id)
-      assert_equal 2, GameHistoryModel.page_for_game(@game11.id)
-      assert_equal 2, GameHistoryModel.page_for_game(@game20.id)
+      assert_equal 0, GameHistoryModel.page_for_game(@game1.id)
+      assert_equal 0, GameHistoryModel.page_for_game(@game10.id)
+      assert_equal 1, GameHistoryModel.page_for_game(@game11.id)
+      assert_equal 1, GameHistoryModel.page_for_game(@game20.id)
    end
 end

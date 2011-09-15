@@ -12,10 +12,10 @@ class GameHistoryModel
    def self.page_for_game(id)
       ordinal_index = 0
       ReachGame.find(:all, :order => "game_time DESC").each_with_index do |game, index|
-         ordinal_index = index
+         ordinal_index = (index + 1)
          break if game.id == id
       end
 
-      (ordinal_index / GAMES_PER_PAGE) - 1
+      (ordinal_index.to_f / GAMES_PER_PAGE.to_f).ceil - 1
    end
 end
