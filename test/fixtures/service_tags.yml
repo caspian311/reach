@@ -18,12 +18,22 @@ player2_srvc_tag2:
    player_id: 2
    tag: "WOOT"
 
-player3_srvc_tag1:
+player2_srvc_tag3:
    id: 5
    player_id: 2
    tag: "GRNT"
 
-player4_srvc_tag1:
+player2_srvc_tag4:
    id: 6
    player_id: 2
    tag: "KILR"
+
+player3_srvc_tag1:
+   id: 7
+   player_id: 3
+   tag: "PLYR3"
+
+player4_srvc_tag1:
+   id: 8
+   player_id: 4
+   tag: "PLYR4"

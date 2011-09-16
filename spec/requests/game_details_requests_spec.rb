@@ -1,82 +1,28 @@
 require 'spec_helper'
 
 describe "Game Details" do
-   before do
-      ReachGame.delete_all
-
-      @reach_id = "1234567890"
-
-      game = ReachGame.new
-      game.reach_id = @reach_id
-      game.save
-
-      team1 = ReachTeam.new
-      team1.team_id = 1
-      team1.score = 15
-      game.reach_teams << team1
-
-      team2 = ReachTeam.new
-      team2.team_id = 2
-      team2.score = 10
-      game.reach_teams << team2
-
-      player1 = Player.new
-      player1.save
-
-      service_tag1 = ServiceTag.new
-      service_tag1.tag = "player1"
-
-      player1.service_tags << service_tag1
-
-      player2 = Player.new
-      player2.save
-
-      service_tag2 = ServiceTag.new
-      service_tag2.tag = "player2"
-
-      player2.service_tags << service_tag2
-
-      player3 = Player.new
-      player3.save
-
-      service_tag3 = ServiceTag.new
-      service_tag3.tag = "player3"
-
-      player3.service_tags << service_tag3
-
-      player_stat1 = ReachPlayerStat.new
-      player_stat1.player = player1
-      team1.reach_player_stats << player_stat1
-
-      player_stat2 = ReachPlayerStat.new
-      player_stat2.player = player2
-      team2.reach_player_stats << player_stat2
-
-      player_stat3 = ReachPlayerStat.new
-      player_stat3.player = player3
-      team1.reach_player_stats << player_stat3
-   end
+   fixtures :all
 
    describe "fetching details for a game" do
       it "should return json version of games" do
-         get game_details_page, :format => :json
+         game_id = reach_games(:game1).id
+
+         get "/game_details/#{game_id}", :format => :json
 
          game_details = JSON.parse(response.body)
          assert_equal 2, game_details["reach_game"]["reach_teams"].size
-         assert_equal 1, game_details["reach_game"]["reach_teams"][0]["team_id"]
-         assert_equal 15, game_details["reach_game"]["reach_teams"][0]["score"]
+
+         assert_equal 0, game_details["reach_game"]["reach_teams"][0]["team_id"]
+         assert_equal 3, game_details["reach_game"]["reach_teams"][0]["score"]
          assert_equal 2, game_details["reach_game"]["reach_teams"][0]["reach_player_stats"].size
-         assert_equal "player1", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
-         assert_equal "player3", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][1]["player"]["service_tags"][0]["tag"]
-         assert_equal 2, game_details["reach_game"]["reach_teams"][1]["team_id"]
-         assert_equal 10, game_details["reach_game"]["reach_teams"][1]["score"]
-         assert_equal 1, game_details["reach_game"]["reach_teams"][1]["reach_player_stats"].size
-         assert_equal "player2", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
+         assert_equal "PLYR1", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
+         assert_equal "PLYR3", game_details["reach_game"]["reach_teams"][0]["reach_player_stats"][1]["player"]["service_tags"][0]["tag"]
+         assert_equal 1, game_details["reach_game"]["reach_teams"][1]["team_id"]
+         assert_equal 2, game_details["reach_game"]["reach_teams"][1]["score"]
+         assert_equal 2, game_details["reach_game"]["reach_teams"][1]["reach_player_stats"].size
+         assert_equal "PLYR2", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][0]["player"]["service_tags"][0]["tag"]
+         assert_equal "PLYR4", game_details["reach_game"]["reach_teams"][1]["reach_player_stats"][1]["player"]["service_tags"][0]["tag"]
       end
-   end
-   
-   def game_details_page
-      "/game_details/#{@reach_id}"
    end
 end
 

@@ -24,10 +24,10 @@ function is_expanded(row) {
    return row_class.indexOf('expanded') != -1
 }
 
-function fetch_game_details(details_cell, reach_id) {
+function fetch_game_details(details_cell, game_id) {
    details_cell.append('<div style="text-align: center">Loading...</div>')
 
-   $.getJSON('/game_details/' + reach_id, function(data){
+   $.getJSON('/game_details/' + game_id, function(data){
       populate_game_details(details_cell, data)
    })
 }

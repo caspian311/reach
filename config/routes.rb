@@ -2,9 +2,10 @@ ReachWeb::Application.routes.draw do
    match "/home" => "home#index"
 
    match "/game_history" => "game_history#show"
-   match "/game_history_info" => "game_history_info#index"
+   match "/game_history/info" => "game_history#info"
    match "/game_details/:reach_id" => "game_details#show"
    match "/game_history/:page" => "game_history#show"
+   match "/game_history/search/:game_id" => "game_history#search"
 
    match "/kill_death_spread" => "kill_death_spread#index"
 

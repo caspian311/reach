@@ -1,0 +1,9 @@
+player_effectivenesses1:
+   player_id: 1
+   effectiveness_rating: 1.33
+   reach_game_id: 20
+
+player_effectivenesses2:
+   player_id: 2
+   effectiveness_rating: .75
+   reach_game_id: 20

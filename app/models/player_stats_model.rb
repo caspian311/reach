@@ -11,8 +11,7 @@ class PlayerStatsModel
       death_points = []
 
       kill_death_stats.each_with_index do |kill_death_stat, index|
-         game = kill_death_stat.reach_team.reach_game
-         graph_meta_data << game_description(game)
+         graph_meta_data << meta_data(kill_death_stat.reach_team.reach_game)
          kill_points << [index, kill_death_stat.kills]
          death_points << [index, kill_death_stat.deaths]
       end
@@ -49,8 +48,7 @@ class PlayerStatsModel
       graph_meta_data = []
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
-         game = effectiveness_stat.reach_game
-         graph_meta_data << game_description(game)
+         graph_meta_data << meta_data(effectiveness_stat.reach_game)
          individual_effectiveness << [index, effectiveness_stat.effectiveness_rating.to_f]
          average_effectiveness << [index, effectiveness_average]
       end
@@ -93,6 +91,14 @@ class PlayerStatsModel
       player_stats_data.stats = [ medal_graph_data ]
       player_stats_data.graph_meta_data = graph_meta_data
       player_stats_data
+   end
+
+   private
+   def self.meta_data(game)
+         meta_data = {}
+         meta_data["id"] = game.id
+         meta_data["description"] = game_description(game)
+         meta_data
    end
 
    private
