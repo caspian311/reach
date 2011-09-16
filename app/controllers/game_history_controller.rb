@@ -3,6 +3,7 @@ class GameHistoryController < ActionController::Base
 
    def show
       @page = current_page(params)
+      @show_game = params[:game]
       @title = "Game History"
 
       @total_pages = ReachGame.all.count / 10
@@ -20,7 +21,7 @@ class GameHistoryController < ActionController::Base
       game_id = params[:game_id]
       page = GameHistoryModel.page_for_game(game_id)
 
-      redirect_to :action => "show", :page => page
+      redirect_to :action => "show", :page => page, :game => game_id
    end
 
    private

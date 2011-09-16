@@ -39,8 +39,8 @@
    <th>Duration</th>
 </tr>
 <% @games.each_with_index do |game, index| %>
-<tr id="<%= game.reach_id %>" class="<%= cycle("regular", "alternate") %>">
-   <td><%= link_to_function game.reach_id, "expand_game_details('#{game.reach_id}')" %></td>
+<tr id="<%= game.id %>" class="<%= cycle("regular", "alternate") %>">
+   <td><%= link_to_function game.reach_id, "expand_game_details('#{game.id}')" %></td>
    <td><%= game.name %></td>
    <td><%= game.reach_map.name %></td>
    <td><%= game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>
@@ -58,3 +58,9 @@
       <input id="description_close" type="button" value="Close" />
    </div>
 </div>
+
+<% if (@show_game != nil) %>
+<script>
+expand_game_details('<%= @show_game %>')
+</script>
+<% end %>

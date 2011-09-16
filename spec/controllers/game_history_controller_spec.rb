@@ -20,7 +20,7 @@ describe GameHistoryController do
          GameHistoryModel.should_receive(:page_for_game).with(1).and_return(4)
 
          get "search", :game_id => 1
-         response.should redirect_to(:action => "show", :page => 4)
+         response.should redirect_to(:action => "show", :page => 4, :game => 1)
        end
    end
 end

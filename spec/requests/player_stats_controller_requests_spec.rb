@@ -17,7 +17,7 @@ describe "Player Graphs" do
 
    describe "fetching player kill/death stats data for player and map" do
       it "should return kill/death stats in json form" do
-         get kill_death_endpoint(@player1_id, @map_id), :format => :json
+         get "/player_stats/kill_death/#{@player1_id}/#{@map_id}", :format => :json
 
          player_stats_data = JSON.parse(response.body)
 
@@ -45,7 +45,7 @@ describe "Player Graphs" do
 
    describe "fetching effectiveness stats data for player and map" do
       it "should return effectiveness stats in json form" do
-         get effectiveness_endpoint(@player1_id, @map_id), :format => :json
+         get "/player_stats/effectiveness/#{@player1_id}/#{@map_id}", :format => :json
 
          player_stats_data = JSON.parse(response.body)
 
@@ -74,7 +74,7 @@ describe "Player Graphs" do
 
    describe "fetching medal stats data for player" do
       it "should return medal stats in json form" do
-         get medal_endpoint(@player1_id), :format => :json
+         get "/player_stats/medals/#{@player1_id}", :format => :json
 
          player_stats_data = JSON.parse(response.body)
 
@@ -84,7 +84,7 @@ describe "Player Graphs" do
          assert_equal 1, player_stats_data["graph_meta_data"].size
          assert_equal "1 - #{@medal1_name}", player_stats_data["graph_meta_data"][0]
 
-         get medal_endpoint(@player2_id), :format => :json
+         get "/player_stats/medals/#{@player2_id}", :format => :json
 
          player_stats_data = JSON.parse(response.body)
 
@@ -94,18 +94,6 @@ describe "Player Graphs" do
          assert_equal 1, player_stats_data["graph_meta_data"].size
          assert_equal "2 - #{@medal1_name}", player_stats_data["graph_meta_data"][0]
       end
-   end
-
-   def kill_death_endpoint(player_id, map_id)
-      "/player_stats/kill_death/#{player_id}/#{map_id}"
-   end
-
-   def effectiveness_endpoint(player_id, map_id)
-      "/player_stats/effectiveness/#{player_id}/#{map_id}"
-   end
-
-   def medal_endpoint(player_id)
-      "/player_stats/medals/#{player_id}"
    end
 end
 
