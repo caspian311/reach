@@ -3,7 +3,7 @@ require "spec_helper"
 describe HomeController do
    describe "GET index" do
       it "should show todays stats" do
-         todays_stats = ["stat1", "stat2"]
+         todays_stats = [HomeModel::SummaryStat.new, HomeModel::SummaryStat.new]
 
          HomeModel.should_receive(:todays_stats).and_return(todays_stats)
 

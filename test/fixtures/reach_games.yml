@@ -10,7 +10,7 @@ game2:
    id: 19
    reach_map_id: 1
    name: "Capture the Flag"
-   game_time: <%= Time.now.advance(:days => -1) %>
+   game_time: <%= Time.now.advance(:minutes => -30) %>
    duration: 594
    reach_id: 2345678901
 

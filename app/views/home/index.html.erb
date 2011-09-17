@@ -2,9 +2,20 @@
    Today's stats: <br />
 
    <table>
-      <% @todays_stats.each do |stat| %>
       <tr>
-         <td><%= stat %></td>
+         <th>Player</th>
+         <th>K/D Spread</th>
+         <th>Effectiveness</th>
+         <th>Medals</th>
+         <th>Games</th>
+      </tr>
+      <% @todays_stats.each do |stat| %>
+      <tr class="<%= cycle("regular", "alternate") %>">
+         <td><%= stat.name %></td>
+         <td><%= stat.kd_spread %></td>
+         <td><%= stat.effectiveness %></td>
+         <td><%= stat.number_of_medals %></td>
+         <td><%= stat.number_of_games %></td>
       </tr>
       <% end %>
    </table>
