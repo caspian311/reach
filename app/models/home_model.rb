@@ -28,22 +28,37 @@ class HomeModel
 
    private
    def self.aggregate(stats)
-      aggregated = {}
+      all_stats = {}
       stats.each do |stat|
-         aggregated_stat = aggregated[stat.name]
+         aggregated_stat = all_stats[stat.name]
          if aggregated_stat == nil
             aggregated_stat = SummaryStat.new
             aggregated_stat.name = stat.name
-            aggregated[aggregated_stat.name] = aggregated_stat
+            all_stats[aggregated_stat.name] = aggregated_stat
+            all_stats[aggregated_stat.name].kd_spread = []
+            all_stats[aggregated_stat.name].effectiveness = []
+            all_stats[aggregated_stat.name].number_of_medals = []
          end
 
-         aggregated_stat.kd_spread += stat.kd_spread
-         aggregated_stat.effectiveness += stat.effectiveness
-         aggregated_stat.number_of_medals += stat.number_of_medals
-         aggregated_stat.number_of_games += stat.number_of_games
+         all_stats[aggregated_stat.name].kd_spread << stat.kd_spread
+         all_stats[aggregated_stat.name].effectiveness << stat.effectiveness
+         all_stats[aggregated_stat.name].number_of_medals << stat.number_of_medals
       end
 
-      aggregated.values
+      aggregated_stats = []
+      all_stats.values.each do |stat|
+         aggregated_stat = SummaryStat.new
+         aggregated_stat.name = stat.name
+
+         aggregated_stat.kd_spread = stat.kd_spread.sum / stat.kd_spread.size.to_f
+         aggregated_stat.effectiveness = stat.effectiveness.sum / stat.effectiveness.size.to_f
+         aggregated_stat.number_of_medals = stat.number_of_medals.sum / stat.number_of_medals.size.to_f
+         aggregated_stat.number_of_games = stat.kd_spread.size
+
+         aggregated_stats << aggregated_stat
+      end
+
+      aggregated_stats
    end
 
    def self.total_medal_count(player_stat)
