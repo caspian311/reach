@@ -30,4 +30,8 @@ class HomeModelTest < ActiveSupport::TestCase
       assert_equal -1, stats[3].effectiveness
       assert_equal 2, stats[3].number_of_medals
    end
+
+   test "last day of stats is last day that has data recorded" do
+      assert_equal Time.now.to_date, HomeModel.last_day_of_stats
+   end
 end

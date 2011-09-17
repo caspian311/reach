@@ -22,6 +22,10 @@ class HomeModel
       end
    end
 
+   def self.last_day_of_stats
+      ReachGame.all(:order => "game_time").last.game_time.to_date
+   end
+
    private
    def self.aggregate(stats)
       aggregated = {}
@@ -58,8 +62,7 @@ class HomeModel
    end
 
    def self.range
-      last_game = ReachGame.all(:order => "game_time").last
-      last_game_day = last_game.game_time.to_date
+      last_game_day = last_day_of_stats
       ((last_game_day - 1.day)...(last_game_day + 1.day))
    end
 
