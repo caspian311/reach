@@ -1,3 +1,11 @@
 <div class="content"> 
-   Some content might go here...
+   Today's stats: <br />
+
+   <table>
+      <% @todays_stats.each do |stat| %>
+      <tr>
+         <td><%= stat %></td>
+      </tr>
+      <% end %>
+   </table>
 </div>
