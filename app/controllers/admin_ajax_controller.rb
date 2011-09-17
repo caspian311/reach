@@ -1,4 +1,4 @@
-class AdminAjaxController < ActionController::Base
+class AdminAjaxController < ApplicationController
    def update
       job_status = AdminModel.start_job
 

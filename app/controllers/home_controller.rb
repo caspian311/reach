@@ -1,6 +1,4 @@
-class HomeController < ActionController::Base
-   layout "application"
-
+class HomeController < ApplicationController
    def index
       @title = "Halo Reach Stats"
    end

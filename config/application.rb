@@ -38,5 +38,7 @@ module ReachWeb
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.action_view.javascript_expansions[:defaults] = %w(jquery-1.6.1.min.js jquery.scrollTo-min.js jquery.flot-0.1.pack.js jquery.flot.selection.js)
   end
 end

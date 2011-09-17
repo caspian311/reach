@@ -1,6 +1,4 @@
-class GameHistoryController < ActionController::Base
-   layout "application"
-
+class GameHistoryController < ApplicationController
    def show
       @page = current_page(params)
       @show_game = params[:game]
@@ -14,7 +12,7 @@ class GameHistoryController < ActionController::Base
    end
 
    def info
-      @title = "Game History"
+      @title = "Game History: Information"
    end
 
    def search

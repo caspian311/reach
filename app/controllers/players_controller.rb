@@ -1,6 +1,4 @@
-class PlayersController < ActionController::Base
-   layout "application"
-
+class PlayersController < ApplicationController
    def index
       @title = "Players"
 
@@ -10,7 +8,11 @@ class PlayersController < ActionController::Base
    def show
       player_id = params[:id]
       @selected_player = Player.find(player_id)
-      @title = "Players"
+      @title = "Players: #{@selected_player.real_name} ("
+      @selected_player.service_tags.each do |service_tag|
+         @title += service_tag.tag
+      end
+      @title += ")"
 
       @maps = ReachMap.find(:all, :order => :name)
 

@@ -1,6 +1,4 @@
-class AdminController < ActionController::Base
-   layout "application"
-
+class AdminController < ApplicationController
    def index
       @title = "Admin"
 
