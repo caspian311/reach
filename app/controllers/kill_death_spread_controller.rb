@@ -1,6 +1,4 @@
-class KillDeathSpreadController < ActionController::Base
-   layout "application"
-
+class KillDeathSpreadController < ApplicationController
    def index
       @title = "Average Kill/Death Spread"
 

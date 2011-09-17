@@ -90,6 +90,9 @@ li {
         padding: 5px;
 }
 
+.nav-column .title {
+}
+
 a:link, a:visited {
         color: #000;
 }
@@ -99,7 +102,6 @@ strong {
 }
 
 .title a:link, .title a:visited {
-	float:right; 
 	font-size: 12pt;
 	text-decoration: none;
 }

@@ -1,20 +1,18 @@
-class PlayerEffectivenessController < ActionController::Base
-   layout "application"
-
+class PlayerEffectivenessController < ApplicationController
    def index
-      setup_page
+      @title = "Player Effectiveness"
+      @maps = ReachMap.find(:all, :order => "name")
    end
 
    def show
-      setup_page
-
+      @maps = ReachMap.find(:all, :order => "name")
       @map_id = params[:map_id]
+      selected_map = ReachMap.find_by_id(@map_id)
+      @title = "Player Effectiveness: #{selected_map.name}"
       @player_stats = PlayerEffectivenessModel.stats_for_map(@map_id)
    end
 
-   private
-   def setup_page
-      @title = "Player Effectiveness"
-      @maps = ReachMap.find(:all, :order => "name")
+   def info
+      @title = "What is Player Effectiveness?"
    end
 end

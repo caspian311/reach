@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Halo Reach: <%= @title %></title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all %>
-  <%= csrf_meta_tag %>
+<title>Halo Reach: <%= @title %></title>
+<%= stylesheet_link_tag :all %>
+<%= javascript_include_tag :all %>
+<%= csrf_meta_tag %>
 </head>
 <body>
    <div class="header">     
@@ -14,7 +14,7 @@
    <div class="main">     
       <div class="nav-column"> 
          <div class="container"> 
-            <div class="title">Site</div> 
+            <div class="title"><%= link_to "Main", "/home"%></div> 
             <ul> 
                  <li>
                      <%= link_to "Players", "/players#index" %>
@@ -37,6 +37,9 @@
     
       <div class="main-column"> 
          <div class="container">
+            <div class="title"> 
+              <%= @title %>
+            </div> 
             <%= yield %> 
          </div> 
       </div> 

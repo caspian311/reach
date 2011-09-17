@@ -10,8 +10,8 @@ ReachWeb::Application.routes.draw do
    match "/kill_death_spread" => "kill_death_spread#index"
 
    match "/player_effectiveness" => "player_effectiveness#index"
-   match "/player_effectiveness/:map_id" => "player_effectiveness#show"
-   match "/player_effectiveness_info" => "player_effectiveness_info#index"
+   match "/player_effectiveness/for_map/:map_id" => "player_effectiveness#show"
+   match "/player_effectiveness/info" => "player_effectiveness#info"
 
    match "/players" => "players#index"
    match "/players/:id" => "players#show"
