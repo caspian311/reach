@@ -11,7 +11,7 @@
          <th>Games</th>
       </tr>
       <% @todays_stats.each do |stat| %>
-      <tr class="<%= cycle("regular", "alternate") %>">
+      <tr class="<%= cycle("alternate", "regular") %>">
          <td><%= stat.name %></td>
          <td><%= number_to_human(stat.kd_spread, :precision => 2) %></td>
          <td><%= number_to_human(stat.effectiveness, :precision => 2) %></td>

@@ -19,7 +19,7 @@
       <th>Count</th>
    </tr>
    <% @ranked_medals.each_with_index do |player_stat, index| %>
-   <tr class="<%= cycle("regular", "alternate") %>">
+   <tr class="<%= cycle("alternate", "regular") %>">
       <td><%= player_stat.real_name %></td>
       <td><%= player_stat.total.to_i %></td>
    </tr>

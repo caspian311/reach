@@ -11,7 +11,7 @@ Below are all the players currently in the system.
    <th>Last game recorded</th>
 </tr>
 <% @players.each do |player| %>
-   <tr class="<%= cycle("regular", "alternate") %>">
+   <tr class="<%= cycle("alternate", "regular") %>">
       <td><%= link_to player.real_name, :controller => "players", :action => "show", :id => player.id %></td>
       <td><%= player.reach_player_stats.size %></td>
       <td><%= player.last_game.game_time.getlocal.strftime("%m/%d/%Y %I:%M%p") %></td>

@@ -12,7 +12,7 @@
    <th>Number of Games</th>
 </tr>
 <% @player_stats.each do |player_stat| %>
-<tr class="<%= cycle("regular", "alternate") %>">
+<tr class="<%= cycle("alternate", "regular") %>">
    <td><%= player_stat.player.real_name %></td>
    <td><%= number_with_precision(player_stat.average_kills, :precision => 2) %></td>
    <td><%= number_with_precision(player_stat.average_deaths, :precision => 2) %></td>

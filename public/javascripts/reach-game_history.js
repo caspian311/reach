@@ -68,7 +68,7 @@ function populate_game_details(details_cell, game_details) {
          var player_deaths = player_stat["deaths"]
          var player_spread = (player_kills * 1) - (player_deaths * 1)
 
-         var player_row_class = (t % 2 == 0) ? 'regular' : 'alternate'
+         var player_row_class = (t % 2 == 0) ? 'alternate' : 'regular'
 
          var player_stat_id = player_stat['id']
 
@@ -150,7 +150,7 @@ function populate_medals(player_stat_id) {
          var count = data[i]['reach_player_medal']['count']
 
          var medal_row = $('<tr></tr>')
-         medal_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
+         medal_row.addClass(i % 2 == 0 ? 'alternate' : 'regular')
 
          var medal_cell = $('<td></td>')
          medal_cell.append('<input name="name" type="hidden" value="' + medal + '" />')
@@ -199,7 +199,7 @@ function populate_carnage_report(player_stat_id) {
             var penalties = data[i]['reach_weapon_carnage_report']['penalties']
 
             var detail_row = $('<tr></tr>')
-            detail_row.addClass(i % 2 == 0 ? 'regular' : 'alternate')
+            detail_row.addClass(i % 2 == 0 ? 'alternate' : 'regular')
 
             var weapon_cell = $('<td></td>')
             weapon_cell.append('<div class="reach_weapons ' + weapon_image + '"></div>')
