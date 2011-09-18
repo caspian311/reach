@@ -11,7 +11,9 @@ class ReachClientTest < Test::Unit::TestCase
       FileUtils.mkdir @test_data_directory
 
       @reach_mock = mock()
-      @test_object = ReachClient.new(@reach_mock, 0, @test_data_directory, [ACCOUNT_1, ACCOUNT_2])
+      accounts_provider = AccountsProviderStub.new
+
+      @test_object = ReachClient.new(@reach_mock, 0, @test_data_directory, accounts_provider)
    end
 
    def teardown
@@ -101,5 +103,11 @@ class ReachClientTest < Test::Unit::TestCase
 
       assert game_details == JSON.parse(contents1)
       assert game_details == JSON.parse(contents2)
+   end
+
+   class AccountsProviderStub
+      def accounts
+         [ACCOUNT_1, ACCOUNT_2]
+      end
    end
 end

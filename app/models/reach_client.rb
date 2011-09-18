@@ -5,11 +5,11 @@ require "halo-reach-api"
 class ReachClient
    CUSTOM_GAME = 6
 
-   def initialize(reach = Halo::Reach::API.new(ApiKeyProvider.new.api_key), throttle = 0.5, output_directory = "reach_data", accounts = ["Buckethead Died", "jaymz9mm"])
+   def initialize(reach = Halo::Reach::API.new(ApiKeyProvider.new.api_key), throttle = 0.5, output_directory = "reach_data", accounts_provider = AccountsProvider.new)
       @reach = reach
       @throttle = throttle
       @output_directory = output_directory
-      @accounts = accounts
+      @accounts = accounts_provider.accounts
    end
 
    def most_recent_games
