@@ -1,15 +1,15 @@
 # Apparently these service tags are not unique
-# W707 is shared by Ben Lee and Srdjan
+# w707 is shared by Ben Lee and Srdjan
 # and there are several games with 4 or 5 players with G717 as the service tag
 
 Arun Deivanaygam : G717
 Ben Lee : [BENX, W707, K959]
 Ben Pomerenke : BUN6
 BJ Self : [FETT, A957]
-Brian Smith : BUCK
+Brian Smith : [BUCK, V370]
 Britain Oates : N30
 Dan King : Z262
-Ed Wells : [O985, X251]
+# Ed Wells : [O985, X251]
 Eric Neunaber : NEUB
 Glenn Howard: [L138, D369]
 James McKie : JM9C
@@ -17,6 +17,6 @@ Kyle Cross : [D1ED, O331]
 Matt Todd : CASP
 Srdjan Grubor : [GER, A258]
 Tim Hamer : HAMR
-Wes Erhlichman : [WES, L138]
-Alex Lapp: LAPR
-Brian Lombardo: C977
+# Wes Erhlichman : [WES, L138]
+# Alex Lapp: LAPR
+# Brian Lombardo: C977
