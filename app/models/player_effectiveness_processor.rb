@@ -1,68 +1,19 @@
 class PlayerEffectivenessProcessor
-   def process_game(game)
-      if highest_score(game) <= 5
-         game.reach_teams.each do |team|
-            team.reach_player_stats.each do |player_stat|
-               team_score = team_score(game, team.team_id)
-               team_size = team_size(game, team.team_id)
-               other_team_size = other_team_size(game, team.team_id)
+   def effectiveness_for_player(player_stat)
+      team_score = player_stat.reach_team.score
+      team_size = player_stat.reach_team.reach_player_stats.count
 
-               team_ratio = team_size.to_f / other_team_size.to_f
-               effectiveness_rating = (team_score + 1) / ( team_ratio )
+      other_team_size = other_team(player_stat).reach_player_stats.count
 
-               player_stat.effectiveness_rating = effectiveness_rating
-            end
-         end
-      end
+      team_ratio = team_size.to_f / other_team_size.to_f
+      effectiveness_rating = (team_score + 1) / ( team_ratio )
+
+      player_stat.effectiveness_rating = effectiveness_rating
    end
 
    private 
-   def highest_score(game)
-      score = 0
-
-      game.reach_teams.each do |team|
-         score = [score, team.score].max
-      end
-
-      score
-   end
-
-   def team_score(game, team_id)
-      score = 0
-
-      game.reach_teams.each do |team|
-         if team.team_id == team_id
-            score = team.score
-            break
-         end
-      end
-
-      score
-   end
-
-   def team_size(game, team_id)
-      team_size = 0
-
-      game.reach_teams.each do |team|
-         if team.team_id == team_id
-            team_size = team.reach_player_stats.count
-            break
-         end
-      end
-
-      team_size
-   end
-
-   def other_team_size(game, team_id)
-      team_size = 0
-
-      game.reach_teams.each do |team|
-         if team.team_id != team_id
-            team_size += team.reach_player_stats.count
-            break
-         end
-      end
-
-      team_size
+   def other_team(player_stat)
+      all_teams = player_stat.reach_team.reach_game.reach_teams
+      other_team = all_teams[0].id == player_stat.reach_team.id ? all_teams[0] : all_teams[1]
    end
 end
