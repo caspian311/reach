@@ -8,7 +8,7 @@ class PutEffectivenessOnPlayerStat < ActiveRecord::Migration
          table.column :effectiveness_rating, :float
       end
 
-      # populate_player_effectiveness
+      populate_player_effectiveness
    end
    
    def self.down

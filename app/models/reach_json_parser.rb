@@ -1,8 +1,9 @@
 require "reach_logging"
 
 class ReachJsonParser
-   def initialize(data_directory = "reach_data")
+   def initialize(data_directory = "reach_data", player_effectiveness_processor = PlayerEffectivenessProcessor.new)
       @data_directory = data_directory
+      @player_effectiveness_processor = player_effectiveness_processor
    end
 
    def populate_details(game_ids)
@@ -37,6 +38,8 @@ class ReachJsonParser
             reach_teams = parse_teams(game, game_details_json["Teams"])
 
             parse_player_stats(reach_teams, game_details_json["Players"])
+
+            @player_effectiveness_processor.process_game(game)
 
             game.save
             all_games << game
