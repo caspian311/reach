@@ -14,14 +14,18 @@ class PlayerEffectivenessModelTest < ActiveSupport::TestCase
 
       assert_equal(4, results.size)
 
-      assert_equal(4.0, result_by_player_id(results, @player1_id).effectiveness)
-      assert_equal(1, result_by_player_id(results, @player1_id).number_of_games)
-      assert_equal(3.0, result_by_player_id(results, @player2_id).effectiveness)
-      assert_equal(1, result_by_player_id(results, @player2_id).number_of_games)
-      assert_equal(4.0, result_by_player_id(results, @player3_id).effectiveness)
-      assert_equal(1, result_by_player_id(results, @player3_id).number_of_games)
-      assert_equal(3.0, result_by_player_id(results, @player4_id).effectiveness)
-      assert_equal(1, result_by_player_id(results, @player4_id).number_of_games)
+      assert_equal("Player One", results[0].player_name)
+      assert_equal(4.0, results[0].average_rating)
+      assert_equal(1, results[0].number_of_games)
+      assert_equal("Player Three", results[1].player_name)
+      assert_equal(4.0, results[1].average_rating)
+      assert_equal(1, results[1].number_of_games)
+      assert_equal("Player Two", results[2].player_name)
+      assert_equal(3.0, results[2].average_rating)
+      assert_equal(1, results[2].number_of_games)
+      assert_equal("Player Four", results[3].player_name)
+      assert_equal(3.0, results[3].average_rating)
+      assert_equal(1, results[3].number_of_games)
    end
 
    test "all stats for player1" do
@@ -66,10 +70,5 @@ class PlayerEffectivenessModelTest < ActiveSupport::TestCase
    test "average stats for player2 on map2" do
       effectiveness = PlayerEffectivenessModel.average_stats_for_player_and_map(@player2_id, @map1_id)
       assert_equal 3.0, effectiveness
-   end
-
-   private
-   def result_by_player_id(results, player_id)
-      results.find{|result| result.player.id == player_id}
    end
 end

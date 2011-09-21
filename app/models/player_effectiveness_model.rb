@@ -1,10 +1,26 @@
 class PlayerEffectivenessModel
    def self.stats_for_map(map_id)
-      ReachPlayerStat.all(
-         :select => "reach_player_stats.*, count(*) as number_of_games",
+      stats = ReachPlayerStat.all(
          :joins => [:player, {:reach_team => :reach_game}], 
-         :conditions => {:reach_games => {:reach_map_id => map_id} }, 
-         :group => "players.id")
+         :conditions => {:reach_games => {:reach_map_id => map_id} }) 
+      effectiveness_by_player = {}
+      stats.each do |stat|
+         if effectiveness_by_player[stat.player.real_name] == nil
+            effectiveness_by_player[stat.player.real_name] = []
+         end
+         effectiveness_by_player[stat.player.real_name] << stat.effectiveness
+      end
+
+      average_stats = []
+      effectiveness_by_player.keys.each do |player_name|
+         effectivenesses = effectiveness_by_player[player_name] 
+         number_of_games = effectivenesses.size
+         average_rating = effectivenesses.inject(0.0){ |sum, effectiveness| sum + effectiveness } / number_of_games
+         average_stats << StatsForMap.new(player_name, average_rating, number_of_games)
+      end
+      average_stats.sort do |stat1, stat2|
+         stat2.average_rating <=> stat1.average_rating
+      end
    end
 
    def self.all_stats_for_player(player_id)
@@ -31,5 +47,17 @@ class PlayerEffectivenessModel
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}},
          :order => {:reach_game => :game_time})
       stats_for_player.inject(0.0){ |sum, stat| sum + stat.effectiveness }.to_f / stats_for_player.size
+   end
+
+   class StatsForMap
+      attr_reader :player_name
+      attr_reader :average_rating
+      attr_reader :number_of_games
+
+      def initialize(player_name, average_rating, number_of_games)
+         @player_name = player_name
+         @average_rating = average_rating
+         @number_of_games = number_of_games
+      end
    end
 end
