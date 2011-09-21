@@ -48,8 +48,8 @@ class PlayerStatsModel
       graph_meta_data = []
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
-         graph_meta_data << meta_data(effectiveness_stat.reach_game)
-         individual_effectiveness << [index, effectiveness_stat.effectiveness_rating.to_f]
+         graph_meta_data << meta_data(effectiveness_stat.reach_team.reach_game)
+         individual_effectiveness << [index, effectiveness_stat.effectiveness]
          average_effectiveness << [index, effectiveness_average]
       end
 

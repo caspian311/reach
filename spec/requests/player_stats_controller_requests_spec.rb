@@ -63,12 +63,12 @@ describe "Player Graphs" do
 
          assert_equal "Each game", each_game_data["label"]
          assert_equal 1, each_game_data["data"].size
-         assert_equal [0, 1.33], each_game_data["data"][0]
+         assert_equal [0, 4.0], each_game_data["data"][0]
 
          assert_equal "Average", average_data["label"]
          assert_equal 1, average_data["data"].size
          assert_equal 0, average_data["data"][0][0]
-         assert_in_delta 1.33, average_data["data"][0][1], 0.01
+         assert_equal 4.0, average_data["data"][0][1]
       end
    end
 
