@@ -3,3 +3,4 @@ reach.log
 tmp
 webrat.log
 rerun.txt
+*.swp

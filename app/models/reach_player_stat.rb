@@ -24,4 +24,20 @@ class ReachPlayerStat < ActiveRecord::Base
    belongs_to :player
    has_many :reach_weapon_carnage_reports
    has_many :reach_player_medals
+
+   def effectiveness
+      team_score = self.reach_team.score
+      team_size = self.reach_team.reach_player_stats.count
+
+      other_team_size = other_team.reach_player_stats.count
+
+      team_ratio = team_size.to_f / other_team_size.to_f
+      (team_score + 1) / ( team_ratio )
+   end
+
+   private 
+   def other_team
+      all_teams = self.reach_team.reach_game.reach_teams
+      other_team = all_teams[0].id == self.reach_team.id ? all_teams[0] : all_teams[1]
+   end
 end

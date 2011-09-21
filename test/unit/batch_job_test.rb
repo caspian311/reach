@@ -6,9 +6,8 @@ class BatchJobTest < Test::Unit::TestCase
       @reach_client = ReachClient.new
       @reach_json_parser = ReachJsonParser.new
       @game_filter = GameFilter.new
-      @game_processor = GameProcessor.new
 
-      @test_object = BatchJob.new(@meta_data_parser, @reach_client, @reach_json_parser, @game_filter, @game_processor)
+      @test_object = BatchJob.new(@meta_data_parser, @reach_client, @reach_json_parser, @game_filter)
 
       @reach_client.stubs(:all_historic_games)
 
@@ -37,9 +36,6 @@ class BatchJobTest < Test::Unit::TestCase
       games = [game1, game2]
 
       @reach_json_parser.expects(:populate_details).with(@game_ids).returns(games)
-
-      @game_processor.expects(:process_game).with(game1)
-      @game_processor.expects(:process_game).with(game2)
 
       @test_object.execute
    end
