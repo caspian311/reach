@@ -8,7 +8,7 @@ class HomeModel
                stat.name = player_stat.player == nil ? "Unknown" : player_stat.player.real_name
                stat.kd_spread = player_stat.kills - player_stat.deaths
                stat.number_of_games = 1
-               stat.effectiveness = -1
+               stat.effectiveness = player_stat.effectiveness
                stat.number_of_medals = total_medal_count(player_stat)
                stats << stat
             end
