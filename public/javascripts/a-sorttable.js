@@ -102,6 +102,7 @@ sorttable = {
             sortrevind.id = "sorttable_sortrevind";
             sortrevind.innerHTML = stIsIE ? '&nbsp<font face="webdings">5</font>' : '&nbsp;&#x25B4;';
             this.appendChild(sortrevind);
+            sorttable.finished_sort();
             return;
           }
           if (this.className.search(/\bsorttable_sorted_reverse\b/) != -1) {
@@ -115,6 +116,7 @@ sorttable = {
             sortfwdind.id = "sorttable_sortfwdind";
             sortfwdind.innerHTML = stIsIE ? '&nbsp<font face="webdings">6</font>' : '&nbsp;&#x25BE;';
             this.appendChild(sortfwdind);
+            sorttable.finished_sort();
             return;
           }
           
@@ -158,11 +160,15 @@ sorttable = {
 	        }
 	        
 	        delete row_array;
+           sorttable.finished_sort();
 	      });
 	    }
     }
   },
   
+  finished_sort: function() {
+  },
+
   guessType: function(table, column) {
     // guess the type of a column based on its first non-blank row
     sortfn = sorttable.sort_alpha;
