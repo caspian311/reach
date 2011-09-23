@@ -1,3 +1,7 @@
 map1:
    id: 1
    name: "Map One"
+
+map2:
+   id: 2
+   name: "Map Two"

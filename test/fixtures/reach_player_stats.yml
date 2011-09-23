@@ -26,4 +26,52 @@ player4_game1_stat:
    kills: 7
    deaths: 3
 
+player1_game2_stat:
+   id: 5
+   reach_team_id: 3
+   player_id: 1
+   kills: 7
+   deaths: 6
+
+player2_game2_stat:
+   id: 6
+   reach_team_id: 4
+   player_id: 2
+   kills: 4
+   deaths: 6
+
+player3_game2_stat:
+   id: 7
+   reach_team_id: 3
+   player_id: 3
+   kills: 2
+   deaths: 6
+
+player4_game2_stat:
+   id: 8
+   reach_team_id: 4
+   player_id: 4
+   kills: 8
+   deaths: 3
+
+player1_game3_stat:
+   id: 9
+   reach_team_id: 5
+   player_id: 1
+   kills: 1
+   deaths: 4
+
+player2_game3_stat:
+   id: 10
+   reach_team_id: 5
+   player_id: 2
+   kills: 1
+   deaths: 4
+
+player3_game3_stat:
+   id: 11
+   reach_team_id: 6
+   player_id: 3
+   kills: 8
+   deaths: 2
 
