@@ -71,14 +71,8 @@ class HomeModel
 
    def self.all_games_on_last_day
       ReachGame.all(
-         :conditions => {
-            :game_time => range
-         })
-   end
-
-   def self.range
-      last_game_day = last_day_of_stats
-      ((last_game_day - 1.day)...(last_game_day + 1.day))
+            :conditions => ["date(game_time) = ?", last_day_of_stats]
+         )
    end
 
    class SummaryStat
