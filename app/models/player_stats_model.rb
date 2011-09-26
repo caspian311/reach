@@ -48,11 +48,9 @@ class PlayerStatsModel
       graph_meta_data = []
 
       effectiveness_stats.each_with_index do |effectiveness_stat, index|
-         if effectiveness_stat.effectiveness <= 6
-            graph_meta_data << meta_data(effectiveness_stat.reach_team.reach_game)
-            individual_effectiveness << [index, effectiveness_stat.effectiveness]
-            average_effectiveness << [index, effectiveness_average]
-         end
+         graph_meta_data << meta_data(effectiveness_stat.reach_team.reach_game)
+         individual_effectiveness << [index, effectiveness_stat.effectiveness]
+         average_effectiveness << [index, effectiveness_average]
       end
 
       effectiveness_graph_data = GraphData.new
