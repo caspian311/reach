@@ -75,3 +75,31 @@ player3_game3_stat:
    kills: 8
    deaths: 2
 
+player1_game4_stat:
+   id: 12
+   reach_team_id: 7
+   player_id: 1
+   kills: 6
+   deaths: 20
+
+player2_game4_stat:
+   id: 13
+   reach_team_id: 7
+   player_id: 2
+   kills: 12
+   deaths: 5
+
+player3_game4_stat:
+   id: 14
+   reach_team_id: 8
+   player_id: 3
+   kills: 15
+   deaths: 10
+
+player4_game4_stat:
+   id: 15
+   reach_team_id: 8
+   player_id: 4
+   kills: 10
+   deaths: 8
+

@@ -71,7 +71,8 @@ class HomeModel
 
    def self.all_games_on_last_day
       ReachGame.all(
-            :conditions => ["date(game_time) = ?", last_day_of_stats]
+            :conditions => ["date(game_time) = ?", last_day_of_stats],
+            :include => {:reach_teams => :reach_player_stats}
          )
    end
 

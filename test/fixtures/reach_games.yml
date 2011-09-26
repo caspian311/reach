@@ -18,15 +18,15 @@ game3:
    id: 18
    reach_map_id: 2
    name: "Capture the Flag"
-   game_time: <%= Time.now.advance(:days => -2) %>
+   game_time: <%= Time.now.advance(:days => -1) %>
    duration: 594
    reach_id: 3456789012
 
 game4:
    id: 17
    reach_map_id: 1
-   name: "Capture the Flag"
-   game_time: <%= Time.now.advance(:days => -3) %>
+   name: "Team Slayer"
+   game_time: <%= Time.now.advance(:days => -2) %>
    duration: 594
    reach_id: 4567890123
 

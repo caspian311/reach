@@ -40,3 +40,17 @@ game3_team2:
    score: 0
    reach_game_id: 18
    
+game4_team1: 
+   id: 7
+   team_id: 0
+   standing: 1
+   score: 18
+   reach_game_id: 18
+
+game4_team2:
+   id: 8
+   team_id: 1
+   standing: 0
+   score: 25
+   reach_game_id: 18
+   
