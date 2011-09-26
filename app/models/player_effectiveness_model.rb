@@ -2,7 +2,8 @@ class PlayerEffectivenessModel
    def self.stats_for_map(map_id)
       stats = ReachPlayerStat.all(
          :joins => [:player, {:reach_team => :reach_game}], 
-         :conditions => {:reach_games => {:reach_map_id => map_id} }) 
+         :conditions => {:reach_games => {:reach_map_id => map_id} },
+         :include => {:reach_team => :reach_game}) 
       effectiveness_by_player = {}
       stats.each do |stat|
          if stat.effectiveness <= 6
@@ -29,12 +30,14 @@ class PlayerEffectivenessModel
    def self.all_stats_for_player(player_id)
      stats = ReachPlayerStat.all(:conditions => {:player_id => player_id},
          :joins => {:reach_team => :reach_game},
-         :order => {:reach_game => :game_time})
+         :order => {:reach_game => :game_time},
+         :include => {:reach_team => :reach_game}) 
       stats.find_all { |stat| stat.effectiveness <= 6 }
    end
 
    def self.average_stats_for_player(player_id)
-      stats_for_player = ReachPlayerStat.find_all_by_player_id(player_id)
+      stats_for_player = ReachPlayerStat.find_all_by_player_id(player_id,
+         :include => {:reach_team => :reach_game}) 
       stats = stats_for_player.find_all { |stat| stat.effectiveness <= 6 }
       stats.inject(0.0) {|sum, stat| sum + stat.effectiveness } / stats.size
    end
@@ -43,7 +46,8 @@ class PlayerEffectivenessModel
       stats = ReachPlayerStat.all(
          :joins => {:reach_team => :reach_game},
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}},
-         :order => {:reach_game => :game_time})
+         :order => {:reach_game => :game_time},
+         :include => {:reach_team => :reach_game}) 
       stats.find_all { |stat| stat.effectiveness <= 6 }
    end
 
@@ -51,7 +55,8 @@ class PlayerEffectivenessModel
       stats_for_player = ReachPlayerStat.all(
          :joins => {:reach_team => :reach_game},
          :conditions => {:player_id => player_id, :reach_games => {:reach_map_id => map_id}},
-         :order => {:reach_game => :game_time})
+         :order => {:reach_game => :game_time},
+         :include => {:reach_team => :reach_game}) 
       stats = stats_for_player.find_all { |stat| stat.effectiveness <= 6 }
       stats.inject(0.0){ |sum, stat| sum + stat.effectiveness }.to_f / stats.size
    end
