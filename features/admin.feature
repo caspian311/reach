@@ -1,3 +1,4 @@
+@ignore
 Feature: Admin
    Scenario: Admin page should have the correct title
       When I go to the admin page

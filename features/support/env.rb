@@ -14,11 +14,8 @@ Capybara.register_driver :selenium do |app|
    Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
-Capybara.configure do |config|
-   config.app_host = "localhost:3000"
-   config.default_driver = :selenium
-   config.default_selector = :css
-end
+Capybara.default_selector = :css
+Capybara.default_driver = :selenium
 
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how 
@@ -40,8 +37,7 @@ ActionController::Base.allow_rescue = false
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-#  DatabaseCleaner.strategy = :transaction
-  DatabaseCleaner.strategy = :truncation
+  DatabaseCleaner.strategy = :transaction
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
@@ -57,3 +53,12 @@ end
 #     DatabaseCleaner.strategy = :transaction
 #   end
 #
+ENV["RAILS_ENV"] = "test"
+require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
+require 'cucumber/rails/world'
+Cucumber::Rails::World.use_transactional_fixtures
+
+Fixtures.reset_cache  
+fixtures_folder = File.join(Rails.root.to_s, 'test', 'fixtures')
+fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+Fixtures.create_fixtures(fixtures_folder, fixtures)
