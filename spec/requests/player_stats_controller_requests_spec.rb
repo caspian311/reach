@@ -32,9 +32,9 @@ describe "Player Graphs" do
          game2_description = player_stats_data["graph_meta_data"][0]["description"]
 
          assert_equal @game1_id, game1_id
-         assert_equal "#{@game1_timestamp}<br />Capture the Flag <br />Map One", game1_description
+         assert_equal "#{@game1_timestamp}<br />Capture the Flag 1 <br />Map One", game1_description
          assert_equal @game2_id, game2_id
-         assert_equal "#{@game2_timestamp}<br />Capture the Flag <br />Map One", game2_description
+         assert_equal "#{@game2_timestamp}<br />Capture the Flag 2 <br />Map One", game2_description
 
          kills_data = player_stats_data["stats"][0]
          deaths_data = player_stats_data["stats"][1]
@@ -66,9 +66,9 @@ describe "Player Graphs" do
          game2_description = player_stats_data["graph_meta_data"][1]["description"]
 
          assert_equal @game1_id, game1_id
-         assert_equal "#{@game1_timestamp}<br />Capture the Flag <br />Map One", game1_description
+         assert_equal "#{@game1_timestamp}<br />Capture the Flag 1 <br />Map One", game1_description
          assert_equal @game2_id, game2_id
-         assert_equal "#{@game2_timestamp}<br />Capture the Flag <br />Map One", game2_description
+         assert_equal "#{@game2_timestamp}<br />Capture the Flag 2 <br />Map One", game2_description
 
          each_game_data = player_stats_data["stats"][0]
          average_data = player_stats_data["stats"][1]
