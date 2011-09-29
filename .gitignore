@@ -4,3 +4,4 @@ tmp
 webrat.log
 rerun.txt
 *.swp
+chromedriver.log
