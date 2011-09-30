@@ -1,4 +1,6 @@
 class GameFilter
+   GAME_MIN_TIME_LIMIT = 90
+
    def initialize(data_directory = "reach_data")
       @data_directory = data_directory
    end
@@ -12,8 +14,10 @@ class GameFilter
          game_duration = file_contents["GameDetails"]["GameDuration"].to_i
 
          if is_game_unique?(reach_id)
-            if game_duration > 90
+            if game_duration > GAME_MIN_TIME_LIMIT
                filtered_game_ids << reach_id
+            else
+               puts "trimmed game b/c it's too short: #{reach_id}"
             end
          end
       end
