@@ -76,11 +76,11 @@ function populate_game_details(details_cell, game_details) {
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
-         player_row.append($('<td><a href="#" onclick="expand_player_carnage_report(' + player_stat_id + ')">' + player_name + '</a></td>'))
-         player_row.append($('<td>' + player_kills + '</td>'))
-         player_row.append($('<td>' + player_assists + '</td>'))
-         player_row.append($('<td>' + player_deaths + '</td>'))
-         player_row.append($('<td>' + player_spread + '</td>'))
+         player_row.append($('<td class="player_name"><a href="#" onclick="expand_player_carnage_report(' + player_stat_id + ')">' + player_name + '</a></td>'))
+         player_row.append($('<td class="kills">' + player_kills + '</td>'))
+         player_row.append($('<td class="assists">' + player_assists + '</td>'))
+         player_row.append($('<td class="deaths">' + player_deaths + '</td>'))
+         player_row.append($('<td class="spread">' + player_spread + '</td>'))
       }
    }
 }
