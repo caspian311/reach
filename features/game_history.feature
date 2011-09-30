@@ -21,10 +21,14 @@ Feature: Game History
       And I should see "Capture the Flag 11"
       And I should see "Capture the Flag 20"
 
+   @wip
    Scenario: Game History details are shown
       When I go to the game history page
       And I follow "1234567890"
-      Then I should see the following data:
-         | Player One   |
-         | Player Three |
+      Then I should see the following table data:
+         | player_name  | kills  | assists   | deaths | spread |
+         | Player One   | 1      | 2         | 3      | 4      |
+         | Player Three | 1      | 2         | 3      | 4      |
+         | Player Two   | 1      | 2         | 3      | 4      |
+         | Player Four  | 1      | 2         | 3      | 4      |
 
