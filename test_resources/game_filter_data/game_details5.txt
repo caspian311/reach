@@ -6,7 +6,7 @@
       "CampaignDifficulty":"Easy",
       "CampaignGlobalScore":0,
       "CampaignMetagameEnabled":false,
-      "GameDuration":60,
+      "GameDuration":91,
       "GameId":4567890123005,
       "GameTimestamp":"\/Date(1284484324877-0700)\/",
       "GameVariantClass":6,
