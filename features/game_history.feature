@@ -27,8 +27,8 @@ Feature: Game History
       And I follow "1234567890"
       Then I should see the following table data:
          | player_name  | kills  | assists   | deaths | spread |
-         | Player One   | 1      | 2         | 3      | 4      |
-         | Player Three | 1      | 2         | 3      | 4      |
-         | Player Two   | 1      | 2         | 3      | 4      |
-         | Player Four  | 1      | 2         | 3      | 4      |
+         | Player One   | 10     | 2         | 5      | 5      |
+         | Player Three | 4      | 6         | 7      | -3     |
+         | Player Two   | 8      | 3         | 6      | 2      |
+         | Player Four  | 7      | 4         | 3      | 4      |
 
