@@ -21,7 +21,6 @@ Feature: Game History
       And I should see "Capture the Flag 11"
       And I should see "Capture the Flag 20"
 
-   @wip
    Scenario: Game History details are shown
       When I go to the game history page
       And I follow "1234567890"
