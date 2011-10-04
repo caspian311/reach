@@ -10,6 +10,7 @@ namespace :reach do
    end
 end
 
+desc "Alias for reach:update"
 task :reach => 'reach:update'
 
 
