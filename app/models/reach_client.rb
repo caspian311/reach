@@ -15,6 +15,12 @@ class ReachClient
       retreive_game_details(ids)
    end
 
+   def most_recent_games
+      json_games = games_on_page(0)
+      ids = get_game_ids(json_games)
+      retreive_game_details(ids)
+   end
+
    def all_historic_games
       json_games = []
       (0..24).each do |page|

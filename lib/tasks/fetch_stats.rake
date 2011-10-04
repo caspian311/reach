@@ -1,16 +1,15 @@
 namespace :reach do 
-   desc "Fetch stats from service and populate database with results"
-   task :run_batch_job => :environment do
-#      ENV["RAILS_ENV"] ||= "production"
+   desc "Fetch all stats from service"
+   task :full => :environment do
+      BatchJob.new.full
+   end
 
-#      config = YAML::load(File.open("config/database.yml"))
-#      ActiveRecord::Base.establish_connection(config["production"])   
-#      ActiveRecord::Migrator.migrate("db/migrate")
-
-      BatchJob.new.execute
+   desc "Fetch only new stats from service"
+   task :update => :environment do
+      BatchJob.new.update
    end
 end
 
-task :reach => 'reach:run_batch_job'
+task :reach => 'reach:full'
 
 
