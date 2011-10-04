@@ -1,11 +1,8 @@
 require "rubygems"
 require "json"
-require "halo-reach-api"
 
 class ReachClient
-   CUSTOM_GAME = 6
-
-   def initialize(reach = Halo::Reach::API.new(ApiKeyProvider.new.api_key), throttle = 0.5, output_directory = "reach_data", accounts_provider = AccountsProvider.new)
+   def initialize(reach = ReachApi.new, throttle = 0.5, output_directory = "reach_data", accounts_provider = AccountsProvider.new)
       @reach = reach
       @throttle = throttle
       @output_directory = output_directory
@@ -71,7 +68,7 @@ class ReachClient
       begin
          @accounts.each do |account|
             LOG.info "Getting game history page #{page_number} from Halo Reach services for #{account}..."
-            game_from_account = @reach.get_game_history(account, CUSTOM_GAME, page_number)["RecentGames"]
+            game_from_account = @reach.get_game_history(account, page_number)["RecentGames"]
 
             games = games | game_from_account
          end

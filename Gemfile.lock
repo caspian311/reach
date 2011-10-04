@@ -56,9 +56,6 @@ GEM
     ffi (1.0.9)
     gherkin (2.5.1)
       json (>= 1.4.6)
-    halo-reach-api (1.0.3)
-      httparty
-      json
     httparty (0.8.0)
       multi_json
       multi_xml
@@ -135,7 +132,7 @@ PLATFORMS
 DEPENDENCIES
   cucumber-rails
   database_cleaner
-  halo-reach-api
+  httparty
   mocha (= 0.9.8)
   mysql2 (< 0.3)
   rails (= 3.0.7)
