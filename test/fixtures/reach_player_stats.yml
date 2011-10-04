@@ -4,6 +4,7 @@ player1_game1_stat:
    player_id: 1
    kills: 10
    deaths: 5
+   assists: 2
 
 player2_game1_stat:
    id: 2
@@ -11,6 +12,7 @@ player2_game1_stat:
    player_id: 2
    kills: 8
    deaths: 6
+   assists: 3
 
 player3_game1_stat:
    id: 3
@@ -18,6 +20,7 @@ player3_game1_stat:
    player_id: 3
    kills: 4
    deaths: 7
+   assists: 6
 
 player4_game1_stat:
    id: 4
@@ -25,6 +28,7 @@ player4_game1_stat:
    player_id: 4
    kills: 7
    deaths: 3
+   assists: 4
 
 player1_game2_stat:
    id: 5
@@ -32,6 +36,7 @@ player1_game2_stat:
    player_id: 1
    kills: 7
    deaths: 6
+   assists: 2
 
 player2_game2_stat:
    id: 6
@@ -39,6 +44,7 @@ player2_game2_stat:
    player_id: 2
    kills: 4
    deaths: 6
+   assists: 0
 
 player3_game2_stat:
    id: 7
@@ -46,6 +52,7 @@ player3_game2_stat:
    player_id: 3
    kills: 2
    deaths: 6
+   assists: 3
 
 player4_game2_stat:
    id: 8
@@ -53,6 +60,7 @@ player4_game2_stat:
    player_id: 4
    kills: 8
    deaths: 3
+   assists: 1
 
 player1_game3_stat:
    id: 9
@@ -60,6 +68,7 @@ player1_game3_stat:
    player_id: 1
    kills: 1
    deaths: 4
+   assists: 1
 
 player2_game3_stat:
    id: 10
@@ -67,6 +76,7 @@ player2_game3_stat:
    player_id: 2
    kills: 1
    deaths: 4
+   assists: 1
 
 player3_game3_stat:
    id: 11
@@ -74,6 +84,7 @@ player3_game3_stat:
    player_id: 3
    kills: 8
    deaths: 2
+   assists: 4
 
 player1_game4_stat:
    id: 12
@@ -81,6 +92,7 @@ player1_game4_stat:
    player_id: 1
    kills: 6
    deaths: 20
+   assists: 0
 
 player2_game4_stat:
    id: 13
@@ -88,6 +100,7 @@ player2_game4_stat:
    player_id: 2
    kills: 12
    deaths: 5
+   assists: 3
 
 player3_game4_stat:
    id: 14
@@ -95,6 +108,7 @@ player3_game4_stat:
    player_id: 3
    kills: 15
    deaths: 10
+   assists: 4
 
 player4_game4_stat:
    id: 15
@@ -102,4 +116,5 @@ player4_game4_stat:
    player_id: 4
    kills: 10
    deaths: 8
+   assists: 0
 
