@@ -6,11 +6,18 @@ class BatchJob
       @game_filter = game_filter
    end
 
-   def execute
+   def full
       populate_meta_data
-      fetch_game_data
+      @reach_client.all_historic_games
 
-      LOG.info "Running batch job: complete."
+      LOG.info "Running full update: complete."
+   end
+
+   def update
+      @reach_client.most_recent_games
+      process_game_data
+
+      LOG.info "Running update: complete."
    end
 
    private
@@ -30,9 +37,7 @@ class BatchJob
       LOG.info "Populating meta-data: complete."
    end
 
-   def fetch_game_data
-      @reach_client.all_historic_games
-
+   def process_game_data
       filtered_game_ids = @game_filter.filter_game_ids
       LOG.info " - #{filtered_game_ids.length} game(s) to be imported into the database"
 
