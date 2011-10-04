@@ -10,6 +10,6 @@ namespace :reach do
    end
 end
 
-task :reach => 'reach:full'
+task :reach => 'reach:update'
 
 
