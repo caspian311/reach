@@ -15,7 +15,7 @@ Glenn Howard: [L138, D369]
 James McKie : JM9C
 Kyle Cross : [D1ED, O331]
 Matt Todd : [CASP, L672]
-Srdjan Grubor : [GER, A258]
+Srdjan Grubor : [GER, A258, L476]
 Tim Hamer : HAMR
 # Wes Erhlichman : [WES, L138]
 # Alex Lapp: LAPR
