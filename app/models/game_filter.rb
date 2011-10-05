@@ -16,8 +16,6 @@ class GameFilter
          if is_game_unique?(reach_id)
             if game_duration > GAME_MIN_TIME_LIMIT
                filtered_game_ids << reach_id
-            else
-               puts "trimmed game b/c it's too short: #{reach_id}"
             end
          end
       end
