@@ -9,6 +9,7 @@ class BatchJob
    def full
       populate_meta_data
       @reach_client.all_historic_games
+      process_game_data
 
       LOG.info "Running full update: complete."
    end
