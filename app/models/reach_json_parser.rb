@@ -6,14 +6,10 @@ class ReachJsonParser
    end
 
    def populate_details(game_ids)
-      total_games = game_ids.length
-      current_game = 0
-
       all_games = []
 
-      game_ids.each do |game_id|
-         current_game += 1
-         LOG.info " - reading in game #{current_game} out of #{total_games}"
+      game_ids.each_with_index do |game_id, current_game|
+         LOG.info " - reading in game #{current_game} out of #{game_ids.length}"
 
          file_contents = JSON.parse(File.read("#{@data_directory}/#{game_id}.json"))
          game_details_json = file_contents["GameDetails"]
