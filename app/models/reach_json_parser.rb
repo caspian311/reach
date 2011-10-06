@@ -21,11 +21,14 @@ class ReachJsonParser
             game.duration = game_details_json["GameDuration"]
             game.game_time = parse_timestamp(game_details_json["GameTimestamp"])
             
-            game.reach_map = ReachMap.get_or_create_by_name game_details_json["MapName"]
+            map_name = game_details_json["MapName"]
+            game.reach_map = ReachMap.get_or_create_by_name(map_name)
 
-            reach_teams = parse_teams(game, game_details_json["Teams"])
+            json_teams = game_details_json["Teams"]
+            json_players = game_details_json["Players"]
 
-            parse_player_stats(reach_teams, game_details_json["Players"])
+            reach_teams = parse_teams(game, json_teams)
+            parse_player_stats(reach_teams, json_players)
 
             game.save
             all_games << game
