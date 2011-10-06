@@ -8,7 +8,13 @@
 #
 
 class ReachMap < ActiveRecord::Base
-   def self.find_by_name(name)
-      where(:name => name).first
+   def self.get_or_create_by_name(map_name)
+      map = find_by_name map_name
+      if map == nil
+         map = ReachMap.new
+         map.name = map_name
+         map.save
+      end
+      map
    end
 end
