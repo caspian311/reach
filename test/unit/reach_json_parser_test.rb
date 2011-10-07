@@ -77,9 +77,7 @@ class ReachJsonParserTest < Test::Unit::TestCase
 
       player7.service_tags << service_tag7
 
-      ids = ["123", "456", "789"]
-
-      @test_object.populate_details(ids)
+      @test_object.populate_details(["789"])
 
       assert_equal 1, ReachMap.all.count
       assert_equal "Hemorrhage (Forge World)", ReachMap.all.first.name

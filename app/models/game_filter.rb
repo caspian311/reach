@@ -12,10 +12,13 @@ class GameFilter
 
          reach_id = file_contents["GameDetails"]["GameId"]
          game_duration = file_contents["GameDetails"]["GameDuration"].to_i
+         teams = file_contents["GameDetails"]["Teams"]
 
-         if is_game_unique?(reach_id)
-            if game_duration > GAME_MIN_TIME_LIMIT
-               filtered_game_ids << reach_id
+         if is_game_already_imported?(reach_id)
+            if has_teams?(teams)
+               if is_game_long_enough?(game_duration)
+                  filtered_game_ids << reach_id
+               end
             end
          end
       end
@@ -24,7 +27,15 @@ class GameFilter
    end
 
    private
-   def is_game_unique?(reach_id)
+   def is_game_already_imported?(reach_id)
       ReachGame.find_by_reach_id(reach_id) == nil
+   end
+
+   def is_game_long_enough?(game_duration)
+      game_duration > GAME_MIN_TIME_LIMIT
+   end
+   
+   def has_teams?(teams)
+      teams != nil
    end
 end

@@ -14,25 +14,23 @@ class ReachJsonParser
          file_contents = JSON.parse(File.read("#{@data_directory}/#{game_id}.json"))
          game_details_json = file_contents["GameDetails"]
 
-         if (game_details_json["Teams"] != nil)
-            game = ReachGame.new
-            game.reach_id = game_id
-            game.name = game_details_json["GameVariantName"]
-            game.duration = game_details_json["GameDuration"]
-            game.game_time = parse_timestamp(game_details_json["GameTimestamp"])
+         game = ReachGame.new
+         game.reach_id = game_id
+         game.name = game_details_json["GameVariantName"]
+         game.duration = game_details_json["GameDuration"]
+         game.game_time = parse_timestamp(game_details_json["GameTimestamp"])
             
-            map_name = game_details_json["MapName"]
-            game.reach_map = ReachMap.get_or_create_by_name(map_name)
+         map_name = game_details_json["MapName"]
+         game.reach_map = ReachMap.get_or_create_by_name(map_name)
 
-            json_teams = game_details_json["Teams"]
-            json_players = game_details_json["Players"]
+         json_teams = game_details_json["Teams"]
+         json_players = game_details_json["Players"]
 
-            reach_teams = parse_teams(game, json_teams)
-            parse_player_stats(reach_teams, json_players)
+         reach_teams = parse_teams(game, json_teams)
+         parse_player_stats(reach_teams, json_players)
 
-            game.save
-            all_games << game
-         end
+         game.save
+         all_games << game
       end
 
       all_games
@@ -59,10 +57,12 @@ class ReachJsonParser
          player_stat.overall_standing = json_player["IndividualStandingWithNoRegardForTeams"]
          player_stat.kills = json_player["Kills"]
          player_stat.total_medals = json_player["TotalMedalCount"]
+         
+         weapon_carnage_json = json_player["WeaponCarnageReport"]
+         medals_json = json_player["SpecificMedalCounts"]
 
-         player_stat.reach_weapon_carnage_reports = parse_weapon_carnage(json_player["WeaponCarnageReport"])
-
-         player_stat.reach_player_medals = parse_player_medals(json_player["SpecificMedalCounts"])
+         player_stat.reach_weapon_carnage_reports = parse_weapon_carnage(weapon_carnage_json)
+         player_stat.reach_player_medals = parse_player_medals(medals_json)
 
          reach_teams[json_player["Team"]].reach_player_stats << player_stat
       end

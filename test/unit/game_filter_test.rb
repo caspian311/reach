@@ -8,6 +8,6 @@ class GameFilterTest < ActiveSupport::TestCase
    test "games in db are filtered out" do
       filtered_game_ids = @test_object.filter_game_ids
       
-      assert_equal [4567890123005], filtered_game_ids
+      assert_equal [817705747], filtered_game_ids
    end
 end
