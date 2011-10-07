@@ -132,11 +132,20 @@ p {
    padding: 0px 0px 0px 10px;
 }
 
-tr.alternate {
+
+table tr:nth-child(even) {
    background: #ffffff;
 }
 
-tr.regular {
+table tr:nth-child(odd) {
+   background: #ddd;
+}
+
+table.sortable tr:nth-child(odd) {
+   background: #ffffff;
+}
+
+table.sortable tr:nth-child(even) {
    background: #ddd;
 }
 

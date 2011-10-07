@@ -35,7 +35,7 @@
    <th>Duration</th>
 </tr>
 <% @games.each_with_index do |game, index| %>
-<tr id="<%= game.id %>" class="<%= cycle("alternate", "regular") %>">
+<tr id="<%= game.id %>">
    <td><%= link_to_function game.reach_id, "expand_game_details('#{game.id}')" %></td>
    <td><%= game.name %></td>
    <td><%= game.reach_map.name %></td>

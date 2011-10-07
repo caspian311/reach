@@ -21,7 +21,7 @@ function expand_game_details(reach_id) {
 
 function is_expanded(row) {
    var row_class = row.attr('class')
-   return row_class.indexOf('expanded') != -1
+   return row_class == 'expanded'
 }
 
 function fetch_game_details(details_cell, game_id) {
@@ -38,7 +38,7 @@ function populate_game_details(details_cell, game_details) {
    var details_table = $('<table></table>')
    details_cell.append(details_table)
 
-   for (var i=0; i<game_details["reach_game"]["reach_teams"].length; i++) {
+   for (var 0; i<game_details["reach_game"]["reach_teams"].length; i++) {
       var team = game_details["reach_game"]["reach_teams"][i]
 
       var team_id = team["team_id"]
@@ -68,11 +68,9 @@ function populate_game_details(details_cell, game_details) {
          var player_deaths = player_stat["deaths"]
          var player_spread = (player_kills * 1) - (player_deaths * 1)
 
-         var player_row_class = (t % 2 == 0) ? 'alternate' : 'regular'
-
          var player_stat_id = player_stat['id']
 
-         var player_row = $('<tr id="' + player_stat_id + '_player_details" class="' + player_row_class + '"></tr>')
+         var player_row = $('<tr id="' + player_stat_id + '_player_details"></tr>')
          details_table.append(player_row)
 
          player_row.append($('<td></td>'))
@@ -150,7 +148,6 @@ function populate_medals(player_stat_id) {
          var count = data[i]['reach_player_medal']['count']
 
          var medal_row = $('<tr></tr>')
-         medal_row.addClass(i % 2 == 0 ? 'alternate' : 'regular')
 
          var medal_cell = $('<td></td>')
          medal_cell.append('<input name="name" type="hidden" value="' + medal + '" />')
@@ -199,7 +196,6 @@ function populate_carnage_report(player_stat_id) {
             var penalties = data[i]['reach_weapon_carnage_report']['penalties']
 
             var detail_row = $('<tr></tr>')
-            detail_row.addClass(i % 2 == 0 ? 'alternate' : 'regular')
 
             var weapon_cell = $('<td></td>')
             weapon_cell.append('<div class="reach_weapons ' + weapon_image + '"></div>')
