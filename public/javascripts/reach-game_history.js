@@ -38,7 +38,7 @@ function populate_game_details(details_cell, game_details) {
    var details_table = $('<table></table>')
    details_cell.append(details_table)
 
-   for (var 0; i<game_details["reach_game"]["reach_teams"].length; i++) {
+   for (var i=0; i<game_details["reach_game"]["reach_teams"].length; i++) {
       var team = game_details["reach_game"]["reach_teams"][i]
 
       var team_id = team["team_id"]
